@@ -1,0 +1,40 @@
+:root {
+  --light-theme-bg-color: #f2f2ff;
+  --light-theme-text-color: #262a36;
+
+  --dark-theme-bg-color: #101823;
+  --dark-theme-text-color: #ededf3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1vw;
+  @include media-breakpoint-down(lg) {
+    font-size: 2.5vw;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 4vw;
+  }
+}
+
+body, select, option {
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+}
+
+
+[data-theme="dark"] {
+  body, select, option {
+    background-color: var(--dark-theme-bg-color);
+    color: var(--dark-theme-text-color);
+  }
+}
+
+
+
+
