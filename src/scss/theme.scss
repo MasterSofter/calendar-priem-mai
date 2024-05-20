@@ -38,4 +38,7 @@
 @import "bootstrap/scss/utilities/api";
 
 // User custom styles
+//@import "app";
+@import "node_modules/swiper/swiper";
+@import "priem-theme";
 @import "app";
