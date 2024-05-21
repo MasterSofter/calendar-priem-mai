@@ -18,8 +18,7 @@ export interface IDate {
   monthNumber : number,
   monthIndex : number,
   timestamp : number,
-  week : number,
-  isActualDate: boolean
+  week : number
 }
 
 export function createDate (params?: CreateDateParams) : IDate {
@@ -38,7 +37,6 @@ export function createDate (params?: CreateDateParams) : IDate {
   const monthIndex : number = d.getMonth();
   const timestamp : number = d.getTime();
   const week : number = getWeekNumber(d);
-  const isActualDate : boolean = d.getMonth() === (new Date().getMonth());
 
   return {
     date: d,
@@ -53,7 +51,6 @@ export function createDate (params?: CreateDateParams) : IDate {
     monthNumber,
     monthIndex,
     timestamp,
-    week,
-    isActualDate
+    week
   };
 };

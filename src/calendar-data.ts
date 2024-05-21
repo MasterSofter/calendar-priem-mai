@@ -1,6 +1,6 @@
-import {CalendarDay} from "./components/calendar-app";
+import {ICalendarDay} from "./components/calendar-app";
 
-export const CalendarData : Array<CalendarDay> = [
+export const CalendarData : Array<ICalendarDay> = [
     {
         "month": 2,
         "number": 31,

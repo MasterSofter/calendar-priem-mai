@@ -6,28 +6,49 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import {getMonthesNames} from "../../../../utils/helpers/date";
+import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+import $ from "jquery";
 
-export default function MonthNavigation(): JSX.Element {
+interface MonthNavigationProps{
+  locale : string;
+  selectedMonth : number;
+  setSelectedMonth : React.Dispatch<React.SetStateAction<number>>;
+}
 
-  const months = getMonthesNames("ru");
+export default function MonthNavigation(props : MonthNavigationProps): JSX.Element {
+
+  const months = getMonthesNames(props.locale);
 
   let actualMonths = [];
   for (let i = 0; i < 12; i++) {
     actualMonths.push(((new Date().getMonth()) + (i - 1)) % 12);
   }
 
+  $(document).on("click", ".swiper-slide", function (){
+    $(this).addClass("month-selected").siblings().removeClass("month-selected");
+    let monthIndex : number | undefined = months.find(item => item.monthShort == $(this).text())?.monthIndex;
+    if( typeof(monthIndex) === "number")
+      props.setSelectedMonth(monthIndex)
+  })
+
   return (
     <>
-      <div className="d-none d-lg-block w-calendar-month-nav">
+      <div className="d-none d-lg-block calendar-month-nav w-calendar-month-nav cursor-grab">
         <Swiper
           slidesPerView={7}
           loop={true}
-          className="swiper-months"
+          className="w-100 pb-4 swiper-months"
+          pagination={{
+            dynamicBullets: true,
+          }}
+          modules={[Pagination]}
         >
           {
             actualMonths.map((item, num) =>
-              <SwiperSlide key={num} className={`${new Date().getMonth() === item ? "fw-medium" : "text-muted fw-light"} fs-calendar-nav`}>
-                {months[item].monthShort}
+              <SwiperSlide key={num} className={`${props.selectedMonth === item ? "month-selected" : ""} text-muted fw-light fs-calendar-nav hover-effect-up`}>
+                <span className="cursor-pointer">
+                   {months[item].monthShort}
+                </span>
               </SwiperSlide>
             )
           }

@@ -1,5 +1,5 @@
-import { createDate } from './createDate';
-import { createMonth } from './createMonth';
+import {createDate, IDate} from "./createDate";
+import {createMonth, IMonth} from "./createMonth";
 
 interface CreateYearParams {
   year?: number;
@@ -21,11 +21,11 @@ export function createYear (params?: CreateYearParams) {
   const getMonthDays = (monthIndex: number) =>
     createMonth({ date: new Date(year, monthIndex), locale }).monthDays();
 
-  const yearMonthes = () => {
-    const monthes = [];
+  const yearMonthes = () : Array<IMonth> => {
+    const monthes : Array<IMonth> = new Array<IMonth>();
 
-    for (let i = 0; i <= monthCount - 1; i += 1) {
-      monthes[i] = getMonthDays(i);
+    for (let i = 0; i <= monthCount - 1; i++) {
+      monthes[i] = createMonth({date : new Date(year, i)});
     }
 
     return monthes;

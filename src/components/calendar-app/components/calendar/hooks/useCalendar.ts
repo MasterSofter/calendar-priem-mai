@@ -1,38 +1,24 @@
 import {
-  createDate,
   createMonth,
-  getMonthesNames,
   getMonthNumberOfDays,
   getWeekDaysNames,
-  IDate
+  IDate, IMonth
 } from "../../../../../utils/helpers/date";
 import {useMemo, useState} from "react";
 
 interface UseCalendarParams {
   locale?: string;
-  selectedDate: Date;
+  month : IMonth,
   firstWeekDayNumber?: number;
 }
 
 const DAYS_IN_WEEK = 7;
 
-export function useCalendar(
-  {
-    locale = "default",
-    selectedDate: date,
-    firstWeekDayNumber = 2
-  }: UseCalendarParams) {
-  const [selectedDay, setSelectedDay] = useState(createDate({date}));
-  const [selectedMonth, setSelectedMonth] = useState(createMonth({
-    date: new Date(selectedDay.year, selectedDay.monthIndex),
-    locale
-  }));
-  const [selectedYear, setSelectedYear] = useState(selectedDay.year);
-  const monthesNames = useMemo(() => getMonthesNames(locale), []);
+export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}: UseCalendarParams) {
+  const days = month.monthDays();
   const weekDaysNames = useMemo(() => getWeekDaysNames(locale, firstWeekDayNumber), []);
-  const days = useMemo(() => selectedMonth.monthDays(), [selectedMonth, selectedYear]);
   const calendarDays: Array<IDate> = useMemo(() => {
-    const monthNumberOfDays = getMonthNumberOfDays(selectedMonth.monthIndex, selectedYear);
+    const monthNumberOfDays = getMonthNumberOfDays(month.monthIndex, month.year);
     const firstDay = days[0];
     const lastDay = days[monthNumberOfDays - 1];
     const shiftIndex = firstWeekDayNumber - 1;
@@ -41,7 +27,7 @@ export function useCalendar(
     //1. Заполнить дни прошлого месяца в начале первой недели
     {
       const prevMonthDays = createMonth({
-        date: new Date(selectedYear, selectedMonth.monthIndex - 1),
+        date: new Date(month.year, month.monthIndex - 1),
         locale
       }).monthDays();
 
@@ -62,7 +48,7 @@ export function useCalendar(
     //3. Заполнить дни следующего месяца в конце последней недели
     {
       const nextMonthDays = createMonth({
-        date: new Date(selectedYear, selectedMonth.monthIndex + 1),
+        date: new Date(month.year, month.monthIndex + 1),
         locale
       }).monthDays();
 
@@ -77,7 +63,7 @@ export function useCalendar(
     }
 
     return result;
-  }, [selectedMonth.year, selectedMonth.monthIndex, selectedYear]);
+  }, [month.year, month.monthIndex, month.year]);
   const calendarWeeks: Array<Array<IDate>> = useMemo(() => {
     let result: Array<Array<IDate>> = new Array<Array<IDate>>();
     let countWeeks = Math.round(calendarDays.length / 7);
@@ -91,9 +77,7 @@ export function useCalendar(
   return {
     state: {
       calendarWeeks,
-      weekDaysNames,
-      monthesNames,
-      calendarDays
+      weekDaysNames
     },
     functions: {}
   };

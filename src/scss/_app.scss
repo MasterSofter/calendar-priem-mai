@@ -119,58 +119,41 @@ $grid-breakpoints: map-merge(
   align-items: center;
 }
 
-/*
-:root {
-  --light-theme-bg-color: #f2f2ff;
-  --light-theme-text-color: #262a36;
-
-  --dark-theme-bg-color: #101823;
-  --dark-theme-text-color: #ededf3;
+.cursor-grab:hover {
+  cursor: grab;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.cursor-pointer:hover{
+  cursor: pointer;
 }
 
-.fs-calendar-app {
-  font-size: 48px;
-  @include media-breakpoint-down(xxl) {
-    font-size: 3.5vw;
-  }
-  @include media-breakpoint-down(sm) {
-    font-size: 4vw;
+.hover-effect-up{
+  transition: all .5s;
+  &:hover {
+    transform: translateY(-.2rem);
   }
 }
 
-.calendar-app-container, .header-days, .calendar-app-day {
-  text-align: center;
+.calendar-month-nav .swiper-pagination {
+  display: inline-block !important;
 }
 
-.calendar-app-container select {
-  background-color: transparent;
-  border: none;
-  text-align: center;
+.calendar-month-nav .swiper-pagination-bullet-active {
+  width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 8px)) !important;
+  height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 8px)) !important;
+  display: inline-block !important;
 }
 
-.calendar-app-container table {
-  border-spacing: 0 2em;
+.month-selected {
+  color: var(--mai-body-color) !important;
+  font-weight: 400 !important;
 }
 
-body, select, option {
-  background-color: var(--tg-theme-bg-color);
-  color: var(--tg-theme-text-color);
+[data-bs-theme="dark"]
+.border-gradient-dark-mode{
+  background-image: linear-gradient(144deg, #4d24ff 0%, #c669ff 100%);
+  background-origin: border-box;
+  border-color: rgba(0, 0, 0, 0) !important;
+  box-shadow: inset 0 1000vh var(--mai-body-bg)
 }
-
-[data-theme="dark"] {
-  body, select, option {
-    background-color: var(--dark-theme-bg-color);
-    color: var(--dark-theme-text-color);
-  }
-}
-
-
-*/
-
 

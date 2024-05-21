@@ -9,7 +9,6 @@ export function getMonthesNames (locale: string = 'defalut') {
   }[] = Array.from({ length: 12 });
 
   const d = new Date();
-
   monthesNames.forEach((_, i) => {
     const { month, monthIndex, monthShort, date } = createDate({
       locale,

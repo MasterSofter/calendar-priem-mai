@@ -1,4 +1,4 @@
-import { createDate } from './createDate';
+import {createDate, IDate} from "./createDate";
 import { getMonthNumberOfDays } from './getMonthNumberOfDays';
 
 interface CreateMonthParams {
@@ -6,17 +6,25 @@ interface CreateMonthParams {
   locale?: string;
 }
 
-export function createMonth (params?: CreateMonthParams) {
+export interface IMonth {
+  monthName : string,
+  monthIndex : number,
+  monthNumber : number,
+  year : number,
+  monthDays : () => Array<IDate>
+}
+
+export function createMonth (params?: CreateMonthParams) : IMonth {
   const date = params?.date ?? new Date();
   const locale = params?.locale ?? "default";
 
   const d = createDate({ date, locale });
   const { month: monthName, year, monthNumber, monthIndex } = d;
 
-  const day = (dayNumber: number) =>
+  const day = (dayNumber: number) : IDate =>
     createDate({ date: new Date(year, monthIndex, dayNumber), locale });
 
-  const monthDays = () => {
+  const monthDays = () : Array<IDate> => {
     const days = [];
 
     for (let i = 0; i <= getMonthNumberOfDays(monthIndex, year) - 1; i += 1) {
@@ -27,7 +35,6 @@ export function createMonth (params?: CreateMonthParams) {
   };
 
   return {
-    day,
     monthName,
     monthIndex,
     monthNumber,

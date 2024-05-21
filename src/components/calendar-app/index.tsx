@@ -1,9 +1,11 @@
 import MonthNavigation from "./components/month-navigation";
 import Title from "./components/title";
-import Calendar from "./components/calendar";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import {useState} from "react";
+import $ from "jquery";
+import {SwiperCalendar} from "./components/swiper-calendar";
 
-export type CalendarDay = {
+export interface ICalendarDay {
   "month": number,
   "number": number,
   "timeStart": string | null,
@@ -18,7 +20,8 @@ export type CalendarDay = {
 };
 
 type CalendarProps = {
-  calendarData: Array<CalendarDay> | undefined,
+  locale : string
+  calendarData: Array<ICalendarDay> | undefined,
   filter: object | undefined,
   className: string
 }
@@ -35,20 +38,18 @@ function FilterStatus() {
 }
 
 export default function CalendarApp(props: CalendarProps): JSX.Element {
-  const [selectedDate, setSelectedDay] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedMonth, setSelectedMonth] = useState<number>((new Date()).getMonth())
 
   return (
     <div className={props.className}>
       <div className="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-lg-6 pb-lg-4">
         <Title/>
-        <MonthNavigation/>
+        <MonthNavigation selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={props.locale}/>
       </div>
-      <Calendar selectedDate={selectedDate} selectDate={(date) => setSelectedDay(date)} locale="ru"/>
 
-      <div className="d-lg-none">
-        <MonthNavigation/>
-        <Calendar selectedDate={selectedDate} selectDate={(date) => setSelectedDay(date)} locale="ru"/>
-      </div>
+        <SwiperCalendar selectedMonth={selectedMonth}/>
+
     </div>
   );
 }
