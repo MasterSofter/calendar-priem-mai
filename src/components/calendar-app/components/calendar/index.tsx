@@ -41,7 +41,7 @@ export default function Calendar(
 
   return (
     <>
-      <div className="row justify-content-between text-start mb-5">
+      <div className="d-none d-lg-flex row justify-content-between text-start mb-5">
         {
           state.weekDaysNames.map((item, number) =>
             <div key={number} className="col text-muted fs-calendar-nav fw-normal">

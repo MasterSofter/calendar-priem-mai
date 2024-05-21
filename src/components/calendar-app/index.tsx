@@ -39,28 +39,16 @@ export default function CalendarApp(props: CalendarProps): JSX.Element {
 
   return (
     <div className={props.className}>
-      <div className="d-flex flex-row justify-content-between align-items-center mb-6 pb-3">
+      <div className="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-lg-6 pb-lg-4">
         <Title/>
         <MonthNavigation/>
       </div>
-      {
-        /*
-
-         <div className="mb-5">
-        <div className="d-none d-lg-flex flex-row justify-content-end align-items-center">
-          <FilterStatus/>
-        </div>
-        <div className="d-lg-none flex-row justify-content-start align-items-center">
-          <FilterStatus/>
-        </div>
-      </div>
-
-        */
-      }
-
-
       <Calendar selectedDate={selectedDate} selectDate={(date) => setSelectedDay(date)} locale="ru"/>
 
+      <div className="d-lg-none">
+        <MonthNavigation/>
+        <Calendar selectedDate={selectedDate} selectDate={(date) => setSelectedDay(date)} locale="ru"/>
+      </div>
     </div>
   );
 }

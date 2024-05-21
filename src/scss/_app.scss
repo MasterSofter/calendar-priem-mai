@@ -1,3 +1,10 @@
+$grid-breakpoints: map-merge(
+  (
+      1800 : 1800px
+  ),
+  $grid-breakpoints
+);
+
 :root {
   --mIndex: 1vw;
   @include media-breakpoint-down(lg) {
@@ -46,11 +53,11 @@
 }
 
 .w-calendar-month-nav{
-  width: 650px;
-  min-width: 650px;
-  @include media-breakpoint-down(xxl) {
-    width: calc(48 * var(--mIndex));
-    min-width: calc(48 * var(--mIndex));
+  width: 800px;
+  min-width: 800px;
+  @include media-breakpoint-down(1800) {
+    width: calc(42 * var(--mIndex));
+    min-width: calc(42 * var(--mIndex));
   }
   @include media-breakpoint-down(lg) {
     width: calc(22 * var(--mIndex));
@@ -77,9 +84,12 @@
 }
 
 .fs-calendar-nav {
-  font-size: 24px;
-  @include media-breakpoint-down(xxl) {
+  font-size: 30px;
+  @include media-breakpoint-down(1800) {
     font-size: calc(1.4 * var(--mIndex));
+  }
+  @include media-breakpoint-down(lg) {
+    font-size: calc(2 * var(--mIndex));
   }
 }
 

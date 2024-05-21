@@ -18,19 +18,10 @@ export default function MonthNavigation(): JSX.Element {
 
   return (
     <>
-      <div className="w-calendar-month-nav">
+      <div className="d-none d-lg-block w-calendar-month-nav">
         <Swiper
+          slidesPerView={7}
           loop={true}
-          breakpoints={{
-            // when window width is >= 640px
-            0: {
-              slidesPerView: 3
-            },
-            // when window width is >= 768px
-            990: {
-              slidesPerView: 7,
-            },
-          }}
           className="swiper-months"
         >
           {
@@ -41,6 +32,11 @@ export default function MonthNavigation(): JSX.Element {
             )
           }
         </Swiper>
+      </div>
+      <div className="w-100 d-flex d-lg-none flex-row justify-content-between">
+        <div className="col text-start fs-calendar-nav">Май</div>
+        <div className="col text-center fs-calendar-nav">2 мая</div>
+        <div className="col text-end fs-calendar-nav">Фильтр</div>
       </div>
     </>
   );
