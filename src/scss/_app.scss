@@ -21,7 +21,6 @@ $grid-breakpoints: map-merge(
   color: #d9d9d9;
 }
 
-
 .h-day-cell{
   height: 180px;
   min-height: 180px;
@@ -49,6 +48,10 @@ $grid-breakpoints: map-merge(
   @include media-breakpoint-down(xxl) {
     width: calc(16 * var(--mIndex));
     min-width: calc(16 * var(--mIndex));
+  }
+  @include media-breakpoint-down(lg) {
+    width: calc(22 * var(--mIndex));
+    min-width: calc(22 * var(--mIndex));
   }
 }
 
@@ -80,6 +83,9 @@ $grid-breakpoints: map-merge(
   font-size: 40px;
   @include media-breakpoint-down(xxl) {
     font-size: calc(2.1 * var(--mIndex));
+  }
+  @include media-breakpoint-down(lg) {
+    font-size: calc(2.8 * var(--mIndex));
   }
 }
 
@@ -117,6 +123,12 @@ $grid-breakpoints: map-merge(
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.swiper-calendar{
+  @include media-breakpoint-down(lg) {
+    max-height: 100vh;
+  }
 }
 
 .cursor-grab:hover {
@@ -157,3 +169,17 @@ $grid-breakpoints: map-merge(
   box-shadow: inset 0 1000vh var(--mai-body-bg)
 }
 
+.bg-white-lg{
+  @include media-breakpoint-up(lg) {
+    --mai-bg-opacity: 1;
+    background-color: rgba(var(--mai-white-rgb), var(--mai-bg-opacity)) !important
+  }
+}
+
+[data-bs-theme="dark"]
+.bg-white-lg{
+  @include media-breakpoint-up(lg) {
+    --mai-bg-opacity: 0;
+    background-color: rgba(var(--mai-white-rgb), var(--mai-bg-opacity)) !important
+  }
+}

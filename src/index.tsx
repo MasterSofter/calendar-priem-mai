@@ -6,9 +6,5 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <div className="page-wrapper">
-    <div className="container content-wrapper py-5">
-      <App/>
-    </div>
-  </div>
+  <App/>
 );

@@ -23,14 +23,14 @@ export default function Calendar({month, locale}: CalendarProps): JSX.Element {
           {calendarDays}
         </div>
         {
-          (weekNumber + 1 !== state.calendarWeeks.length) ? <hr className="border-2 border-dark-mode-light my-3"/> : <></>
+          (weekNumber + 1 !== state.calendarWeeks.length) ? <hr className="border-2 border-dark border-dark-mode-light my-3"/> : <></>
         }
       </div>
     );
   });
 
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="d-none d-lg-flex row justify-content-between text-start mb-5">
         {
           state.weekDaysNames.map((item, number) =>
@@ -40,7 +40,7 @@ export default function Calendar({month, locale}: CalendarProps): JSX.Element {
           )
         }
       </div>
-      <hr className="border-2 border-dark-mode-light my-3"></hr>
+      <hr className="border-2 border-dark border-dark-mode-light my-3"></hr>
       <div className="row d-flex flex-column">
         {calendarWeeks}
       </div>
