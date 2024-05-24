@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import {getMonthesNames} from "../../../../utils/helpers/date";
 import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 import $ from "jquery";
+import {capitalizeFirstLetter} from "../../../../utils/helpers/string/capitalizeFirstLetter";
 
 interface MonthNavigationProps{
   locale : string;
@@ -16,7 +17,7 @@ interface MonthNavigationProps{
 }
 
 export default function MonthNavigation(props : MonthNavigationProps): JSX.Element {
-
+  const swiperMonthsMobileRef = useRef();
   const months = getMonthesNames(props.locale);
 
   let actualMonths = [];
@@ -31,13 +32,31 @@ export default function MonthNavigation(props : MonthNavigationProps): JSX.Eleme
       props.setSelectedMonth(monthIndex)
   })
 
+  useEffect(() => {
+    if(swiperMonthsMobileRef.current)
+    {
+      //@ts-ignore
+      swiperMonthsMobileRef.current.on('slideChangeTransitionEnd', function () {
+        //@ts-ignore
+        props.setSelectedMonth(swiperMonthsMobileRef.current?.activeIndex);
+      });
+    }
+
+  }, [swiperMonthsMobileRef]);
+
+  useEffect(() => {
+    if(swiperMonthsMobileRef.current)
+      //@ts-ignore
+      swiperMonthsMobileRef.current.slideTo(props.selectedMonth);
+  }, [props.selectedMonth]);
+
   return (
     <>
       <div className="d-none d-lg-block calendar-month-nav w-calendar-month-nav cursor-grab">
         <Swiper
           slidesPerView={7}
           loop={true}
-          className="w-100 pb-4 swiper-months"
+          className="pb-4"
           pagination={{
             dynamicBullets: true,
           }}
@@ -54,10 +73,31 @@ export default function MonthNavigation(props : MonthNavigationProps): JSX.Eleme
           }
         </Swiper>
       </div>
-      <div className="w-100 d-flex d-lg-none flex-row justify-content-between">
-        <div className="col text-start fs-calendar-nav">Май</div>
-        <div className="col text-center fs-calendar-nav">2 мая</div>
-        <div className="col text-end fs-calendar-nav">Фильтр</div>
+      <div className="d-flex d-lg-none bg-body flex-row justify-content-end w-100" style={{maxHeight:"3rem"}}>
+        <div className="col-4">
+          <Swiper
+            onSwiper={(swiper : any) => {
+              swiperMonthsMobileRef.current = swiper;
+            }}
+            slidesPerView={1}
+            spaceBetween={10}
+            loop={false}
+            direction="vertical"
+            speed={1000}
+          >
+            {
+              months.map((item, num) =>
+                <SwiperSlide key={num} className={`text-start fs-calendar-nav`}>
+                  <span className="cursor-pointer">
+                     {capitalizeFirstLetter(item.month)}
+                  </span>
+                </SwiperSlide>
+              )
+            }
+          </Swiper>
+        </div>
+        <div className="col-4 text-center fs-calendar-nav">2 мая</div>
+        <div className="col-4 text-end fs-calendar-nav">Фильтр</div>
       </div>
     </>
   );

@@ -183,3 +183,7 @@ $grid-breakpoints: map-merge(
     background-color: rgba(var(--mai-white-rgb), var(--mai-bg-opacity)) !important
   }
 }
+
+.mt-neg-calendar-swiper {
+  margin-top: -2.5rem !important;
+}

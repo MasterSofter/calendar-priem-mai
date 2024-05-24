@@ -25,7 +25,7 @@ export function createYear (params?: CreateYearParams) {
     const monthes : Array<IMonth> = new Array<IMonth>();
 
     for (let i = 0; i <= monthCount - 1; i++) {
-      monthes[i] = createMonth({date : new Date(year, i)});
+      monthes[i] = createMonth({locale: locale, date : new Date(year, i)});
     }
 
     return monthes;

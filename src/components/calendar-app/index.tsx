@@ -1,8 +1,6 @@
 import MonthNavigation from "./components/month-navigation";
 import Title from "./components/title";
-import { Swiper, SwiperSlide } from 'swiper/react';
 import {useState} from "react";
-import $ from "jquery";
 import {SwiperCalendar} from "./components/swiper-calendar";
 
 export interface ICalendarDay {
@@ -32,11 +30,11 @@ export default function CalendarApp(props: CalendarProps): JSX.Element {
 
   return (
     <div className={props.className}>
-      <div className="calendar-nav d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-lg-6 pb-lg-4">
+      <div className="position-relative zindex-3 calendar-nav d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-lg-6 pb-lg-4">
         <Title/>
         <MonthNavigation selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={props.locale}/>
       </div>
-      <SwiperCalendar selectedMonth={selectedMonth}/>
+      <SwiperCalendar selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={props.locale} />
     </div>
   );
 }

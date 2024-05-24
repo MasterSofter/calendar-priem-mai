@@ -3,15 +3,17 @@ import Calendar from "../calendar";
 import {createYear} from "../../../../utils/helpers/date";
 import {useWindowDimensions} from "../../../hooks/useWindowDimensions";
 import {useSwiperCalendar} from "./hooks/useSwiperCalendar";
-import {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 
 interface SwiperCalendarProps {
+  setSelectedMonth :  React.Dispatch<React.SetStateAction<number>>;
   selectedMonth : number;
+  locale : string;
 }
 
-export function SwiperCalendar({selectedMonth} : SwiperCalendarProps) : JSX.Element {
+export function SwiperCalendar({locale, selectedMonth, setSelectedMonth} : SwiperCalendarProps) : JSX.Element {
   const { height, width } = useWindowDimensions();
-  const {state, functions} = useSwiperCalendar({selectedMonth, width})
+  const {state, functions} = useSwiperCalendar({selectedMonth, setSelectedMonth, width})
 
   return (
     <>
@@ -19,17 +21,17 @@ export function SwiperCalendar({selectedMonth} : SwiperCalendarProps) : JSX.Elem
         onSwiper={(swiper : any) => {
           state.swiperRef.current = swiper;
         }}
-        loop={true}
-        spaceBetween={40}
+        loop={false}
+        spaceBetween={0}
         direction={functions.defineDirection(width)}
         slidesPerView={'auto'}
         speed={2000}
-        className="swiper-calendar"
+        className="swiper-calendar mt-neg-calendar-swiper position-relative zindex-1"
       >
         {
-          createYear().yearMonthes().map((month, index) =>
+          createYear({locale:locale}).yearMonthes().map((month, index) =>
             <SwiperSlide key={index}>
-              <Calendar month={month} locale={"ru"}/>
+              <Calendar className={`calendar-${index}`} month={month} locale={"ru"}/>
             </SwiperSlide>
           )
         }
