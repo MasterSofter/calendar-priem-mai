@@ -5,23 +5,24 @@ import {IMonth} from "../../../../utils/helpers/date";
 import {capitalizeFirstLetter} from "../../../../utils/helpers/string/capitalizeFirstLetter";
 
 interface CalendarProps {
+  selectedDate : Date;
+  setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
   className: string;
   locale: string;
   month : IMonth;
 }
 
-export default function Calendar({className, month, locale}: CalendarProps): JSX.Element {
+export default function Calendar({selectedDate, setSelectedDate, className, month, locale}: CalendarProps): JSX.Element {
   const firstWeekDayNumber = 2;
   const {functions, state} = useCalendar({month, locale, firstWeekDayNumber});
 
   let calendarWeeks: Array<JSX.Element> = [];
   state.calendarWeeks.map((week, weekNumber) => {
     let calendarDays: Array<JSX.Element> = [];
-    week.map((day, index) => calendarDays.push(<Day key={index} number={day.dayNumber}
-                                                    isActualDate={day.monthIndex == month.monthIndex}/>));
+    week.map((day, index) => calendarDays.push(<Day selectedDate={selectedDate} setSelectedDate={setSelectedDate} key={index} date={day.date} isToday={(new Date().getDate() === day.date.getDate()) && (new Date().getMonth() === day.date.getMonth())} isActualDate={day.monthIndex == month.monthIndex}/>));
     calendarWeeks.push(
-      <div className="col container" key={weekNumber}>
-        <div className="row justify-content-between text-center">
+      <div className="col" key={weekNumber}>
+        <div className="px-4 row justify-content-between text-center">
           {calendarDays}
         </div>
         {

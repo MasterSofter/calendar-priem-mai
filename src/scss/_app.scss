@@ -140,7 +140,7 @@ $grid-breakpoints: map-merge(
 }
 
 .hover-effect-up{
-  transition: all .5s;
+  transition: transform .5s;
   &:hover {
     transform: translateY(-.2rem);
   }
@@ -185,5 +185,33 @@ $grid-breakpoints: map-merge(
 }
 
 .mt-neg-calendar-swiper {
-  margin-top: -2.5rem !important;
+  margin-top: -3rem !important;
+}
+
+.bg-current-date {
+  background-color: #F3F3F3;
+  @include media-breakpoint-down(lg) {
+    background-color: #dfdfdf;
+  }
+}
+
+[data-bs-theme="dark"]
+.bg-current-date {
+  background-color: #3d3d3d;
+  @include media-breakpoint-down(lg) {
+    background-color: #3d3d3d;
+  }
+}
+
+.hover-border{
+  &:hover{
+    border: solid rgba(17, 17, 17, 0.35);
+  }
+}
+
+[data-bs-theme="dark"]
+.hover-border{
+  &:hover{
+    border: solid #ccc;
+  }
 }

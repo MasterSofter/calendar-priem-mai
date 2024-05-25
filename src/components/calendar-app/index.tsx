@@ -34,7 +34,7 @@ export default function CalendarApp(props: CalendarProps): JSX.Element {
         <Title/>
         <MonthNavigation selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={props.locale}/>
       </div>
-      <SwiperCalendar selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={props.locale} />
+      <SwiperCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate}  selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={props.locale} />
     </div>
   );
 }

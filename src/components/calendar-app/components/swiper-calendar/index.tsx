@@ -3,15 +3,17 @@ import Calendar from "../calendar";
 import {createYear} from "../../../../utils/helpers/date";
 import {useWindowDimensions} from "../../../hooks/useWindowDimensions";
 import {useSwiperCalendar} from "./hooks/useSwiperCalendar";
-import React, {useEffect, useRef} from "react";
+import React from "react";
 
 interface SwiperCalendarProps {
+  selectedDate : Date;
+  setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
   setSelectedMonth :  React.Dispatch<React.SetStateAction<number>>;
   selectedMonth : number;
   locale : string;
 }
 
-export function SwiperCalendar({locale, selectedMonth, setSelectedMonth} : SwiperCalendarProps) : JSX.Element {
+export function SwiperCalendar({selectedDate, setSelectedDate, locale, selectedMonth, setSelectedMonth} : SwiperCalendarProps) : JSX.Element {
   const { height, width } = useWindowDimensions();
   const {state, functions} = useSwiperCalendar({selectedMonth, setSelectedMonth, width})
 
@@ -31,7 +33,7 @@ export function SwiperCalendar({locale, selectedMonth, setSelectedMonth} : Swipe
         {
           createYear({locale:locale}).yearMonthes().map((month, index) =>
             <SwiperSlide key={index}>
-              <Calendar className={`calendar-${index}`} month={month} locale={"ru"}/>
+              <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} className={`calendar-${index}`} month={month} locale={"ru"}/>
             </SwiperSlide>
           )
         }

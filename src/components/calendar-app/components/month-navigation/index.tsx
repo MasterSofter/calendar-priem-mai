@@ -1,22 +1,22 @@
 import React, {useEffect, useRef} from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
+import {Swiper, SwiperSlide} from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/pagination";
 
-import {getMonthesNames} from "../../../../utils/helpers/date";
-import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+import {createDate, getMonthesNames} from "../../../../utils/helpers/date";
+import {Pagination} from "swiper/modules";
 import $ from "jquery";
 import {capitalizeFirstLetter} from "../../../../utils/helpers/string/capitalizeFirstLetter";
 
-interface MonthNavigationProps{
-  locale : string;
-  selectedMonth : number;
-  setSelectedMonth : React.Dispatch<React.SetStateAction<number>>;
+interface MonthNavigationProps {
+  locale: string;
+  selectedMonth: number;
+  setSelectedMonth: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function MonthNavigation(props : MonthNavigationProps): JSX.Element {
+export default function MonthNavigation(props: MonthNavigationProps): JSX.Element {
   const swiperMonthsMobileRef = useRef();
   const months = getMonthesNames(props.locale);
 
@@ -25,18 +25,17 @@ export default function MonthNavigation(props : MonthNavigationProps): JSX.Eleme
     actualMonths.push(((new Date().getMonth()) + (i - 1)) % 12);
   }
 
-  $(document).on("click", ".swiper-slide", function (){
+  $(document).on("click", ".swiper-slide", function () {
     $(this).addClass("month-selected").siblings().removeClass("month-selected");
-    let monthIndex : number | undefined = months.find(item => item.monthShort == $(this).text())?.monthIndex;
-    if( typeof(monthIndex) === "number")
-      props.setSelectedMonth(monthIndex)
-  })
+    let monthIndex: number | undefined = months.find(item => item.monthShort == $(this).text())?.monthIndex;
+    if (typeof (monthIndex) === "number")
+      props.setSelectedMonth(monthIndex);
+  });
 
   useEffect(() => {
-    if(swiperMonthsMobileRef.current)
-    {
+    if (swiperMonthsMobileRef.current) {
       //@ts-ignore
-      swiperMonthsMobileRef.current.on('slideChangeTransitionEnd', function () {
+      swiperMonthsMobileRef.current.on("slideChangeTransitionEnd", function () {
         //@ts-ignore
         props.setSelectedMonth(swiperMonthsMobileRef.current?.activeIndex);
       });
@@ -45,7 +44,7 @@ export default function MonthNavigation(props : MonthNavigationProps): JSX.Eleme
   }, [swiperMonthsMobileRef]);
 
   useEffect(() => {
-    if(swiperMonthsMobileRef.current)
+    if (swiperMonthsMobileRef.current)
       //@ts-ignore
       swiperMonthsMobileRef.current.slideTo(props.selectedMonth);
   }, [props.selectedMonth]);
@@ -64,7 +63,8 @@ export default function MonthNavigation(props : MonthNavigationProps): JSX.Eleme
         >
           {
             actualMonths.map((item, num) =>
-              <SwiperSlide key={num} className={`${props.selectedMonth === item ? "month-selected" : ""} text-muted fw-light fs-calendar-nav hover-effect-up`}>
+              <SwiperSlide key={num}
+                           className={`${props.selectedMonth === item ? "month-selected" : ""} text-muted fw-light fs-calendar-nav hover-effect-up`}>
                 <span className="cursor-pointer">
                    {months[item].monthShort}
                 </span>
@@ -73,10 +73,10 @@ export default function MonthNavigation(props : MonthNavigationProps): JSX.Eleme
           }
         </Swiper>
       </div>
-      <div className="d-flex d-lg-none bg-body flex-row justify-content-end w-100" style={{maxHeight:"3rem"}}>
+      <div className="d-flex d-lg-none bg-body flex-row justify-content-end w-100" style={{maxHeight: "3rem"}}>
         <div className="col-4">
           <Swiper
-            onSwiper={(swiper : any) => {
+            onSwiper={(swiper: any) => {
               swiperMonthsMobileRef.current = swiper;
             }}
             slidesPerView={1}
@@ -87,7 +87,7 @@ export default function MonthNavigation(props : MonthNavigationProps): JSX.Eleme
           >
             {
               months.map((item, num) =>
-                <SwiperSlide key={num} className={`text-start fs-calendar-nav`}>
+                <SwiperSlide key={num} className="text-start fs-calendar-nav">
                   <span className="cursor-pointer">
                      {capitalizeFirstLetter(item.month)}
                   </span>
@@ -96,7 +96,7 @@ export default function MonthNavigation(props : MonthNavigationProps): JSX.Eleme
             }
           </Swiper>
         </div>
-        <div className="col-4 text-center fs-calendar-nav">2 мая</div>
+        <div className="col-4 text-center fs-calendar-nav">{createDate({locale: props.locale}).dateMonth}</div>
         <div className="col-4 text-end fs-calendar-nav">Фильтр</div>
       </div>
     </>

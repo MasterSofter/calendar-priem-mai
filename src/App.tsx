@@ -6,42 +6,10 @@ import "./calendar-data"
 import {CalendarData} from "./calendar-data";
 import CalendarApp from "./components/calendar-app";
 
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-
 function App() {
   const [calendarData, setCalendarData] = useState<Array<ICalendarDay>>(CalendarData);
   const [filter, setFilter] = useState<object>();
   const [locale, setLocale] = useState<string>("ru");
-
-  {
-    /*
-
-    useEffect(()=>{
-    let calendarWrapper = document.querySelector(".calendar-wrapper");
-    let calendarContent = document.querySelector(".calendar-content");
-
-    window.onscroll = () => {
-
-      if(calendarWrapper && calendarContent) {
-        let scrollTop = window.scrollY; // current scroll position
-        let viewportHeight = window.innerHeight; //viewport height
-        let contentHeight = calendarContent?.getBoundingClientRect().height; // current content height
-
-        if(scrollTop >= (contentHeight - viewportHeight)) {
-          calendarWrapper.classList.add("position-fixed");
-        }
-        else {
-          calendarWrapper.classList.remove("position-fixed");
-        }
-      }
-    }
-
-  },[])
-
-
-    * */
-  }
 
   return (
     <div className="w-100 h-100 page-wrapper calendar-wrapper">
