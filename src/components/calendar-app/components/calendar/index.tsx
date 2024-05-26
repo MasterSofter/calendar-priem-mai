@@ -36,7 +36,7 @@ export default function Calendar({selectedDate, setSelectedDate, className, mont
 
   return (
     <div className={className}>
-      <div className="d-none d-lg-flex flex-row row justify-content-between text-start mb-5">
+      <div className="d-none d-lg-flex flex-row row justify-content-between text-start mb-5 px-4">
         {
           state.weekDaysNames.map((item, number) =>
             <div key={number} className="col text-muted fs-calendar-nav fw-normal">

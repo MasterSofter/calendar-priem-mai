@@ -55,6 +55,19 @@ $grid-breakpoints: map-merge(
   }
 }
 
+.check-calendar-filter-size{
+  width: 14px;
+  height: 14px;
+  @include media-breakpoint-down(xxl) {
+    width: calc(16 * var(--mIndex));
+    min-width: calc(16 * var(--mIndex));
+  }
+  @include media-breakpoint-down(lg) {
+    width: calc(22 * var(--mIndex));
+    min-width: calc(22 * var(--mIndex));
+  }
+}
+
 .w-calendar-month-nav{
   width: 800px;
   min-width: 800px;
@@ -96,6 +109,42 @@ $grid-breakpoints: map-merge(
   }
   @include media-breakpoint-down(lg) {
     font-size: calc(2 * var(--mIndex));
+  }
+}
+
+.fs-calendar-filter{
+  font-size: 14px;
+  @include media-breakpoint-down(1800) {
+    font-size: calc(.8 * var(--mIndex));
+  }
+  @include media-breakpoint-down(lg) {
+    font-size: calc(.8 * var(--mIndex));
+  }
+}
+
+.fs-calendar-filter-title{
+  font-size: 24px;
+  @include media-breakpoint-down(1800) {
+    font-size: calc(1.25 * var(--mIndex));
+  }
+  @include media-breakpoint-down(lg) {
+    font-size: calc(1.25 * var(--mIndex));
+  }
+}
+
+.input-calendar-filter{
+  width: 18px;
+  height: 18px;
+  margin-top: .38rem;
+  @include media-breakpoint-down(1800) {
+    width: calc(1 * var(--mIndex));
+    height: calc(1 * var(--mIndex));
+    margin-top: calc(.4 * var(--mIndex));
+  }
+  @include media-breakpoint-down(lg) {
+    width: calc(1 * var(--mIndex));
+    height: calc(1 * var(--mIndex));
+    margin-top: calc(.4 * var(--mIndex));
   }
 }
 
