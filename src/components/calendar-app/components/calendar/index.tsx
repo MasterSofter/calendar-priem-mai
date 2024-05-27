@@ -3,26 +3,30 @@ import Day from "../calendar-day";
 import React, {JSX} from "react";
 import {IMonth} from "../../../../utils/helpers/date";
 import {capitalizeFirstLetter} from "../../../../utils/helpers/string/capitalizeFirstLetter";
+import {ICalendarDay} from "../../index";
 
 interface CalendarProps {
   selectedDate : Date;
+  setShowEvents:  React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
   className: string;
   locale: string;
+  calendarData: Array<ICalendarDay> | undefined;
+  filter: object | undefined;
   month : IMonth;
 }
 
-export default function Calendar({selectedDate, setSelectedDate, className, month, locale}: CalendarProps): JSX.Element {
+export default function Calendar({setShowEvents, calendarData, filter, selectedDate, setSelectedDate, className, month, locale}: CalendarProps): JSX.Element {
   const firstWeekDayNumber = 2;
   const {functions, state} = useCalendar({month, locale, firstWeekDayNumber});
 
   let calendarWeeks: Array<JSX.Element> = [];
   state.calendarWeeks.map((week, weekNumber) => {
     let calendarDays: Array<JSX.Element> = [];
-    week.map((day, index) => calendarDays.push(<Day selectedDate={selectedDate} setSelectedDate={setSelectedDate} key={index} date={day.date} isToday={(new Date().getDate() === day.date.getDate()) && (new Date().getMonth() === day.date.getMonth())} isActualDate={day.monthIndex == month.monthIndex}/>));
+    week.map((day, index) => calendarDays.push(<Day setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} key={index} date={day.date} isToday={(new Date().getDate() === day.date.getDate()) && (new Date().getMonth() === day.date.getMonth())} isActualDate={day.monthIndex == month.monthIndex}/>));
     calendarWeeks.push(
       <div className="col" key={weekNumber}>
-        <div className="px-4 row justify-content-between text-center">
+        <div className="px-3 px-lg-4 row justify-content-between text-center">
           {calendarDays}
         </div>
         {
@@ -36,7 +40,7 @@ export default function Calendar({selectedDate, setSelectedDate, className, mont
 
   return (
     <div className={className}>
-      <div className="d-none d-lg-flex flex-row row justify-content-between text-start mb-5 px-4">
+      <div className="d-none d-lg-flex flex-row row justify-content-between text-start mb-5 px-3 px-lg-4">
         {
           state.weekDaysNames.map((item, number) =>
             <div key={number} className="col text-muted fs-calendar-nav fw-normal">

@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from "react";
-import $ from "jquery";
 
 interface SwiperCalendarParams {
   setSelectedMonth :  React.Dispatch<React.SetStateAction<number>>

@@ -5,6 +5,10 @@ type FilterProps = {
   className: string
 }
 
+export interface IFilter {
+
+}
+
 export default function Filter (props : FilterProps) : JSX.Element {
 
   return (
