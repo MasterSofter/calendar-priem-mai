@@ -10,15 +10,19 @@ import {Pagination} from "swiper/modules";
 import $ from "jquery";
 import {capitalizeFirstLetter} from "../../../../utils/helpers/string/capitalizeFirstLetter";
 import {OffcanvasFilter} from "../../../filter/components/offcanvas-filter";
+import {IFilter} from "../../../filter";
+import {ICalendarDay} from "../../index";
 
 interface MonthNavigationProps {
   locale: string;
   selectedMonth: number;
-  setFilter:  React.Dispatch<React.SetStateAction<object | undefined>>;
+  filter : IFilter;
+  calendarData : Array<ICalendarDay>;
+  setFilter:  React.Dispatch<React.SetStateAction<IFilter>>;
   setSelectedMonth: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function MonthNavigation({locale, selectedMonth, setSelectedMonth, setFilter}: MonthNavigationProps): JSX.Element {
+export default function MonthNavigation({calendarData, filter, locale, selectedMonth, setSelectedMonth, setFilter}: MonthNavigationProps): JSX.Element {
   const swiperMonthsMobileRef = useRef();
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const months = getMonthesNames(locale);
@@ -104,7 +108,7 @@ export default function MonthNavigation({locale, selectedMonth, setSelectedMonth
         <div className="col-4 text-center fs-calendar-nav">{createDate({locale: locale}).dateMonth}</div>
         <div onClick={handleOpen} className="col-4 text-end fs-calendar-nav">Фильтр</div>
       </div>
-      <OffcanvasFilter setFilter={setFilter} show={showFilter} setShow={setShowFilter} locale={locale}/>
+      <OffcanvasFilter calendarData={calendarData} filter={filter} setFilter={setFilter} show={showFilter} setShow={setShowFilter} locale={locale}/>
     </>
   );
 }

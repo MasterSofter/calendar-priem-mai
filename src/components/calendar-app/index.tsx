@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {SwiperCalendar} from "./components/swiper-calendar";
 import {Offcanvas} from "react-bootstrap";
 import {OffcanvasCalendarEvent} from "./components/offcanvas-calendar-event";
+import {IFilter} from "../filter";
 
 export interface ICalendarDay {
   "month": number,
@@ -21,9 +22,9 @@ export interface ICalendarDay {
 
 type CalendarProps = {
   locale : string
-  calendarData: Array<ICalendarDay> | undefined,
-  filter: object | undefined,
-  setFilter:  React.Dispatch<React.SetStateAction<object | undefined>>;
+  calendarData: Array<ICalendarDay>,
+  filter: IFilter,
+  setFilter:  React.Dispatch<React.SetStateAction<IFilter>>;
   className: string
 }
 
@@ -36,10 +37,10 @@ export default function CalendarApp({calendarData, filter, setFilter, className,
     <div className={className}>
       <div className="position-relative zindex-3 calendar-nav d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-lg-6 pb-lg-6 pt-lg-4">
         <Title/>
-        <MonthNavigation setFilter={setFilter} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={locale}/>
+        <MonthNavigation calendarData={calendarData} filter={filter} setFilter={setFilter} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={locale}/>
       </div>
       <SwiperCalendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate}  selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={locale} />
-      <OffcanvasCalendarEvent selectedDate={selectedDate} calendarData={calendarData} show={showEvents} setShow={setShowEvents} locale={locale} />
+      <OffcanvasCalendarEvent filter={filter} selectedDate={selectedDate} calendarData={calendarData} show={showEvents} setShow={setShowEvents} locale={locale} />
     </div>
   );
 }

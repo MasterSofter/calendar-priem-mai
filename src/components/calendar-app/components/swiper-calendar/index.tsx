@@ -5,6 +5,7 @@ import {useWindowDimensions} from "../../../hooks/useWindowDimensions";
 import {useSwiperCalendar} from "./hooks/useSwiperCalendar";
 import React from "react";
 import {ICalendarDay} from "../../index";
+import {IFilter} from "../../../filter";
 
 interface SwiperCalendarProps {
   selectedDate : Date;
@@ -13,7 +14,7 @@ interface SwiperCalendarProps {
   setSelectedMonth :  React.Dispatch<React.SetStateAction<number>>;
   selectedMonth : number;
   calendarData: Array<ICalendarDay> | undefined;
-  filter: object | undefined;
+  filter: IFilter;
   locale : string;
 }
 
