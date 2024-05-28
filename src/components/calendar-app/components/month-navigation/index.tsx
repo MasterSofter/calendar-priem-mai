@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 // Import Swiper styles
@@ -9,16 +9,21 @@ import {createDate, getMonthesNames} from "../../../../utils/helpers/date";
 import {Pagination} from "swiper/modules";
 import $ from "jquery";
 import {capitalizeFirstLetter} from "../../../../utils/helpers/string/capitalizeFirstLetter";
+import {OffcanvasFilter} from "../../../filter/components/offcanvas-filter";
 
 interface MonthNavigationProps {
   locale: string;
   selectedMonth: number;
+  setFilter:  React.Dispatch<React.SetStateAction<object | undefined>>;
   setSelectedMonth: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function MonthNavigation(props: MonthNavigationProps): JSX.Element {
+export default function MonthNavigation({locale, selectedMonth, setSelectedMonth, setFilter}: MonthNavigationProps): JSX.Element {
   const swiperMonthsMobileRef = useRef();
-  const months = getMonthesNames(props.locale);
+  const [showFilter, setShowFilter] = useState<boolean>(false);
+  const months = getMonthesNames(locale);
+
+  const handleOpen = () => setShowFilter(true);
 
   let actualMonths = [];
   for (let i = 0; i < 12; i++) {
@@ -29,7 +34,7 @@ export default function MonthNavigation(props: MonthNavigationProps): JSX.Elemen
     $(this).addClass("month-selected").siblings().removeClass("month-selected");
     let monthIndex: number | undefined = months.find(item => item.monthShort == $(this).text())?.monthIndex;
     if (typeof (monthIndex) === "number")
-      props.setSelectedMonth(monthIndex);
+      setSelectedMonth(monthIndex);
   });
 
   useEffect(() => {
@@ -37,7 +42,7 @@ export default function MonthNavigation(props: MonthNavigationProps): JSX.Elemen
       //@ts-ignore
       swiperMonthsMobileRef.current.on("slideChangeTransitionEnd", function () {
         //@ts-ignore
-        props.setSelectedMonth(swiperMonthsMobileRef.current?.activeIndex);
+        setSelectedMonth(swiperMonthsMobileRef.current?.activeIndex);
       });
     }
 
@@ -46,8 +51,8 @@ export default function MonthNavigation(props: MonthNavigationProps): JSX.Elemen
   useEffect(() => {
     if (swiperMonthsMobileRef.current)
       //@ts-ignore
-      swiperMonthsMobileRef.current.slideTo(props.selectedMonth);
-  }, [props.selectedMonth]);
+      swiperMonthsMobileRef.current.slideTo(selectedMonth);
+  }, [selectedMonth]);
 
   return (
     <>
@@ -64,7 +69,7 @@ export default function MonthNavigation(props: MonthNavigationProps): JSX.Elemen
           {
             actualMonths.map((item, num) =>
               <SwiperSlide key={num}
-                           className={`${props.selectedMonth === item ? "month-selected" : ""} text-muted fw-light fs-calendar-nav hover-effect-up`}>
+                           className={`${selectedMonth === item ? "month-selected" : ""} text-muted fw-light fs-calendar-nav hover-effect-up`}>
                 <span className="cursor-pointer">
                    {months[item].monthShort}
                 </span>
@@ -96,9 +101,10 @@ export default function MonthNavigation(props: MonthNavigationProps): JSX.Elemen
             }
           </Swiper>
         </div>
-        <div className="col-4 text-center fs-calendar-nav">{createDate({locale: props.locale}).dateMonth}</div>
-        <div className="col-4 text-end fs-calendar-nav">Фильтр</div>
+        <div className="col-4 text-center fs-calendar-nav">{createDate({locale: locale}).dateMonth}</div>
+        <div onClick={handleOpen} className="col-4 text-end fs-calendar-nav">Фильтр</div>
       </div>
+      <OffcanvasFilter setFilter={setFilter} show={showFilter} setShow={setShowFilter} locale={locale}/>
     </>
   );
 }

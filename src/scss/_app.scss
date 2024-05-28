@@ -129,7 +129,7 @@ $grid-breakpoints: map-merge(
     font-size: calc(6 * var(--mIndex));
   }
   @include media-breakpoint-down(lg) {
-    font-size: calc(3 * var(--mIndex));
+    font-size: calc(2.8 * var(--mIndex));
   }
 }
 
@@ -176,10 +176,10 @@ $grid-breakpoints: map-merge(
 .fs-calendar-filter{
   font-size: 14px;
   @include media-breakpoint-down(1800) {
-    font-size: calc(.8 * var(--mIndex));
+    font-size: calc(.75 * var(--mIndex));
   }
   @include media-breakpoint-down(lg) {
-    font-size: calc(.8 * var(--mIndex));
+    font-size: calc(1.8 * var(--mIndex));
   }
 }
 
@@ -198,13 +198,13 @@ $grid-breakpoints: map-merge(
   height: 18px;
   margin-top: .38rem;
   @include media-breakpoint-down(1800) {
-    width: calc(1 * var(--mIndex));
-    height: calc(1 * var(--mIndex));
-    margin-top: calc(.4 * var(--mIndex));
+    width: calc(.8 * var(--mIndex));
+    height: calc(.8 * var(--mIndex));
+    margin-top: calc(.6 * var(--mIndex));
   }
   @include media-breakpoint-down(lg) {
-    width: calc(1 * var(--mIndex));
-    height: calc(1 * var(--mIndex));
+    width: calc(2 * var(--mIndex));
+    height: calc(2 * var(--mIndex));
     margin-top: calc(.4 * var(--mIndex));
   }
 }
@@ -219,6 +219,13 @@ $grid-breakpoints: map-merge(
   }
   @include media-breakpoint-down(md) {
     border-radius: .6rem;
+  }
+}
+
+.border-filter {
+  border-width: 1px !important;
+  @include media-breakpoint-down(lg) {
+    border-width: calc(1 * var(--mIndex)) !important;
   }
 }
 
