@@ -23,6 +23,10 @@ $grid-breakpoints: map-merge(
   color: #d9d9d9;
 }
 
+.border-white{
+  border-color: #fff;
+}
+
 .border-grey-light{
   border-color: #e4e4e4;
 }
@@ -340,14 +344,14 @@ $grid-breakpoints: map-merge(
 
 .hover-border{
   &:hover{
-    border: solid rgba(17, 17, 17, 0.35);
+    border-color: rgba(17, 17, 17, 0.35) !important;
   }
 }
 
 [data-bs-theme="dark"]
 .hover-border{
   &:hover{
-    border: solid #ccc;
+    border-color: #ccc !important;
   }
 }
 
