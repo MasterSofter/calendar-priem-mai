@@ -129,7 +129,7 @@ $grid-breakpoints: map-merge(
 }
 
 .fs-calendar-nav {
-  font-size: 30px;
+  font-size: 24px;
   @include media-breakpoint-down(1800) {
     font-size: calc(1.4 * var(--mIndex));
   }
