@@ -60,33 +60,33 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
     <div className={className}>
       <div className="w-100 mt-lg-5">
         <div className="d-none d-lg-block text-center my-4 mb-5 pt-2"><span className="fs-calendar-filter-title fw-book">Фильтр</span></div>
-        <hr className="border-filter border-dark border-dark-mode-light my-3"/>
+        <hr className="border-calendar-filter border-grey-light mb-4"/>
         {/* Уровни образования */}
-        <div className="px-3">
+        <div className="px-3 mb-4 pb-2">
           <span className="text-lg-uppercase fs-calendar-filter fw-lg-bold mb-4 mb-lg-2 ms-3 ms-lg-0 d-block">Уровень образования</span>
           {
             degrees.map((degree, index) =>
-              <div key={index} className="form-check cursor-pointer hover-effect-up mb-3 mb-lg-0 ms-3 ms-lg-0">
+              <div key={index} className="d-flex flex-row form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
                 <input checked={degrees[index] == filter.degree} onChange={(e)=> {
                   if(e.currentTarget.checked){
                     filter.degree = degrees[index];
                     setFilter({...filter});
                   }
                 }} className="form-check-input input-calendar-filter cursor-pointer me-4 me-lg-3" type="radio" name={`${prefix}-Уровни образования`} id={`${prefix}-cal-filter-level-${index}`}/>
-                <label id={`${prefix}-label-level-${index}`} className="form-check-label fs-calendar-filter cursor-pointer" htmlFor={`${prefix}-cal-filter-level-${index}`}>
+                <label id={`${prefix}-label-level-${index}`} className="lh-1 form-check-label fs-calendar-filter cursor-pointer ms-3 ms-lg-0" htmlFor={`${prefix}-cal-filter-level-${index}`}>
                   {degree}
                 </label>
               </div>
             )
           }
         </div>
-        <hr className="border-filter border-dark border-dark-mode-light my-3"/>
+        <hr className="border-calendar-filter border-grey-light mb-4"/>
         {/* Категории */}
         <div className="px-3">
           <span className="text-lg-uppercase fs-calendar-filter fw-lg-bold mb-4 mb-lg-2 ms-3 ms-lg-0 d-block">Категории</span>
           {
             categories.map((category, index) =>
-              <div key={index} className="form-check cursor-pointer hover-effect-up mb-3 mb-lg-0 ms-3 ms-lg-0">
+              <div key={index} className="d-flex flex-row form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
                 <input checked={!!filter.categories.find(item => item == categories[index]) } onChange={(e)=> {
 
                   const _index = filter.categories.indexOf(`${categories[index]}`);
@@ -98,7 +98,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
 
                   setFilter({...filter});
                 }} className="form-check-input input-calendar-filter cursor-pointer me-4 me-lg-3" type="checkbox" name="Категории" id={`${prefix}-cal-filter-${index}`}/>
-                <label className="form-check-label fs-calendar-filter cursor-pointer" htmlFor={`${prefix}-cal-filter-${index}`}>
+                <label className="lh-1 form-check-label fs-calendar-filter cursor-pointer ms-3 ms-lg-0" htmlFor={`${prefix}-cal-filter-${index}`}>
                   {category}
                 </label>
               </div>

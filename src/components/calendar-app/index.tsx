@@ -1,23 +1,23 @@
 import MonthNavigation from "./components/month-navigation";
 import Title from "./components/title";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {SwiperCalendar} from "./components/swiper-calendar";
-import {Offcanvas} from "react-bootstrap";
 import {OffcanvasCalendarEvent} from "./components/offcanvas-calendar-event";
 import {IFilter} from "../filter";
 
 export interface ICalendarDay {
   "month": number,
   "number": number,
-  "timeStart": string | null,
-  "timeEnd": string | null,
-  "category": string | null,
-  "header": string | null,
-  "text": string | null,
-  "location": string | null,
-  "warning": boolean | null,
-  "link": string | null,
-  "degree": string | null
+  "timeStart": string | null;
+  "timeEnd": string | null;
+  "category": string | null;
+  "header": string | null;
+  "text": string | null;
+  "location": string | null;
+  "warning": boolean;
+  "link": string | null;
+  "degree": string;
+  "primary": boolean;
 };
 
 type CalendarProps = {
@@ -30,8 +30,8 @@ type CalendarProps = {
 
 export default function CalendarApp({calendarData, filter, setFilter, className, locale}: CalendarProps): JSX.Element {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedMonth, setSelectedMonth] = useState<number>((new Date()).getMonth())
-  const [showEvents, setShowEvents] = useState<boolean>(false)
+  const [selectedMonth, setSelectedMonth] = useState<number>((new Date()).getMonth());
+  const [showEvents, setShowEvents] = useState<boolean>(false);
 
   return (
     <div className={className}>

@@ -32,8 +32,8 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
         </div>
         {
           (weekNumber + 1 !== state.calendarWeeks.length)
-            ? <hr className="border-2 border-dark border-dark-mode-light my-3"/>
-            : <hr className="d-lg-none border-2 border-dark border-dark-mode-light my-3"/>
+            ? <hr className="border-3 border-grey-light my-3"/>
+            : <hr className="d-lg-none border-3 border-grey-light my-3"/>
         }
       </div>
     );
@@ -51,9 +51,9 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
         }
       </div>
       <div className="d-lg-none row d-flex text-start">
-        <span className="col-4 text-muted fs-calendar-nav fw-normal">{capitalizeFirstLetter(month.monthName)}</span>
+        <span className="col-4 text-muted fs-calendar-nav fw-normal text-capitalize ms-5">{month.monthName}</span>
       </div>
-      <hr className="calendar-start-line border-2 border-dark border-dark-mode-light my-3"/>
+      <hr className="calendar-start-line border-3 border-grey-light my-3"/>
       <div className="row d-flex flex-column">
         {calendarWeeks}
       </div>

@@ -38,7 +38,7 @@ export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDat
         {
           createYear({locale:locale}).yearMonthes().map((month, index) =>
             <SwiperSlide key={index}>
-              <Calendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter}  selectedDate={selectedDate} setSelectedDate={setSelectedDate} className={`calendar-${index}`} month={month} locale={"ru"}/>
+              <Calendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter}  selectedDate={selectedDate} setSelectedDate={setSelectedDate} className={`w-100 calendar-${index}`} month={month} locale={"ru"}/>
             </SwiperSlide>
           )
         }

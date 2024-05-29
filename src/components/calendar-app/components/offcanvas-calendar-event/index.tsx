@@ -71,20 +71,20 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
                 </div>
                 <div className="col d-flex flex-column justify-content-start py-6 px-6 mx-5">
                   {
-                    categories?.map((item, index) => <Event className="row" key={index} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}/>)
+                    categories?.map((item, index) => <Event className="row" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}/>)
                   }
                 </div>
               </div>
             </div>
           </div>
           <div className="d-lg-none">
-            <div onClick={handleClose} className="px-4 sticky-top bg-body d-flex flex-row justify-content-start align-items-center py-5">
-              <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-text me-3"/>
-              <span className="fs-calendar-offcanvas-title lh-1">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
+            <div onClick={handleClose} className="ps-4 sticky-top bg-body d-flex flex-row justify-content-start align-items-center py-5">
+              <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-text text-muted ms-3 me-4"/>
+              <span className="fs-calendar-offcanvas-title lh-1 ms-2">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
             </div>
-            <div className="px-4 col d-flex flex-column justify-content-start">
+            <div className="d-flex flex-column justify-content-start">
               {
-                categories?.map((item, index) => <Event className="row bg-white bg-dark-mode-gray mb-4" key={index} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}/>)
+                categories?.map((item, index) => <Event className="bg-grey-light mb-4 px-4 py-2" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}/>)
               }
             </div>
           </div>
