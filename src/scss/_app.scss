@@ -355,18 +355,22 @@ $grid-breakpoints: map-merge(
   }
 }
 
-.text-lg-capitalize {
-  @include media-breakpoint-up(lg) {
-    text-transform: capitalize !important
-  }
-}
-
 [data-bs-theme="dark"]
 .mx-dark-mode-0{
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
-.min-vw-15 {
-  min-width: 18.5rem;
+.min-vw-19 {
+  min-width: 19rem !important;
+}
+
+.max-vw-20 {
+  max-width: 20rem !important;
+}
+
+.text-mobile-uppercase{
+  @include media-breakpoint-down(lg) {
+    text-transform: uppercase !important;
+  }
 }

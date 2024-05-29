@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 import {createDate, getMonthesNames} from "../../../../utils/helpers/date";
 import {Pagination} from "swiper/modules";
 import $ from "jquery";
-import {capitalizeFirstLetter} from "../../../../utils/helpers/string/capitalizeFirstLetter";
 import {OffcanvasFilter} from "../../../filter/components/offcanvas-filter";
 import {IFilter} from "../../../filter";
 import {ICalendarDay} from "../../index";
@@ -71,7 +70,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
           }}
           slidesPerView={7}
           loop={false}
-          className="pb-5"
+          className="disable-carousel pb-5"
           pagination={{
             dynamicBullets: true,
           }}
@@ -79,7 +78,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
         >
           {
             actualMonths.map((item, num) =>
-              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : ""} text-muted fw-light fs-calendar-nav hover-effect-up`}>
+              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted"} fw-light fs-calendar-nav hover-effect-up`}>
                 <span className="cursor-pointer">
                    {months[item].monthShort}
                 </span>
@@ -99,6 +98,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
             loop={false}
             direction="vertical"
             speed={1000}
+            className="disable-carousel"
           >
             {
               months.map((item, num) =>

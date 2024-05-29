@@ -33,7 +33,7 @@ export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDat
         direction={functions.defineDirection(width)}
         slidesPerView={'auto'}
         speed={2000}
-        className="swiper-calendar mt-neg-calendar-swiper position-relative zindex-1"
+        className="disable-carousel swiper-calendar mt-neg-calendar-swiper position-relative zindex-1"
       >
         {
           createYear({locale:locale}).yearMonthes().map((month, index) =>

@@ -25,7 +25,7 @@ export function Event({warning, primary,  className, category, header, text, lin
           <span className="col-11 col-lg-9 fs-calendar-offcanvas-text lh-sm">{text}</span>
         </div>
         <div className="row text-start pb-5 pb-lg-4 pt-lg-2">
-          <a className="fs-calendar-offcanvas-text text-uppercase text-lg-capitalize" href={link ? link : ""} target="_blank">Узнать больше</a>
+          <a className="fs-calendar-offcanvas-text text-mobile-uppercase" href={link ? link : ""} target="_blank">Узнать больше</a>
         </div>
         <div className="d-flex flex-row justify-content-start align-items-center fs-calendar-offcanvas-text pt-lg-2">
           <i className="fa-light fa-location-dot me-3"/>

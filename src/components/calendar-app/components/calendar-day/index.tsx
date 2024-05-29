@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
+import {removeDuplicates} from "../../../../utils/helpers/string/removeDuplicates";
 
 interface DayProps {
   isToday : boolean;
@@ -46,18 +47,19 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
     );
 
   //3. Смотрим есть ли категории по приоритету 1.Warning 2.Primary
-  const warningCategories = categories?.filter((item) => item.warning);
-  const primaryCategories = categories?.filter((item) => item.primary);
+  let warningCategories = categories?.filter((item) => item.warning);
+  let primaryCategories = categories?.filter((item) => item.primary);
   categories = categories?.filter((item) => !item.warning && !item.primary);
 
-  primaryCategories?.map( (item) => {
+  let uniqueArray = removeDuplicates(primaryCategories, "category");
+  uniqueArray?.map((item) => {
     categories?.unshift(item);
   });
 
-  warningCategories?.map( (item) => {
+  uniqueArray = removeDuplicates(warningCategories, "category");
+  uniqueArray?.map( (item) => {
     categories?.unshift(item);
   });
-
 
   return (
     <div onClick={() => {setSelectedDate(date); setShowEvents(true);}} className={`${isToday ? "bg-grey-light" : ""} border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar col text-center text-lg-start h-day-cell ${isActualDate ? "" : "text-muted"}`}>

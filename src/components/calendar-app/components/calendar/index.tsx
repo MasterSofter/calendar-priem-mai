@@ -2,7 +2,6 @@ import {useCalendar} from "./hooks/useCalendar";
 import Day from "../calendar-day";
 import React, {JSX} from "react";
 import {IMonth} from "../../../../utils/helpers/date";
-import {capitalizeFirstLetter} from "../../../../utils/helpers/string/capitalizeFirstLetter";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
 
