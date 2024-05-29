@@ -16,7 +16,7 @@ export interface ICalendarDay {
   "location": string | null;
   "warning": boolean;
   "link": string | null;
-  "degree": string;
+  "degree": string | null;
   "primary": boolean;
 };
 

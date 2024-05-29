@@ -78,7 +78,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
         >
           {
             actualMonths.map((item, num) =>
-              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted"} fw-light fs-calendar-nav hover-effect-up`}>
+              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted fw-light"} fs-calendar-nav hover-effect-up`}>
                 <span className="cursor-pointer">
                    {months[item].monthShort}
                 </span>

@@ -16,45 +16,22 @@ export interface IFilter {
 
 export default function Filter ({calendarData, prefix, filter, setFilter, className} : FilterProps) : JSX.Element {
 
-  const degrees : Array<string> = new Array<string>();
+  const degrees : Array<string> = ["Все"];
   calendarData.map((item, index) => {
-    if(!degrees.find(el => item.degree && el == item.degree) && item.degree)
+    if(!degrees.find(el => el === item.degree) && (item.degree != "" && item.degree != null))
       degrees.push(item.degree);
-  })
+  });
 
   const categories : Array<string> = new Array<string>();
   calendarData.map((item, index) => {
     if(!categories.find(el => item.category && el == item.category) && item.category)
       categories.push(item.category);
-  })
-
-  /*
-  const levels : Array<string> = [
-    "Все",
-    "Базовое высшее",
-    "Специализированное высшее"
-  ]
-
-  let categories : Array<string> = [
-    "Предварительный приём",
-    "День открытых дверей",
-    "Приём документов",
-    "Приём согласий",
-    "Мероприятие",
-    "Университетские субботы",
-    "Завершение",
-    "Приказ",
-    "Консультация",
-    "Экзамен",
-    "Результаты",
-    "Заселение в общежитие"
-  ];
-  */
+  });
 
   useEffect( () => {
     if(filter.degree == "")
       setFilter({...filter, degree: degrees[0]})
-  }, [] )
+  }, [] );
 
   return (
     <div className={className}>

@@ -111,82 +111,82 @@ $grid-breakpoints: map-merge(
   }
 }
 
-.fs-calendar-badge{
-  font-size: 40px;
-  @include media-breakpoint-down(xxl) {
-    font-size: calc(1.1 * var(--mIndex));
-  }
-}
-
 .fs-calendar-title {
-  font-size: 40px;
+  font-size: 40px !important;
   @include media-breakpoint-down(xxl) {
-    font-size: calc(2.1 * var(--mIndex));
+    font-size: calc(2.1 * var(--mIndex)) !important;
   }
   @include media-breakpoint-down(lg) {
-    font-size: calc(2.8 * var(--mIndex));
+    font-size: calc(2.8 * var(--mIndex)) !important;
   }
 }
 
 .fs-calendar-nav {
-  font-size: 24px;
+  font-size: 24px !important;
   @include media-breakpoint-down(1800) {
-    font-size: calc(1.4 * var(--mIndex));
+    font-size: calc(1.4 * var(--mIndex)) !important;
   }
   @include media-breakpoint-down(lg) {
-    font-size: calc(2 * var(--mIndex));
+    font-size: calc(2 * var(--mIndex)) !important;
   }
 }
 
 .fs-calendar-offcanvas-title{
-  font-size: 96px;
+  font-size: 96px !important;
   @include media-breakpoint-down(1800) {
-    font-size: calc(6 * var(--mIndex));
+    font-size: calc(6 * var(--mIndex)) !important;
   }
   @include media-breakpoint-down(lg) {
-    font-size: calc(2.4 * var(--mIndex));
+    font-size: calc(2.4 * var(--mIndex)) !important;
   }
 }
 
 .fs-calendar-offcanvas-header{
-  font-size: 34px;
+  font-size: 34px !important;
   @include media-breakpoint-down(1800) {
-    font-size: calc(2.2 * var(--mIndex));
+    font-size: calc(2.2 * var(--mIndex)) !important;
   }
   @include media-breakpoint-down(lg) {
-    font-size: calc(2.2 * var(--mIndex));
+    font-size: calc(2.2 * var(--mIndex)) !important;
   }
 }
 
 .fs-calendar-offcanvas-category{
-  font-size: 30px;
+  font-size: 30px !important;
   @include media-breakpoint-down(1800) {
-    font-size: calc(1.6 * var(--mIndex));
+    font-size: calc(1.6 * var(--mIndex)) !important;
+  }
+}
+
+.fs-calendar-badge{
+  font-size: 40px !important;
+  @include media-breakpoint-down(xxl) {
+    font-size: calc(1.1 * var(--mIndex)) !important;
   }
 }
 
 .fs-calendar-offcanvas-badge{
-  font-size: 20px;
+  font-size: 20px !important;
   @include media-breakpoint-down(1800) {
-    font-size: calc(1 * var(--mIndex));
+    font-size: calc(1 * var(--mIndex)) !important;
   }
   @include media-breakpoint-down(lg) {
-    font-size: calc(1.25 * var(--mIndex));
+    font-size: calc(1.25 * var(--mIndex)) !important;
   }
 }
 
 .fs-calendar-offcanvas-text{
-  font-size: 28px;
+  font-size: 28px !important;
   @include media-breakpoint-down(1800) {
-    font-size: calc(1.8 * var(--mIndex));
+    font-size: calc(1.8 * var(--mIndex)) !important;
   }
   @include media-breakpoint-down(lg) {
-    font-size: calc(1.6 * var(--mIndex));
+    font-size: calc(1.6 * var(--mIndex)) !important;
   }
 }
 
 .fs-day-event{
-  font-size: 14px;
+  font-size: 13px;
   @include media-breakpoint-down(1800) {
     font-size: calc(.7 * var(--mIndex));
   }
@@ -216,18 +216,18 @@ $grid-breakpoints: map-merge(
 }
 
 .input-calendar-filter{
-  width: 18px;
-  height: 18px;
-  margin-top: 0rem;
+  width: 18px !important;
+  height: 18px !important;
+  margin-top: 0 !important;
   @include media-breakpoint-down(1800) {
-    width: calc(.8 * var(--mIndex));
-    height: calc(.8 * var(--mIndex));
-    margin-top: calc(0 * var(--mIndex));
+    width: calc(.8 * var(--mIndex)) !important;
+    height: calc(.8 * var(--mIndex)) !important;
+    margin-top: 0 !important;
   }
   @include media-breakpoint-down(lg) {
-    width: calc(2 * var(--mIndex));
-    height: calc(2 * var(--mIndex));
-    margin-top: calc(0 * var(--mIndex));
+    width: calc(2 * var(--mIndex)) !important;
+    height: calc(2 * var(--mIndex)) !important;
+    margin-top: 0 !important;
   }
 }
 

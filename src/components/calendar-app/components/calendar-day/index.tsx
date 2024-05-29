@@ -15,38 +15,27 @@ interface DayProps {
 }
 
 export default function Day({setShowEvents, calendarData, filter, isToday, selectedDate, setSelectedDate, date, isActualDate}: DayProps) : JSX.Element {
-  let degree = "";
   let categories : Array<ICalendarDay> | undefined;
 
-  //1. Получить уровень, относящийся к этому дню этого месяца с учетом фильтра
-  if(filter.degree != ""){
-    calendarData?.map(
-      (item, index) => {
-        if (filter.degree == item.degree && item.month === date.getMonth() && item.number == date.getDate())
-          degree = item.degree;
-      }
-    )
-  }
-
-  //2. Получить массив категорий, удовлетворяющий условиям фильтра
-  if(filter.categories.length > 0 && filter.degree != "")
+  //1. Получить массив категорий, удовлетворяющий условиям фильтра
+  if(filter.categories.length > 0 && filter.degree != "Все")
     categories = calendarData?.filter(
-      (item) => (!!filter.categories.find(el => el == item.category) && item.degree == degree && item.month === date.getMonth() && item.number == date.getDate())
+      (item) => (!!filter.categories.find(el => el == item.category) && item.degree == filter.degree && item.month === date.getMonth() && item.number == date.getDate())
     );
   else if (filter.categories.length > 0)
     categories = calendarData?.filter(
       (item) => (!!filter.categories.find(el => el == item.category) && item.month === date.getMonth() && item.number == date.getDate())
     );
-  else if(filter.degree != "")
+  else if(filter.degree != "Все")
     categories = calendarData?.filter(
-      (item) => (item.degree == degree && item.month === date.getMonth() && item.number == date.getDate())
+      (item) => (item.degree == filter.degree && item.month === date.getMonth() && item.number == date.getDate())
     );
   else
     categories = calendarData?.filter(
       (item) => (item.month === date.getMonth() && item.number == date.getDate())
     );
 
-  //3. Смотрим есть ли категории по приоритету 1.Warning 2.Primary
+  //2. Смотрим есть ли категории по приоритету 1.Warning 2.Primary
   let warningCategories = categories?.filter((item) => item.warning);
   let primaryCategories = categories?.filter((item) => item.primary);
   categories = categories?.filter((item) => !item.warning && !item.primary);
