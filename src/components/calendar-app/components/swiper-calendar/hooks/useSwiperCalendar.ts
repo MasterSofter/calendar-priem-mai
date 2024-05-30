@@ -11,7 +11,7 @@ interface SwiperCalendarParams {
 export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width, height} : SwiperCalendarParams){
   const defineDirection = (width : number) : ("horizontal" | "vertical") => width < 990 ? "vertical" : "horizontal";
   const defineAllowTouchMove = (width : number) : boolean => width < 990;
-  const defineSpeed = (width : number) : number => width < 990 ? 500 : 2000;
+  const defineSpeed = (width : number) : number => width < 990 ? 800 : 2000;
 
   const swiperRef = useRef();
 
@@ -48,11 +48,7 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width, heig
     document.querySelector(".swiper-calendar").style.maxHeight = "100vh";
     if(window.innerWidth < 990){
       //@ts-ignore
-      document.querySelector(".swiper-calendar").style.maxHeight = `${window.innerHeight - $("#calendar-nav").height() + 3.4 * (window.innerWidth/100)}px`;
-    }
-    if(window.innerWidth < 767){
-      //@ts-ignore
-      document.querySelector(".swiper-calendar").style.maxHeight = `${window.innerHeight - $("#calendar-nav").height() + 3.4 * (window.innerWidth/100)}px`;
+      document.querySelector(".swiper-calendar").style.maxHeight = `${(window.innerHeight/100 * 76 + $("#calendar-nav").height() - 3.4 * (window.innerWidth/100))}px`;
     }
   }, [width])
 
