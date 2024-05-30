@@ -20,7 +20,7 @@ interface SwiperCalendarProps {
 
 export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDate, setSelectedDate, locale, selectedMonth, setSelectedMonth} : SwiperCalendarProps) : JSX.Element {
   const { height, width } = useWindowDimensions();
-  const {state, functions} = useSwiperCalendar({selectedMonth, setSelectedMonth, width})
+  const {state, functions} = useSwiperCalendar({selectedMonth, setSelectedMonth, width, height})
 
   return (
     <>
@@ -30,7 +30,7 @@ export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDat
         }}
         loop={false}
         spaceBetween={0}
-        direction={functions.defineDirection(width)}
+        direction={'vertical'}
         slidesPerView={'auto'}
         speed={2000}
         className="disable-carousel swiper-calendar mt-neg-calendar-swiper position-relative zindex-1"

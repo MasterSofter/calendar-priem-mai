@@ -5,9 +5,10 @@ interface SwiperCalendarParams {
   setSelectedMonth :  React.Dispatch<React.SetStateAction<number>>
   selectedMonth : number;
   width : number;
+  height : number;
 }
 
-export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width} : SwiperCalendarParams){
+export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width, height} : SwiperCalendarParams){
   const defineDirection = (width : number) : ("horizontal" | "vertical") => width < 990 ? "vertical" : "horizontal";
   const defineAllowTouchMove = (width : number) : boolean => width < 990;
 
@@ -16,11 +17,11 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width} : Sw
   useEffect(() => {
     if(swiperRef.current)
     {
-      console.log("Отрисовка", selectedMonth)
       //@ts-ignore
       swiperRef.current.slideTo(selectedMonth);
     }
   }, [selectedMonth]);
+
 
   useEffect(() => {
     if(swiperRef.current)
@@ -39,9 +40,11 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width} : Sw
       //@ts-ignore
       swiperRef.current.allowTouchMove = defineAllowTouchMove(width);
     }
-  }, [width]);
+  }, [height, width]);
 
   useEffect(()=> {
+    //@ts-ignore
+    document.querySelector(".swiper-calendar").style.maxHeight = "100vh";
     if(window.innerWidth < 990){
       //@ts-ignore
       document.querySelector(".swiper-calendar").style.maxHeight = `${window.innerHeight - $("#calendar-nav").height() + 3.4 * (window.innerWidth/100)}px`;
@@ -50,7 +53,7 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width} : Sw
       //@ts-ignore
       document.querySelector(".swiper-calendar").style.maxHeight = `${window.innerHeight - $("#calendar-nav").height() + 3.4 * (window.innerWidth/100)}px`;
     }
-  })
+  }, [width])
 
   return {
     state: {
