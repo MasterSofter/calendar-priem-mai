@@ -69,6 +69,9 @@ $grid-breakpoints: map-merge(
 }
 
 .w-calendar-title {
+  width: 16.5rem;
+  min-width: 16.5rem;
+  /*
   width: 310px;
   min-width: 310px;
   @include media-breakpoint-down(xxl) {
@@ -79,6 +82,7 @@ $grid-breakpoints: map-merge(
     width: calc(22 * var(--mIndex));
     min-width: calc(22 * var(--mIndex));
   }
+  */
 }
 
 .check-calendar-filter-size{
@@ -112,6 +116,8 @@ $grid-breakpoints: map-merge(
 }
 
 .fs-calendar-title {
+  font-size: 2.1rem !important;
+  /*
   font-size: 40px !important;
   @include media-breakpoint-down(xxl) {
     font-size: calc(2.1 * var(--mIndex)) !important;
@@ -119,6 +125,7 @@ $grid-breakpoints: map-merge(
   @include media-breakpoint-down(lg) {
     font-size: calc(2.8 * var(--mIndex)) !important;
   }
+  */
 }
 
 .fs-calendar-nav {
@@ -386,8 +393,18 @@ $grid-breakpoints: map-merge(
   margin-left: -2px !important;
 }
 
-.max-vw-16 {
-  max-width: 16% !important;
+.w-calendar{
+  width: 84% !important;
+  @include media-breakpoint-down(lg) {
+    width: 100% !important;
+  }
+}
+
+.w-filter{
+  width: 16% !important;
+  @include media-breakpoint-down(lg) {
+    width: 100% !important;
+  }
 }
 
 .text-mobile-uppercase{

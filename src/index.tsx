@@ -17,5 +17,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   //@ts-ignore
-  <App calendarData={calendarData}/>
+ <div className="page-wrapper content-wrapper">
+   <App calendarData={calendarData}/>
+ </div>
 );

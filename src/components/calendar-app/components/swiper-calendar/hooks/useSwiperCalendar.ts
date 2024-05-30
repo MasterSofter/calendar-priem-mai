@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
+import $ from "jquery";
 
 interface SwiperCalendarParams {
   setSelectedMonth :  React.Dispatch<React.SetStateAction<number>>
@@ -35,6 +36,17 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width} : Sw
       swiperRef.current.allowTouchMove = defineAllowTouchMove(width);
     }
   }, [width]);
+
+  useEffect(()=> {
+    if(window.innerWidth < 990){
+      //@ts-ignore
+      document.querySelector(".swiper-calendar").style.maxHeight = `${window.innerHeight - $("#calendar-nav").height() + 3.4 * (window.innerWidth/100)}px`;
+    }
+    if(window.innerWidth < 767){
+      //@ts-ignore
+      document.querySelector(".swiper-calendar").style.maxHeight = `${window.innerHeight - $("#calendar-nav").height() + 3.4 * (window.innerWidth/100)}px`;
+    }
+  })
 
   return {
     state: {

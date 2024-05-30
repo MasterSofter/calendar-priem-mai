@@ -23,17 +23,11 @@ export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDat
   const { height, width } = useWindowDimensions();
   const {state, functions} = useSwiperCalendar({selectedMonth, setSelectedMonth, width})
 
-  useEffect(()=> {
-    //@ts-ignore
-    document.querySelector(".swiper-calendar").style.maxHeight = `${window.innerHeight - $("#calendar-nav").height()}px`;
-  })
-
   return (
     <>
       <Swiper
         onSwiper={(swiper : any) => {
           state.swiperRef.current = swiper;
-
         }}
         loop={false}
         spaceBetween={0}
@@ -45,7 +39,7 @@ export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDat
         {
           createYear({locale:locale}).yearMonthes().map((month, index) =>
             <SwiperSlide key={index}>
-              <Calendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter}  selectedDate={selectedDate} setSelectedDate={setSelectedDate} className={`w-100 calendar-${index}`} month={month} locale={"ru"}/>
+              <Calendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} className={`w-100 calendar-${index}`} month={month} locale={"ru"}/>
             </SwiperSlide>
           )
         }

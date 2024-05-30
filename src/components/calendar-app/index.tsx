@@ -39,7 +39,7 @@ export default function CalendarApp({calendarData, filter, setFilter, className,
         <Title/>
         <MonthNavigation calendarData={calendarData} filter={filter} setFilter={setFilter} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={locale}/>
       </div>
-      <SwiperCalendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate}  selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={locale} />
+      <SwiperCalendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={locale} />
       <OffcanvasCalendarEvent filter={filter} selectedDate={selectedDate} calendarData={calendarData} show={showEvents} setShow={setShowEvents} locale={locale} />
     </div>
   );
