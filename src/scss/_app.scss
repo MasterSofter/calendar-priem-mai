@@ -1,19 +1,3 @@
-
-
-$grid-breakpoints: map-merge(
-  (
-      1800 : 1800px
-  ),
-  $grid-breakpoints
-);
-
-:root {
-  --mIndex: 1vw;
-  @include media-breakpoint-down(lg) {
-    --mIndex: 2.4vw;
-  }
-}
-
 .text-grey{
   color: #828282;
 }
@@ -37,230 +21,173 @@ $grid-breakpoints: map-merge(
 }
 
 .h-day-cell{
-  height: 180px;
-  min-height: 180px;
-  @include media-breakpoint-down(xxl) {
-    height: calc(10 * var(--mIndex));
-    min-height: calc(10 * var(--mIndex));
+  height: 10rem !important;
+  min-height: 10rem !important;
+  @media screen and (max-width: 991px){
+    height: 8rem !important;
+    min-height: 8rem !important;
   }
-  @include media-breakpoint-down(lg) {
-    height: calc(6 * var(--mIndex));
-    min-height: calc(6 * var(--mIndex));
+  @media screen and (max-width: 767px){
+    height: 6rem !important;
+    min-height: 6rem !important;
   }
 }
 
 .fs-day-number{
-  font-size: 32px;
-  @include media-breakpoint-down(xxl) {
-    font-size: calc(1.6 * var(--mIndex));
-  }
+  font-size: 1.8rem;
 }
 
 .fs-circle-sm{
-  font-size: calc(.4 * var(--mIndex));
+  font-size: .8rem !important;
+  @media screen and (max-width: 767px){
+    font-size: .5rem !important;
+  }
 }
 
 .fs-circle-md{
-  font-size: calc(.65 * var(--mIndex));
+  font-size: 1.6rem !important;
+  @media screen and (max-width: 767px){
+    font-size: .8rem !important;
+  }
 }
 
 .fs-circle-lg{
-  font-size: calc(1.25 * var(--mIndex));
+  font-size: 2.2rem !important;
+  @media screen and (max-width: 767px){
+    font-size: 1.6rem !important;
+  }
 }
 
 .w-calendar-title {
-  width: 16.5rem;
-  min-width: 16.5rem;
-  /*
-  width: 310px;
-  min-width: 310px;
-  @include media-breakpoint-down(xxl) {
-    width: calc(16 * var(--mIndex));
-    min-width: calc(16 * var(--mIndex));
-  }
-  @include media-breakpoint-down(lg) {
-    width: calc(22 * var(--mIndex));
-    min-width: calc(22 * var(--mIndex));
-  }
-  */
-}
-
-.check-calendar-filter-size{
-  width: 14px;
-  height: 14px;
-  @include media-breakpoint-down(xxl) {
-    width: calc(16 * var(--mIndex));
-    min-width: calc(16 * var(--mIndex));
-  }
-  @include media-breakpoint-down(lg) {
-    width: calc(22 * var(--mIndex));
-    min-width: calc(22 * var(--mIndex));
+  width: 22rem;
+  min-width:22rem;
+  @media screen and (max-width: 767px){
+    width: 18rem;
+    min-width: 18rem;
   }
 }
 
 .w-calendar-month-nav{
-  width: 800px;
-  min-width: 800px;
-  @include media-breakpoint-down(1800) {
-    width: calc(42 * var(--mIndex));
-    min-width: calc(42 * var(--mIndex));
-  }
-  @include media-breakpoint-down(lg) {
-    width: calc(22 * var(--mIndex));
-    min-width: calc(22 * var(--mIndex));
-  }
-  @include media-breakpoint-down(md) {
-    width: calc(19 * var(--mIndex));
-    min-width: calc(19 * var(--mIndex));
-  }
+  width: 43rem;
+  min-width: 43rem;
 }
 
 .fs-calendar-title {
-  font-size: 2.1rem !important;
-  /*
-  font-size: 40px !important;
-  @include media-breakpoint-down(xxl) {
-    font-size: calc(2.1 * var(--mIndex)) !important;
+  font-size: 2.8rem !important;
+  @media screen and (max-width: 767px){
+    font-size: 2.2rem !important;
   }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(2.8 * var(--mIndex)) !important;
-  }
-  */
 }
 
 .fs-calendar-nav {
-  font-size: 24px !important;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(1.4 * var(--mIndex)) !important;
-  }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(2 * var(--mIndex)) !important;
-  }
-}
-
-.fs-calendar-offcanvas-title{
-  font-size: 96px !important;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(6 * var(--mIndex)) !important;
-  }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(2.4 * var(--mIndex)) !important;
-  }
-}
-
-.fs-calendar-offcanvas-header{
-  font-size: 34px !important;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(2.2 * var(--mIndex)) !important;
-  }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(2.2 * var(--mIndex)) !important;
-  }
-}
-
-.fs-calendar-offcanvas-category{
-  font-size: 30px !important;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(1.6 * var(--mIndex)) !important;
-  }
-}
-
-.fs-calendar-badge{
-  font-size: 40px !important;
-  @include media-breakpoint-down(xxl) {
-    font-size: calc(1.1 * var(--mIndex)) !important;
-  }
-}
-
-.fs-calendar-offcanvas-badge{
-  font-size: 20px !important;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(1 * var(--mIndex)) !important;
-  }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(1.25 * var(--mIndex)) !important;
-  }
-}
-
-.fs-calendar-offcanvas-text{
-  font-size: 28px !important;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(1.8 * var(--mIndex)) !important;
-  }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(1.6 * var(--mIndex)) !important;
-  }
-}
-
-.fs-day-event{
-  font-size: 13px;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(.7 * var(--mIndex));
-  }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(.8 * var(--mIndex));
-  }
-}
-
-.fs-calendar-filter{
-  font-size: 18px;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(.75 * var(--mIndex));
-  }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(1.8 * var(--mIndex));
+  font-size: 1.9rem !important;
+  @media screen and (max-width: 767px){
+    font-size: 1.6rem !important;
   }
 }
 
 .fs-calendar-filter-title{
-  font-size: 24px;
-  @include media-breakpoint-down(1800) {
-    font-size: calc(1.25 * var(--mIndex));
+  font-size: 1.4rem;
+}
+
+
+.fs-calendar-day-nav{
+  font-size: 1.2rem !important;
+}
+
+.fs-calendar-offcanvas-title{
+  font-size: 6rem !important;
+  @media screen and (max-width: 991px){
+    font-size: 2.8rem !important;
   }
-  @include media-breakpoint-down(lg) {
-    font-size: calc(1.25 * var(--mIndex));
+  @media screen and (max-width: 767px){
+    font-size: 1.8rem !important;
+  }
+}
+
+.fs-calendar-offcanvas-header{
+  font-size: 2.4rem !important;
+  @media screen and (max-width: 991px){
+    font-size: 2rem !important;
+  }
+  @media screen and (max-width: 767px){
+    font-size: 1.6rem !important;
+  }
+}
+
+.fs-calendar-offcanvas-category{
+  font-size: 2rem !important;
+}
+
+.fs-calendar-offcanvas-badge{
+  font-size: 1.35rem !important;
+  @media screen and (max-width: 991px){
+    font-size: 1.25rem !important;
+  }
+  @media screen and (max-width: 767px){
+    font-size: 1.15rem !important;
+  }
+}
+
+.fs-calendar-offcanvas-text{
+  font-size: 1.65rem !important;
+  @media screen and (max-width: 991px){
+    font-size: 1.45rem !important;
+  }
+  @media screen and (max-width: 767px){
+    font-size: 1.25rem !important;
+  }
+}
+
+.fs-day-event{
+  font-size: .9rem;
+}
+
+.fs-calendar-filter{
+  font-size: .9rem;
+  @media screen and (max-width: 991px){
+    font-size: 2.8rem !important;
+  }
+  @media screen and (max-width: 767px){
+    font-size: 1.8rem !important;
   }
 }
 
 .input-calendar-filter{
-  width: 18px !important;
-  height: 18px !important;
+  width: 1.1rem !important;
+  height: 1.1rem !important;
   margin-top: 0 !important;
-  @include media-breakpoint-down(1800) {
-    width: calc(.8 * var(--mIndex)) !important;
-    height: calc(.8 * var(--mIndex)) !important;
-    margin-top: 0 !important;
+  @media screen and (max-width: 991px){
+    width: 2.4rem !important;
+    height: 2.4rem !important;
   }
-  @include media-breakpoint-down(lg) {
-    width: calc(2 * var(--mIndex)) !important;
-    height: calc(2 * var(--mIndex)) !important;
-    margin-top: 0 !important;
+  @media screen and (max-width: 767px){
+    width: 1.8rem !important;
+    height: 1.8rem !important;
   }
 }
 
 .rounded-calendar{
-  border-radius: 30px;
-  @include media-breakpoint-down(xxl) {
-    border-radius: 2rem;
-  }
-  @include media-breakpoint-down(lg) {
-    border-radius: 1rem;
-  }
-  @include media-breakpoint-down(md) {
-    border-radius: .6rem;
-  }
+  border-radius: 2.25rem;
+}
+
+.rounded-calendar-day-cell{
+  border-radius: 1.2rem;
 }
 
 .border-calendar-filter {
-  border-width: 1px !important;
-  @include media-breakpoint-down(lg) {
-    border-width: calc(1 * var(--mIndex)) !important;
+  border-width: .08rem !important;
+  @media screen and (max-width: 991px){
+    border-width: 1.4rem !important;
+  }
+  @media screen and (max-width: 767px){
+    border-width: 1rem !important;
   }
 }
 
 [data-bs-theme="dark"]
 .border-calendar-dark-mode-light{
-  @include media-breakpoint-up(lg) {
+  @media screen and (min-width: 991px){
     border-color: #ccc !important;
   }
 }
@@ -276,26 +203,6 @@ $grid-breakpoints: map-merge(
   justify-content: center;
   align-items: center;
 }
-
-
-/*
-.swiper-calendar{
-  @include media-breakpoint-down(lg) {
-    max-height: 76vh !important;
-  }
-  @media screen and (max-width: 900px){
-    max-height: 80vh !important;
-  }
-  @media screen and (max-width: 700px){
-    max-height: 85vh !important;
-  }
-  @media screen and (max-width: 540px){
-    max-height: 88.5vh !important;
-  }
-}
-*/
-
-
 
 .cursor-grab:hover {
   cursor: grab;
@@ -336,17 +243,15 @@ $grid-breakpoints: map-merge(
 }
 
 .bg-white-lg{
-  @include media-breakpoint-up(lg) {
-    --mai-bg-opacity: 1;
-    background-color: rgba(var(--mai-white-rgb), var(--mai-bg-opacity)) !important
+  @media screen and (min-width: 991px){
+    background-color: rgba(var(--mai-white-rgb), 1) !important
   }
 }
 
 [data-bs-theme="dark"]
 .bg-white-lg{
-  @include media-breakpoint-up(lg) {
-    --mai-bg-opacity: 0;
-    background-color: rgba(var(--mai-white-rgb), var(--mai-bg-opacity)) !important
+  @media screen and (min-width: 991px){
+    background-color: rgba(var(--mai-white-rgb), 0) !important
   }
 }
 
@@ -356,15 +261,15 @@ $grid-breakpoints: map-merge(
 
 .bg-grey-light {
   background-color: #F3F3F3;
-  @include media-breakpoint-down(lg) {
-    background-color: #ebebeb;
+  @media screen and (max-width: 991px){
+    background-color: #e4e4e4;
   }
 }
 
 [data-bs-theme="dark"]
 .bg-grey-light{
   background-color: #2c2c2c;
-  @include media-breakpoint-down(lg) {
+  @media screen and (max-width: 991px){
     background-color: #1d1d1d;
   }
 }
@@ -395,20 +300,20 @@ $grid-breakpoints: map-merge(
 
 .w-calendar{
   width: 84% !important;
-  @include media-breakpoint-down(lg) {
+  @media screen and (max-width: 991px){
     width: 100% !important;
   }
 }
 
 .w-filter{
   width: 16% !important;
-  @include media-breakpoint-down(lg) {
+  @media screen and (max-width: 991px){
     width: 100% !important;
   }
 }
 
 .text-mobile-uppercase{
-  @include media-breakpoint-down(lg) {
+  @media screen and (max-width: 991px){
     text-transform: uppercase !important;
   }
 }

@@ -3,10 +3,9 @@ import Calendar from "../calendar";
 import {createMonth, createYear} from "../../../../utils/helpers/date";
 import {useWindowDimensions} from "../../../hooks/useWindowDimensions";
 import {useSwiperCalendar} from "./hooks/useSwiperCalendar";
-import React, {useEffect} from "react";
+import React from "react";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
-import $ from "jquery";
 
 interface SwiperCalendarProps {
   selectedDate : Date;

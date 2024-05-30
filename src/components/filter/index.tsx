@@ -35,12 +35,12 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
 
   return (
     <div className={className}>
-      <div className="w-100 mt-lg-5">
-        <div className="d-none d-lg-block text-center my-4 mb-5 pt-2"><span className="fs-calendar-filter-title fw-book">Фильтр</span></div>
+      <div className="w-100 pt-lg-1 mt-lg-5">
+        <div className="d-none d-lg-block text-center mb-5"><span className="fs-calendar-filter-title fw-book">Фильтр</span></div>
         <hr className="border-calendar-filter border-grey-light mb-4"/>
         {/* Уровни образования */}
         <div className="px-3 mb-1 pb-2">
-          <span className="text-lg-uppercase fs-calendar-filter fw-lg-bold mb-4 mb-lg-2 ms-3 ms-lg-0 d-block">Уровень образования</span>
+          <span className="text-lg-uppercase fs-calendar-filter mb-4 mb-lg-2 ms-3 ms-lg-0 d-block text-uppercase">Уровень образования</span>
           {
             degrees.map((degree, index) =>
               <div key={index} className="d-flex flex-row align-items-center form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
@@ -49,7 +49,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
                     filter.degree = degrees[index];
                     setFilter({...filter});
                   }
-                }} className="form-check-input input-calendar-filter cursor-pointer me-4 me-lg-3" type="radio" name={`${prefix}-Уровни образования`} id={`${prefix}-cal-filter-level-${index}`}/>
+                }} className="form-check-input input-calendar-filter cursor-pointer me-3 me-lg-3" type="radio" name={`${prefix}-Уровни образования`} id={`${prefix}-cal-filter-level-${index}`}/>
                 <label id={`${prefix}-label-level-${index}`} className="lh-1 form-check-label fs-calendar-filter cursor-pointer ms-3 ms-lg-0" htmlFor={`${prefix}-cal-filter-level-${index}`}>
                   {degree}
                 </label>
@@ -60,7 +60,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
         <hr className="border-calendar-filter border-grey-light mb-4"/>
         {/* Категории */}
         <div className="px-3">
-          <span className="text-lg-uppercase fs-calendar-filter fw-lg-bold mb-4 mb-lg-2 ms-3 ms-lg-0 d-block">Категории</span>
+          <span className="text-lg-uppercase fs-calendar-filter mb-4 mb-lg-2 ms-3 ms-lg-0 d-block text-uppercase">Категории</span>
           {
             categories.map((category, index) =>
               <div key={index} className="d-flex flex-row align-items-center form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
@@ -74,7 +74,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
                     filter.categories.push(categories[index])
 
                   setFilter({...filter});
-                }} className="form-check-input input-calendar-filter cursor-pointer me-4 me-lg-3" type="checkbox" name="Категории" id={`${prefix}-cal-filter-${index}`}/>
+                }} className="form-check-input input-calendar-filter cursor-pointer me-3 me-lg-3" type="checkbox" name="Категории" id={`${prefix}-cal-filter-${index}`}/>
                 <label className="lh-1 form-check-label fs-calendar-filter cursor-pointer ms-3 ms-lg-0" htmlFor={`${prefix}-cal-filter-${index}`}>
                   {category}
                 </label>

@@ -43,14 +43,14 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
       <div className="d-none d-lg-flex flex-row row justify-content-between text-start mb-5 px-3 px-lg-4">
         {
           state.weekDaysNames.map((item, number) =>
-            <div key={number} className="col text-muted fs-calendar-nav fw-normal">
+            <div key={number} className="col text-muted fs-calendar-day-nav fw-normal">
               {item.dayShort}
             </div>
           )
         }
       </div>
       <div className="d-lg-none row d-flex text-start">
-        <span className="col-4 text-muted fs-calendar-nav fw-normal text-capitalize ms-5">{month.monthName}</span>
+        <span className="col-4 text-muted fs-calendar-nav fw-normal text-capitalize ms-4">{month.monthName}</span>
       </div>
       <hr className="calendar-start-line border-3 border-grey-light my-3"/>
       <div className="row d-flex flex-column">

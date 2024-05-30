@@ -51,14 +51,14 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
         setSelectedMonth(swiperMonthsMobileRef.current?.activeIndex);
       });
     }
-
-  }, [swiperMonthsMobileRef]);
+  }, []);
 
   // При обновлении selectedMonth пролистываем swiperMonths
   useEffect(() => {
     if (swiperMonthsRef.current)
       //@ts-ignore
       swiperMonthsRef.current.slideTo(selectedMonth - 2 >= 0 ? selectedMonth - 2 : selectedMonth - 1 >= 0 ? selectedMonth - 1 : selectedMonth);
+
     if (swiperMonthsMobileRef.current)
       //@ts-ignore
       swiperMonthsMobileRef.current.slideTo(selectedMonth);
@@ -73,7 +73,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
           }}
           slidesPerView={7}
           loop={false}
-          className="disable-carousel pb-5"
+          className="disable-carousel pb-4"
           pagination={{
             dynamicBullets: true,
           }}
@@ -81,7 +81,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
         >
           {
             actualMonths.map((item, num) =>
-              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted fw-light"} fs-calendar-nav hover-effect-up`}>
+              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted fw-light"} pb-4 lh-1 fs-calendar-nav hover-effect-up`}>
                 <span className="cursor-pointer">
                    {months[item].monthShort}
                 </span>
@@ -90,7 +90,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
           }
         </Swiper>
       </div>
-      <div className="bg-body d-flex d-lg-none flex-row justify-content-between px-5 w-100" >
+      <div className="bg-body d-flex d-lg-none flex-row justify-content-between px-4 w-100" >
         <div className="col-4 text-start" style={{maxHeight: "4rem"}}>
           <Swiper
             onSwiper={(swiper: any) => {

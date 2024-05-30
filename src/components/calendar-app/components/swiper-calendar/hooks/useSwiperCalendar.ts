@@ -12,6 +12,16 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width} : Sw
   const defineAllowTouchMove = (width : number) : boolean => width < 990;
 
   const swiperRef = useRef();
+
+  useEffect(() => {
+    if(swiperRef.current)
+    {
+      console.log("Отрисовка", selectedMonth)
+      //@ts-ignore
+      swiperRef.current.slideTo(selectedMonth);
+    }
+  }, [selectedMonth]);
+
   useEffect(() => {
     if(swiperRef.current)
     {
@@ -23,12 +33,6 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width} : Sw
     }
 
   }, [swiperRef]);
-
-  useEffect(() => {
-    if(swiperRef.current)
-      //@ts-ignore
-      swiperRef.current.slideTo(selectedMonth);
-  }, [selectedMonth]);
 
   useEffect(() => {
     if(swiperRef.current){

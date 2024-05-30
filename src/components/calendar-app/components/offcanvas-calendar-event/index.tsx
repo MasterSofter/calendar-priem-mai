@@ -67,13 +67,13 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
                     </div>
                     <span className="fs-calendar-offcanvas-title lh-1">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
                   </div>
-                  <div className="d-flex flex-column mb-6">
+                  <div className="d-flex flex-column mb-6 pb-3">
                     {
                       categories?.map((item, index) => <span className="fs-calendar-offcanvas-category hover-effect-up" key={index}>{item.category}</span>)
                     }
                   </div>
                 </div>
-                <div className="col d-flex flex-column justify-content-start py-6 px-6 mx-5">
+                <div className="col d-flex flex-column justify-content-start py-6 px-6 mx-5 mt-6">
                   {
                     categories?.map((item, index) => <Event className="row" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}/>)
                   }
@@ -82,8 +82,8 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
             </div>
           </div>
           <div className="d-lg-none">
-            <div onClick={handleClose} className="ps-4 sticky-top bg-body d-flex flex-row justify-content-start align-items-center py-5">
-              <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-text text-muted ms-3 me-4"/>
+            <div onClick={handleClose} className="ps-4 sticky-top bg-body d-flex flex-row justify-content-start align-items-center py-4">
+              <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-text text-muted ms-3 me-3"/>
               <span className="fs-calendar-offcanvas-title lh-1 ms-2">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
             </div>
             <div className="d-flex flex-column justify-content-start">
