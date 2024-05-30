@@ -251,6 +251,12 @@ $grid-breakpoints: map-merge(
   }
 }
 
+[data-bs-theme="dark"]
+.border-calendar-dark-mode-light{
+  @include media-breakpoint-up(lg) {
+    border-color: #ccc !important;
+  }
+}
 
 .swiper {
   width: 100%;
@@ -359,6 +365,11 @@ $grid-breakpoints: map-merge(
 .mx-dark-mode-0{
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+[data-bs-theme="dark"]
+.ms-neg-calendar-border-dark-mode{
+  margin-left: -2px !important;
 }
 
 .min-vw-19 {

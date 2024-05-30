@@ -39,11 +39,11 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
         <div className="d-none d-lg-block text-center my-4 mb-5 pt-2"><span className="fs-calendar-filter-title fw-book">Фильтр</span></div>
         <hr className="border-calendar-filter border-grey-light mb-4"/>
         {/* Уровни образования */}
-        <div className="px-3 mb-4 pb-2">
+        <div className="px-3 mb-1 pb-2">
           <span className="text-lg-uppercase fs-calendar-filter fw-lg-bold mb-4 mb-lg-2 ms-3 ms-lg-0 d-block">Уровень образования</span>
           {
             degrees.map((degree, index) =>
-              <div key={index} className="d-flex flex-row form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
+              <div key={index} className="d-flex flex-row align-items-center form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
                 <input checked={degrees[index] == filter.degree} onChange={(e)=> {
                   if(e.currentTarget.checked){
                     filter.degree = degrees[index];
@@ -63,7 +63,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
           <span className="text-lg-uppercase fs-calendar-filter fw-lg-bold mb-4 mb-lg-2 ms-3 ms-lg-0 d-block">Категории</span>
           {
             categories.map((category, index) =>
-              <div key={index} className="d-flex flex-row form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
+              <div key={index} className="d-flex flex-row align-items-center form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
                 <input checked={!!filter.categories.find(item => item == categories[index]) } onChange={(e)=> {
 
                   const _index = filter.categories.indexOf(`${categories[index]}`);

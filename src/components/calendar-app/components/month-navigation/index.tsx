@@ -54,11 +54,14 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
 
   }, [swiperMonthsMobileRef]);
 
-  // При обновлении selectedMonth пролистываем swiperMonthsMobile
+  // При обновлении selectedMonth пролистываем swiperMonths
   useEffect(() => {
     if (swiperMonthsRef.current)
       //@ts-ignore
       swiperMonthsRef.current.slideTo(selectedMonth - 2 >= 0 ? selectedMonth - 2 : selectedMonth - 1 >= 0 ? selectedMonth - 1 : selectedMonth);
+    if (swiperMonthsMobileRef.current)
+      //@ts-ignore
+      swiperMonthsMobileRef.current.slideTo(selectedMonth);
   }, [selectedMonth]);
 
   return (
@@ -87,8 +90,8 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
           }
         </Swiper>
       </div>
-      <div className="d-flex d-lg-none bg-body flex-row justify-content-between px-5 w-100" style={{maxHeight: "3rem"}}>
-        <div className="col-4 text-start">
+      <div className="bg-body d-flex d-lg-none flex-row justify-content-between px-5 w-100" >
+        <div className="col-4 text-start" style={{maxHeight: "4rem"}}>
           <Swiper
             onSwiper={(swiper: any) => {
               swiperMonthsMobileRef.current = swiper;
@@ -111,8 +114,8 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
             }
           </Swiper>
         </div>
-        <div className="col-4 text-center fs-calendar-nav">{createDate({locale: locale}).dateMonth}</div>
-        <div onClick={handleOpen} className="col-4 text-end fs-calendar-nav">Фильтр</div>
+        <div className="col-4 text-center fs-calendar-nav my-auto">{createDate({locale: locale}).dateMonth}</div>
+        <div onClick={handleOpen} className="col-4 text-end fs-calendar-nav my-auto">Фильтр</div>
       </div>
       <OffcanvasFilter calendarData={calendarData} filter={filter} setFilter={setFilter} show={showFilter} setShow={setShowFilter} locale={locale}/>
     </>
