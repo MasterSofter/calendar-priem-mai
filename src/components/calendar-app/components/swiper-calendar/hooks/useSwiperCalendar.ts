@@ -11,6 +11,7 @@ interface SwiperCalendarParams {
 export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width, height} : SwiperCalendarParams){
   const defineDirection = (width : number) : ("horizontal" | "vertical") => width < 990 ? "vertical" : "horizontal";
   const defineAllowTouchMove = (width : number) : boolean => width < 990;
+  const defineSpeed = (width : number) : number => width < 990 ? 500 : 2000;
 
   const swiperRef = useRef();
 
@@ -61,7 +62,8 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width, heig
     },
     functions: {
       defineDirection,
-      defineAllowTouchMove
+      defineAllowTouchMove,
+      defineSpeed
     }
   };
 }

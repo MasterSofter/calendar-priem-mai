@@ -30,9 +30,9 @@ export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDat
         }}
         loop={false}
         spaceBetween={0}
-        direction={'vertical'}
+        direction={functions.defineDirection(width)}
         slidesPerView={'auto'}
-        speed={2000}
+        speed={functions.defineSpeed(width)}
         className="disable-carousel swiper-calendar mt-neg-calendar-swiper position-relative zindex-1"
       >
         {

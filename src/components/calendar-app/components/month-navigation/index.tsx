@@ -100,7 +100,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
             spaceBetween={10}
             loop={false}
             direction="vertical"
-            speed={1000}
+            speed={1}
             className="disable-carousel"
           >
             {
