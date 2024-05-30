@@ -31,7 +31,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
 
   let actualMonths = [];
   for (let i = 0; i < 12; i++) {
-    actualMonths.push(i); //((new Date().getMonth()) + (i - 1)) % 12
+    actualMonths.push(i);
   }
 
   // При клике на месяц делаем его выделенным (черным) и обновляем selectedMonth

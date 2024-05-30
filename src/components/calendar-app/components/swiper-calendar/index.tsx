@@ -1,11 +1,12 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Calendar from "../calendar";
-import {createYear} from "../../../../utils/helpers/date";
+import {createMonth, createYear} from "../../../../utils/helpers/date";
 import {useWindowDimensions} from "../../../hooks/useWindowDimensions";
 import {useSwiperCalendar} from "./hooks/useSwiperCalendar";
-import React from "react";
+import React, {useEffect} from "react";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
+import $ from "jquery";
 
 interface SwiperCalendarProps {
   selectedDate : Date;
@@ -22,11 +23,17 @@ export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDat
   const { height, width } = useWindowDimensions();
   const {state, functions} = useSwiperCalendar({selectedMonth, setSelectedMonth, width})
 
+  useEffect(()=> {
+    //@ts-ignore
+    document.querySelector(".swiper-calendar").style.maxHeight = `${window.innerHeight - $("#calendar-nav").height()}px`;
+  })
+
   return (
     <>
       <Swiper
         onSwiper={(swiper : any) => {
           state.swiperRef.current = swiper;
+
         }}
         loop={false}
         spaceBetween={0}
@@ -42,6 +49,9 @@ export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDat
             </SwiperSlide>
           )
         }
+        <SwiperSlide key="end-month">
+          <Calendar setShowEvents={setShowEvents} calendarData={undefined} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} className={`w-100 calendar-end`} month={createMonth({date: new Date(new Date().getFullYear() + 1, 0), locale: locale})} locale={"ru"}/>
+        </SwiperSlide>
       </Swiper>
     </>
   )

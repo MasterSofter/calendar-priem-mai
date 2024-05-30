@@ -270,11 +270,25 @@ $grid-breakpoints: map-merge(
   align-items: center;
 }
 
+
+/*
 .swiper-calendar{
   @include media-breakpoint-down(lg) {
-    max-height: 100vh;
+    max-height: 76vh !important;
+  }
+  @media screen and (max-width: 900px){
+    max-height: 80vh !important;
+  }
+  @media screen and (max-width: 700px){
+    max-height: 85vh !important;
+  }
+  @media screen and (max-width: 540px){
+    max-height: 88.5vh !important;
   }
 }
+*/
+
+
 
 .cursor-grab:hover {
   cursor: grab;
@@ -330,7 +344,7 @@ $grid-breakpoints: map-merge(
 }
 
 .mt-neg-calendar-swiper {
-  margin-top: -3rem !important;
+  margin-top: -3.4rem !important;
 }
 
 .bg-grey-light {
@@ -372,12 +386,8 @@ $grid-breakpoints: map-merge(
   margin-left: -2px !important;
 }
 
-.min-vw-19 {
-  min-width: 19rem !important;
-}
-
-.max-vw-20 {
-  max-width: 20rem !important;
+.max-vw-16 {
+  max-width: 16% !important;
 }
 
 .text-mobile-uppercase{
