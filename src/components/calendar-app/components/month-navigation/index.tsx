@@ -40,6 +40,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
         el.classList.add("text-muted");
         el.classList.remove("month-selected");
       })
+      item.classList.remove("text-muted");
       item.classList.add("month-selected");
 
       let monthIndex: number | undefined = months.find(el => el.monthShort == item.textContent)?.monthIndex;
