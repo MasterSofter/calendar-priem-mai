@@ -292,15 +292,9 @@
   margin-left: -2px !important;
 }
 
-.w-calendar{
-  width: 84% !important;
-  @media screen and (max-width: 991px){
-    width: 100% !important;
-  }
-  &-wrapper {
-    max-height: 100dvh;
-    overflow: hidden;
-  }
+.calendar-wrapper {
+  max-height: 100dvh;
+  overflow: hidden;
 }
 
 .w-filter{
