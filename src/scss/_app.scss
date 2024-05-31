@@ -96,7 +96,7 @@
 }
 
 .fs-calendar-offcanvas-title{
-  font-size: 6rem !important;
+  font-size: 5rem !important;
   @media screen and (max-width: 991px){
     font-size: 2.8rem !important;
   }
@@ -196,12 +196,12 @@
   }
 }
 
-.swiper {
+.swiper-mobile-months {
   width: 100%;
   height: 100%;
 }
 
-.swiper-slide {
+.slide-month {
   text-align: center;
   display: flex;
   justify-content: center;

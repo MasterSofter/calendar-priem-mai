@@ -107,7 +107,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
             loop={false}
             direction="vertical"
             speed={1}
-            className="disable-carousel"
+            className="disable-carousel swiper-mobile-months"
           >
             {
               months.map((item, num) =>

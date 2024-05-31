@@ -3,7 +3,7 @@ import Calendar from "../calendar";
 import {createMonth, createYear} from "../../../../utils/helpers/date";
 import {useWindowDimensions} from "../../../hooks/useWindowDimensions";
 import {useSwiperCalendar} from "./hooks/useSwiperCalendar";
-import React from "react";
+import React, {useEffect} from "react";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
 
