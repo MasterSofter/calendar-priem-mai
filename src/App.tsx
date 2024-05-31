@@ -17,7 +17,7 @@ function App({calendarData} : AppProps) {
       filter={filter}
       setFilter={setFilter}
       locale={locale}
-      className="col-lg-10 bg-white-lg rounded-calendar border border-2 border-transparent border-calendar-dark-mode-light p-lg-5 me-lg-2 mx-dark-mode-0 h-100"
+      className="col-lg-10 bg-white-lg rounded-calendar border border-2 border-transparent border-calendar-dark-mode-light mx-dark-mode-0"
     />
     <Filter
       calendarData={calendarData}

@@ -26,12 +26,12 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
     week.map((day, index) => calendarDays.push(<Day key={`day-${index}-month-${day.monthIndex}`} setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} date={day.date} isToday={(new Date().getDate() === day.date.getDate()) && (new Date().getMonth() === day.date.getMonth())} isActualDate={day.monthIndex == month.monthIndex}/>));
     calendarWeeks.push(
       <div className="col" key={weekNumber}>
-        <div className="px-3 px-lg-4 row justify-content-between text-center">
+        <div className="px-3 px-lg-5 row justify-content-between text-center">
           {calendarDays}
         </div>
         {
           (weekNumber + 1 !== state.calendarWeeks.length)
-            ? <hr className="border-3 border-grey-light my-3"/>
+            ? <hr className="border-2 border-grey-light my-3"/>
             : <hr className="d-lg-none border-3 border-grey-light my-3"/>
         }
       </div>
@@ -40,7 +40,7 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
 
   return (
     <div className={className}>
-      <div className="d-none d-lg-flex flex-row row justify-content-between text-start mb-5 px-3 px-lg-4">
+      <div className="d-none d-lg-flex flex-row row justify-content-between text-start mb-5 px-3 px-lg-5">
         {
           state.weekDaysNames.map((item, number) =>
             <div key={number} className="col text-muted fs-calendar-day-nav fw-normal">
@@ -52,7 +52,7 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
       <div className="d-lg-none row d-flex text-start">
         <span className="col-4 text-muted fs-calendar-nav fw-normal text-capitalize ms-4">{month.monthName}</span>
       </div>
-      <hr className="calendar-start-line border-3 border-grey-light my-3"/>
+      <hr className="calendar-start-line border-2 border-grey-light my-3"/>
       <div className="row d-flex flex-column">
         {calendarWeeks}
       </div>

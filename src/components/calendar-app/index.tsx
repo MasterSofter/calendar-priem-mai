@@ -38,7 +38,7 @@ export default function CalendarApp({calendarData, filter, setFilter, className,
 
   return (
     <div className={className}>
-      <div id="calendar-nav" className="position-relative zindex-3 d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-lg-6 pb-lg-6 pt-4 pt-lg-4">
+      <div id="calendar-nav" className="position-relative zindex-3 d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-lg-6 pb-lg-6 pt-4 pt-lg-6 mt-lg-2 px-lg-5">
         <Title/>
         <MonthNavigation swiperCalendarRef={swiperCalendarRef} swiperMobileMonthsRef={swiperMobileMonthsRef} calendarData={calendarData} filter={filter} setFilter={setFilter} locale={locale}/>
       </div>
