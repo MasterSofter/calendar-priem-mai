@@ -297,6 +297,10 @@
   @media screen and (max-width: 991px){
     width: 100% !important;
   }
+  &-wrapper {
+    max-height: 100dvh;
+    overflow: hidden;
+  }
 }
 
 .w-filter{

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import Filter, {IFilter} from "./components/filter";
 import CalendarApp, {ICalendarDay} from "./components/calendar-app";
 
@@ -12,9 +12,21 @@ function App({calendarData} : AppProps) {
   const locale = "ru";
 
   return (
-  <div className="d-flex flex-column flex-lg-row px-lg-3">
-    <CalendarApp calendarData={calendarData} className="col-lg-10 w-calendar bg-white-lg rounded-calendar border border-2 border-transparent border-calendar-dark-mode-light p-lg-5 me-lg-2 mx-dark-mode-0 h-100" locale={locale} filter={filter} setFilter={setFilter}/>
-    <Filter calendarData={calendarData} prefix="desktop" className="col-lg w-filter d-none d-lg-block bg-white-lg border border-2 border-transparent border-calendar-dark-mode-light rounded-calendar ms-neg-calendar-border-dark-mode mx-dark-mode-0 ms-lg-2 pt-4 p-0" filter={filter} setFilter={setFilter}/>
+  <div className="w-calendar-wrapper d-flex flex-column flex-lg-row px-lg-3">
+    <CalendarApp
+      calendarData={calendarData}
+      filter={filter}
+      setFilter={setFilter}
+      locale={locale}
+      className="w-calendar bg-white-lg rounded-calendar border border-2 border-transparent border-calendar-dark-mode-light p-lg-5 me-lg-2 mx-dark-mode-0 h-100"
+    />
+    <Filter
+      calendarData={calendarData}
+      filter={filter}
+      setFilter={setFilter}
+      prefix="desktop"
+      className="w-filter d-none d-lg-block bg-white-lg border border-2 border-transparent border-calendar-dark-mode-light rounded-calendar ms-neg-calendar-border-dark-mode mx-dark-mode-0 ms-lg-2 pt-4 p-0"
+    />
   </div>
   );
 }
