@@ -8,7 +8,6 @@ interface AppProps {
 
 function App({calendarData} : AppProps) {
   const [filter, setFilter] = useState<IFilter>({categories : new Array<string>(), degree: ""});
-  //const [locale, setLocale] = useState<string>("ru"); // на будущее
   const locale = "ru";
 
   return (

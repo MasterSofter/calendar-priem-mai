@@ -12,18 +12,19 @@ import {IFilter} from "../../../filter";
 import {ICalendarDay} from "../../index";
 
 interface MonthNavigationProps {
+  swiperCalendarRef :  React.MutableRefObject<any>;
+  swiperMobileMonthsRef: React.MutableRefObject<any>;
   locale: string;
-  selectedMonth: number;
   filter : IFilter;
   calendarData : Array<ICalendarDay>;
   setFilter:  React.Dispatch<React.SetStateAction<IFilter>>;
-  setSelectedMonth: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function MonthNavigation({calendarData, filter, locale, selectedMonth, setSelectedMonth, setFilter}: MonthNavigationProps): JSX.Element {
-  const swiperMonthsMobileRef = useRef();
-  const swiperMonthsRef = useRef();
+export default function MonthNavigation({swiperCalendarRef, swiperMobileMonthsRef, calendarData, filter, locale, setFilter}: MonthNavigationProps): JSX.Element {
+  const swiperMonthsMobileRef = useRef<typeof Swiper>();
+  const swiperMonthsRef = useRef<typeof Swiper>();
   const [showFilter, setShowFilter] = useState<boolean>(false);
+  const [selectedMonth, setSelectedMonth] = useState<number>((new Date()).getMonth());
   const months = getMonthesNames(locale);
 
   const handleOpen = () => setShowFilter(true);
@@ -33,42 +34,42 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
     actualMonths.push(i);
   }
 
-  // При клике на месяц делаем его выделенным (черным) и обновляем selectedMonth
-  document.querySelectorAll(".slide-month").forEach( (item) => {
-  item.addEventListener("click", function (event) {
-      document.querySelectorAll(".slide-month").forEach (el => {
-        el.classList.add("text-muted");
-        el.classList.remove("month-selected");
-      })
-      item.classList.remove("text-muted");
-      item.classList.add("month-selected");
-
-      let monthIndex: number | undefined = months.find(el => el.monthShort == item.textContent)?.monthIndex;
-      if (typeof (monthIndex) === "number")
-        setSelectedMonth(monthIndex);
-  })});
-
-  // При завершении пролистывания swiperMonthsMobile обновляем selectedMonth
   useEffect(() => {
+    if (swiperMonthsRef.current)
+      //@ts-ignore
+      swiperMonthsRef.current.slideTo(selectedMonth - 2 >= 0 ? selectedMonth - 2 : selectedMonth - 1 >= 0 ? selectedMonth - 1 : selectedMonth);
+  }, [selectedMonth]);
+
+
+  useEffect(() => {
+    // При клике на месяц делаем его выделенным (черным) и листаем свайпер календаря
+    document.querySelectorAll(".slide-month").forEach( (item) => {
+      item.addEventListener("click", function (event) {
+        document.querySelectorAll(".slide-month").forEach (el => {
+          el.classList.add("text-muted");
+          el.classList.remove("month-selected");
+        })
+        item.classList.remove("text-muted");
+        item.classList.add("month-selected");
+
+        let monthIndex: number | undefined = months.find(el => el.monthShort == item.textContent)?.monthIndex;
+        if (typeof (monthIndex) === "number")
+        {
+          swiperCalendarRef.current.slideTo(monthIndex);
+          setSelectedMonth(monthIndex);
+        }
+      })});
+
     if (swiperMonthsMobileRef.current) {
       //@ts-ignore
       swiperMonthsMobileRef.current.on("slideChangeTransitionEnd", function () {
+        //@ts-ignore
+        swiperCalendarRef.current.slideTo(swiperMonthsMobileRef.current?.activeIndex);
         //@ts-ignore
         setSelectedMonth(swiperMonthsMobileRef.current?.activeIndex);
       });
     }
   }, []);
-
-  // При обновлении selectedMonth пролистываем swiperMonths
-  useEffect(() => {
-    if (swiperMonthsRef.current)
-      //@ts-ignore
-      swiperMonthsRef.current.slideTo(selectedMonth - 2 >= 0 ? selectedMonth - 2 : selectedMonth - 1 >= 0 ? selectedMonth - 1 : selectedMonth);
-
-    if (swiperMonthsMobileRef.current)
-      //@ts-ignore
-      swiperMonthsMobileRef.current.slideTo(selectedMonth);
-  }, [selectedMonth]);
 
   return (
     <>
@@ -78,7 +79,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
             swiperMonthsRef.current = swiper;
           }}
           slidesPerView={7}
-          slidesPerGroup={4}
+          //slidesPerGroup={4}
           loop={false}
           className="disable-carousel pb-4"
           pagination={{
@@ -88,6 +89,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
         >
           {
             actualMonths.map((item, num) =>
+              //@ts-ignore
               <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted fw-light"} pb-4 lh-1 fs-calendar-nav hover-effect-up slide-month`}>
                 <span className="cursor-pointer">
                    {months[item].monthShort}
@@ -102,6 +104,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
           <Swiper
             onSwiper={(swiper: any) => {
               swiperMonthsMobileRef.current = swiper;
+              swiperMobileMonthsRef.current = swiper;
             }}
             slidesPerView={1}
             spaceBetween={10}

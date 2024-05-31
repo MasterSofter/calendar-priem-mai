@@ -8,25 +8,26 @@ import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
 
 interface SwiperCalendarProps {
+  swiperMobileMonthsRef : React.MutableRefObject<any>
+  swiperCalendarRef :  React.MutableRefObject<any>;
   selectedDate : Date;
   setShowEvents:  React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
-  setSelectedMonth :  React.Dispatch<React.SetStateAction<number>>;
-  selectedMonth : number;
   calendarData: Array<ICalendarDay> | undefined;
   filter: IFilter;
   locale : string;
 }
 
-export function SwiperCalendar({calendarData, setShowEvents, filter, selectedDate, setSelectedDate, locale, selectedMonth, setSelectedMonth} : SwiperCalendarProps) : JSX.Element {
+export function SwiperCalendar({swiperCalendarRef, swiperMobileMonthsRef, calendarData, setShowEvents, filter, selectedDate, setSelectedDate, locale} : SwiperCalendarProps) : JSX.Element {
   const { height, width } = useWindowDimensions();
-  const {state, functions} = useSwiperCalendar({selectedMonth, setSelectedMonth, width, height})
+  const {state, functions} = useSwiperCalendar({swiperMobileMonthsRef, width, height})
 
   return (
     <>
       <Swiper
         onSwiper={(swiper : any) => {
           state.swiperRef.current = swiper;
+          swiperCalendarRef.current = swiper;
         }}
         loop={false}
         spaceBetween={0}

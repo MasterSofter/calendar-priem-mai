@@ -1,9 +1,10 @@
 import MonthNavigation from "./components/month-navigation";
 import Title from "./components/title";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {SwiperCalendar} from "./components/swiper-calendar";
 import {OffcanvasCalendarEvent} from "./components/offcanvas-calendar-event";
 import {IFilter} from "../filter";
+import Swiper from "swiper";
 
 export interface ICalendarDay {
   "month": number,
@@ -30,16 +31,18 @@ type CalendarProps = {
 
 export default function CalendarApp({calendarData, filter, setFilter, className, locale}: CalendarProps): JSX.Element {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedMonth, setSelectedMonth] = useState<number>((new Date()).getMonth());
   const [showEvents, setShowEvents] = useState<boolean>(false);
+
+  const swiperCalendarRef = useRef<any>(null);
+  const swiperMobileMonthsRef = useRef<any>(null);
 
   return (
     <div className={className}>
       <div id="calendar-nav" className="position-relative zindex-3 d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-lg-6 pb-lg-6 pt-4 pt-lg-4">
         <Title/>
-        <MonthNavigation calendarData={calendarData} filter={filter} setFilter={setFilter} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={locale}/>
+        <MonthNavigation swiperCalendarRef={swiperCalendarRef} swiperMobileMonthsRef={swiperMobileMonthsRef} calendarData={calendarData} filter={filter} setFilter={setFilter} locale={locale}/>
       </div>
-      <SwiperCalendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} locale={locale} />
+      <SwiperCalendar swiperCalendarRef={swiperCalendarRef} swiperMobileMonthsRef={swiperMobileMonthsRef} setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} locale={locale} />
       <OffcanvasCalendarEvent filter={filter} selectedDate={selectedDate} calendarData={calendarData} show={showEvents} setShow={setShowEvents} locale={locale} />
     </div>
   );
