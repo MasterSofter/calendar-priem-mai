@@ -7,7 +7,6 @@ import "swiper/css/pagination";
 
 import {createDate, getMonthesNames} from "../../../../utils/helpers/date";
 import {Pagination} from "swiper/modules";
-import $ from "jquery";
 import {OffcanvasFilter} from "../../../filter/components/offcanvas-filter";
 import {IFilter} from "../../../filter";
 import {ICalendarDay} from "../../index";
@@ -35,12 +34,18 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
   }
 
   // При клике на месяц делаем его выделенным (черным) и обновляем selectedMonth
-  $(document).on("click", ".swiper-slide", function () {
-    $(this).addClass("month-selected").siblings().removeClass("month-selected");
-    let monthIndex: number | undefined = months.find(item => item.monthShort == $(this).text())?.monthIndex;
-    if (typeof (monthIndex) === "number")
-      setSelectedMonth(monthIndex);
-  });
+  document.querySelectorAll(".slide-month").forEach( (item) => {
+  item.addEventListener("click", function (event) {
+      document.querySelectorAll(".slide-month").forEach (el => {
+        el.classList.add("text-muted");
+        el.classList.remove("month-selected");
+      })
+      item.classList.add("month-selected");
+
+      let monthIndex: number | undefined = months.find(el => el.monthShort == item.textContent)?.monthIndex;
+      if (typeof (monthIndex) === "number")
+        setSelectedMonth(monthIndex);
+  })});
 
   // При завершении пролистывания swiperMonthsMobile обновляем selectedMonth
   useEffect(() => {
@@ -81,7 +86,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
         >
           {
             actualMonths.map((item, num) =>
-              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted fw-light"} pb-4 lh-1 fs-calendar-nav hover-effect-up`}>
+              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted fw-light"} pb-4 lh-1 fs-calendar-nav hover-effect-up slide-month`}>
                 <span className="cursor-pointer">
                    {months[item].monthShort}
                 </span>
@@ -105,7 +110,7 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
           >
             {
               months.map((item, num) =>
-                <SwiperSlide key={num} className="justify-content-start">
+                <SwiperSlide key={num} className="slide-month justify-content-start">
                   <span className="fs-calendar-nav cursor-pointer text-capitalize text-start">
                      {item.month}
                   </span>
