@@ -42,14 +42,14 @@ export function useSwiperCalendar({selectedMonth, setSelectedMonth,  width, heig
     }
   }, [height, width]);
 
-  useEffect(()=> {
-    //@ts-ignore
-    document.querySelector(".swiper-calendar").style.maxHeight = "100vh";
-    if(window.innerWidth < 990){
-      //@ts-ignore
-      //document.querySelector(".swiper-calendar").style.maxHeight = `${(window.innerHeight/100 * 76 + $("#calendar-nav").height() - 3.4 * (window.innerWidth/100))}px`;
-    }
-  }, [width])
+  // useEffect(()=> {
+  //   //@ts-ignore
+  //   document.querySelector(".swiper-calendar").style.maxHeight = "100vh";
+  //   if(window.innerWidth < 990){
+  //     //@ts-ignore
+  //     //document.querySelector(".swiper-calendar").style.maxHeight = `${(window.innerHeight/100 * 76 + $("#calendar-nav").height() - 3.4 * (window.innerWidth/100))}px`;
+  //   }
+  // }, [width])
 
   return {
     state: {
