@@ -4,7 +4,7 @@ import React from "react";
 import {createDate} from "../../../../utils/helpers/date";
 import {Event} from "./components/event";
 import {IFilter} from "../../../filter";
-import {removeDuplicates} from "../../../../utils/helpers/string/removeDuplicates";
+import {removeDuplicates} from "../../../../utils/helpers/array/removeDuplicates";
 
 interface OffcanvasCalendarEventProps{
   locale: string;
@@ -69,7 +69,7 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
                   </div>
                   <div className="d-flex flex-column mb-6 pb-3">
                     {
-                      categories?.map((item, index) => <span className="fs-calendar-offcanvas-category hover-effect-up" key={index}>{item.category}</span>)
+                      removeDuplicates(categories, "category")?.map((item, index) => <span className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""}  fs-calendar-offcanvas-category hover-effect-up lh-1 mb-3`} key={index}>{item.category}</span>)
                     }
                   </div>
                 </div>

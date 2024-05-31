@@ -50,7 +50,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
                     setFilter({...filter});
                   }
                 }} className="form-check-input input-calendar-filter cursor-pointer me-1 me-lg-3" type="radio" name={`${prefix}-Уровни образования`} id={`${prefix}-cal-filter-level-${index}`}/>
-                <label id={`${prefix}-label-level-${index}`} className="lh-1 form-check-label fs-calendar-filter cursor-pointer ms-3 ms-lg-0" htmlFor={`${prefix}-cal-filter-level-${index}`}>
+                <label id={`${prefix}-label-level-${index}`} className="lh-sm form-check-label fs-calendar-filter cursor-pointer ms-3 ms-lg-0" htmlFor={`${prefix}-cal-filter-level-${index}`}>
                   {degree}
                 </label>
               </div>
@@ -75,7 +75,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
 
                   setFilter({...filter});
                 }} className="form-check-input input-calendar-filter cursor-pointer me-1 me-lg-3" type="checkbox" name="Категории" id={`${prefix}-cal-filter-${index}`}/>
-                <label className="lh-1 form-check-label fs-calendar-filter cursor-pointer ms-3 ms-lg-0" htmlFor={`${prefix}-cal-filter-${index}`}>
+                <label className="lh-sm form-check-label fs-calendar-filter cursor-pointer ms-3 ms-lg-0" htmlFor={`${prefix}-cal-filter-${index}`}>
                   {category}
                 </label>
               </div>

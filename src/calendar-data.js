@@ -4,14 +4,14 @@ export const calendarData = [
         "number": 1,
         "timeStart": "",
         "timeEnd": "",
-        "category": "Базовое высшее",
+        "category": "аааааааааааааа аааааааа",
         "header": "Предварительный приём ",
         "text": "Предварительная подача документов в приёмную комисcию и индивидуальные консультации по поступлению в МАИ в 2024 году.",
         "location": "Онлайн ",
         "warning": false,
         "link": "https://lk.mai.ru/accounts/login",
-        "degree": "Базовое высшее",
-        "primary": false
+        "degree": "Среднее специальное образование",
+        "primary": true
     },
     {
         "month": 4,
@@ -64,7 +64,7 @@ export const calendarData = [
         "header": "Предварительный приём ",
         "text": "Предварительная подача документов в приёмную комисcию и индивидуальные консультации по поступлению в МАИ в 2024 году.",
         "location": "Онлайн ",
-        "warning": false,
+        "warning": true,
         "link": "https://lk.mai.ru/accounts/login",
         "degree": "Базовое высшее",
         "primary": false
@@ -78,7 +78,7 @@ export const calendarData = [
         "header": "Предварительный приём ",
         "text": "Предварительная подача документов в приёмную комисcию и индивидуальные консультации по поступлению в МАИ в 2024 году.",
         "location": "Онлайн ",
-        "warning": false,
+        "warning": true,
         "link": "https://lk.mai.ru/accounts/login",
         "degree": "Спец высщее",
         "primary": false

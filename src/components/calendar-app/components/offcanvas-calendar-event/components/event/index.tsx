@@ -16,7 +16,7 @@ export function Event({warning, primary,  className, category, header, text, lin
     <div className={className}>
       <div className="px-3 px-lg-0 py-4 py-lg-3 pb-lg-6">
         <div className="text-end me-lg-3">
-          <Badge pill bg="" className={`border ${primary ? "text-primary text-dark-mode-white border-primary border-dark-mode-light" : warning ? "text-danger text-dark-mode-white border-danger border-dark-mode-light" : "text-dark border-black border-dark-mode-light"} fs-calendar-offcanvas-badge`}>{category}</Badge>
+          <Badge pill bg="" className={`border ${primary ? "text-primary text-dark-mode-brand border-primary border-gradient-dark-mode" : warning ? "text-danger border-danger border-2" : "text-dark border-black border-dark-mode-light"} fs-calendar-offcanvas-badge`}>{category}</Badge>
         </div>
         <div className="row text-start pb-4 pt-4">
           <span className="fs-calendar-offcanvas-header">{header}</span>

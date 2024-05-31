@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
-import {removeDuplicates} from "../../../../utils/helpers/string/removeDuplicates";
+import {removeDuplicates} from "../../../../utils/helpers/array/removeDuplicates";
+import {apadtStringLength} from "../../../../utils/helpers/string/apadtStringLength";
 
 interface DayProps {
   isToday : boolean;
@@ -57,7 +58,7 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
         <div className="d-none d-lg-flex flex-column">
           {
             categories?.map((item, index) => index < 3
-              && <span key={`day-event-${index}`} className={`lh-1 mb-2 fs-day-event ${item.primary ? "text-primary text-dark-mode-white" : ""} ${item.warning ? "text-danger text-dark-mode-white" : ""} `}>{item.category}</span>
+              && <span key={`day-event-${index}`} className={`lh-1 mb-2 fs-day-event ${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} `}>{apadtStringLength(item.category)}</span>
             )
           }
           {categories && categories?.length > 3 &&
