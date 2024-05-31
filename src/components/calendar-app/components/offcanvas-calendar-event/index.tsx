@@ -56,8 +56,8 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
     <>
       <Offcanvas className="w-100 h-100" scroll={false} backdrop={false} placement="end" show={show} onHide={handleClose}>
         <OffcanvasBody className="py-0 px-0" >
-          <div className="d-none d-lg-block w-100 h-100 page-wrapper calendar-wrapper">
-            <div className="container content-wrapper">
+          <div className="d-none d-lg-block w-100 h-100">
+            <div className="container page-wrapper">
               <div className="row d-flex flex-column flex-lg-row justify-content-center min-vh-100">
                 <div className="col-3 border-end border-dark border-dark-mode-light d-flex flex-column py-5">
                   <div className="row d-flex flex-column justify-content-start mb-6">
@@ -67,9 +67,9 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
                     </div>
                     <span className="fs-calendar-offcanvas-title lh-1">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
                   </div>
-                  <div className="row d-flex flex-column position-fixed" style={{width:"21rem", bottom:"6rem"}}>
+                  <div className="row d-flex flex-column position-fixed" style={{width:"23rem", bottom:"4.5rem"}}>
                     {
-                      removeDuplicates(categories, "category")?.map((item, index) => <span className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""}  fs-calendar-offcanvas-category hover-effect-up cursor-pointer lh-1 mb-4`} key={index}>{item.category}</span>)
+                      removeDuplicates(categories, "category")?.map((item, index) => <span className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} fs-calendar-offcanvas-category hover-effect-up cursor-pointer lh-sm mb-4`} key={index}>{item.category}</span>)
                     }
                   </div>
                 </div>

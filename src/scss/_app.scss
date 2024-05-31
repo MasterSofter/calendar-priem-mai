@@ -116,7 +116,7 @@
 }
 
 .fs-calendar-offcanvas-category{
-  font-size: 2rem !important;
+  font-size: 1.5rem !important;
 }
 
 .fs-calendar-offcanvas-badge{
@@ -293,8 +293,11 @@
 }
 
 .calendar-wrapper {
-  max-height: 100dvh;
-  overflow: hidden;
+  min-height: 100vh;
+  @media screen and (max-width: 991px){
+    max-height: 100dvh;
+    overflow: hidden;
+  }
 }
 
 .w-filter{

@@ -40,6 +40,7 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
   let warningCategories = categories?.filter((item) => item.warning);
   let primaryCategories = categories?.filter((item) => item.primary);
   categories = categories?.filter((item) => !item.warning && !item.primary);
+  categories = removeDuplicates(categories, "category");
 
   let uniqueArray = removeDuplicates(primaryCategories, "category");
   uniqueArray?.map((item) => {
