@@ -223,16 +223,6 @@
   }
 }
 
-.calendar-month-nav .swiper-pagination {
-  display: inline-block !important;
-}
-
-.calendar-month-nav .swiper-pagination-bullet-active {
-  width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 8px)) !important;
-  height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 8px)) !important;
-  display: inline-block !important;
-}
-
 .month-selected {
   color: var(--mai-body-color) !important;
   font-weight: 400 !important;

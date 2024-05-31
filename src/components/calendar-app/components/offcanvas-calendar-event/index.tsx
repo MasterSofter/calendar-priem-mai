@@ -54,22 +54,22 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
 
   return (
     <>
-      <Offcanvas className="w-100 h-100" scroll={true} backdrop={false} placement="end" show={show} onHide={handleClose}>
+      <Offcanvas className="w-100 h-100" scroll={false} backdrop={false} placement="end" show={show} onHide={handleClose}>
         <OffcanvasBody className="py-0 px-0" >
           <div className="d-none d-lg-block w-100 h-100 page-wrapper calendar-wrapper">
             <div className="container content-wrapper">
               <div className="row d-flex flex-column flex-lg-row justify-content-center min-vh-100">
-                <div className="col-3 border-end border-dark border-dark-mode-light d-flex flex-column justify-content-between py-5">
-                  <div className="d-flex flex-column justify-content-start mb-6">
+                <div className="col-3 border-end border-dark border-dark-mode-light d-flex flex-column py-5">
+                  <div className="row d-flex flex-column justify-content-start mb-6">
                     <div className="d-flex flex-row justify-content-start align-items-center mb-6">
                       <i onClick={handleClose} className="fa-regular fa-arrow-left fs-calendar-offcanvas-text border border-2 border-black border-dark-mode-light rounded-circle hover-effect-up cursor-pointer p-3 me-3"/>
                       <span className="fs-calendar-offcanvas-text text-muted">Esc</span>
                     </div>
                     <span className="fs-calendar-offcanvas-title lh-1">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
                   </div>
-                  <div className="d-flex flex-column mb-6 pb-3">
+                  <div className="row d-flex flex-column position-fixed" style={{width:"21rem", bottom:"6rem"}}>
                     {
-                      removeDuplicates(categories, "category")?.map((item, index) => <span className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""}  fs-calendar-offcanvas-category hover-effect-up lh-1 mb-3`} key={index}>{item.category}</span>)
+                      removeDuplicates(categories, "category")?.map((item, index) => <span className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""}  fs-calendar-offcanvas-category hover-effect-up cursor-pointer lh-1 mb-4`} key={index}>{item.category}</span>)
                     }
                   </div>
                 </div>

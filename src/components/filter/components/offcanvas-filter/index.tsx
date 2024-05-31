@@ -19,7 +19,7 @@ export function OffcanvasFilter({calendarData, filter, locale, show, setShow, se
   const handleClose = () => setShow(false);
   return (
     <>
-      <Offcanvas className="w-100 h-100" scroll={true} backdrop={false} placement="end" show={show} onHide={handleClose}>
+      <Offcanvas className="w-100 h-100" scroll={false} backdrop={false} placement="end" show={show} onHide={handleClose}>
         <OffcanvasBody className="py-0 px-0" >
           <div className="d-lg-none">
             <div onClick={handleClose} className="sticky-top d-flex flex-row justify-content-start align-items-center py-4 ps-3">

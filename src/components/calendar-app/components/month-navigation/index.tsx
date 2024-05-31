@@ -78,10 +78,11 @@ export default function MonthNavigation({calendarData, filter, locale, selectedM
             swiperMonthsRef.current = swiper;
           }}
           slidesPerView={7}
+          slidesPerGroup={4}
           loop={false}
           className="disable-carousel pb-4"
           pagination={{
-            dynamicBullets: true,
+            dynamicBullets: false,
           }}
           modules={[Pagination]}
         >
