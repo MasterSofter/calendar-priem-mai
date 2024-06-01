@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Filter, {IFilter} from "./components/filter";
 import CalendarApp, {ICalendarDay} from "./components/calendar-app";
 
@@ -9,6 +9,26 @@ interface AppProps {
 function App({calendarData} : AppProps) {
   const [filter, setFilter] = useState<IFilter>({categories : new Array<string>(), degree: ""});
   const locale = "ru";
+  
+  useEffect(() => {
+    const handleLoad = () => {
+      const rootElement = document.getElementById('root');
+      if (!rootElement) return;
+      setTimeout(() => {
+        rootElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }, 300);
+    };
+
+    window.addEventListener('load', handleLoad);
+
+    return () => {
+       window.removeEventListener('load', handleLoad);
+    };
+ }, []);
+
 
   return (
   <div className="calendar-wrapper d-flex flex-column flex-lg-row">
