@@ -12,14 +12,16 @@ function App({calendarData} : AppProps) {
   
   useEffect(() => {
     const handleLoad = () => {
-      const rootElement = document.getElementById('root');
-      if (!rootElement) return;
-      setTimeout(() => {
-        rootElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
-      }, 300);
+      if(window.innerWidth < 991){
+        const rootElement = document.getElementById('root');
+        if (!rootElement) return;
+        setTimeout(() => {
+          rootElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          })
+        }, 300);
+      }
     };
 
     window.addEventListener('load', handleLoad);
