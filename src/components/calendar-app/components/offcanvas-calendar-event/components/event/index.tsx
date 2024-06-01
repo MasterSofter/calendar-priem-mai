@@ -1,6 +1,7 @@
 import {Badge} from "react-bootstrap";
 
 interface EventProps{
+  id : string;
   className : string;
   category: string | null;
   header : string | null;
@@ -11,9 +12,9 @@ interface EventProps{
   warning : boolean;
 }
 
-export function Event({warning, primary,  className, category, header, text, link, location} : EventProps) : JSX.Element {
+export function Event({id, warning, primary,  className, category, header, text, link, location} : EventProps) : JSX.Element {
   return (
-    <div className={className}>
+    <div id={id} className={className}>
       <div className="px-3 px-lg-0 py-4 py-lg-3 pb-lg-6">
         <div className="text-end me-lg-3">
           <Badge pill bg="" className={`border ${primary ? "text-primary text-dark-mode-brand border-primary border-gradient-dark-mode" : warning ? "text-danger border-danger border-2" : "text-dark border-black border-dark-mode-light"} fs-calendar-offcanvas-badge`}>{category}</Badge>
