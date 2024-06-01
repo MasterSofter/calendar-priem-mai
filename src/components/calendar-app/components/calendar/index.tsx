@@ -26,13 +26,13 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
     week.map((day, index) => calendarDays.push(<Day key={`day-${index}-month-${day.monthIndex}`} setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} date={day.date} isToday={(new Date().getDate() === day.date.getDate()) && (new Date().getMonth() === day.date.getMonth())} isActualDate={day.monthIndex == month.monthIndex}/>));
     calendarWeeks.push(
       <div className="col" key={weekNumber}>
-        <div className="px-3 px-lg-5 row justify-content-between text-center">
+        <div className="px-3 px-lg-5 row justify-content-between text-center mb-3">
           {calendarDays}
         </div>
         {
           (weekNumber + 1 !== state.calendarWeeks.length)
-            ? <hr className="border-2 border-grey-light my-3"/>
-            : <hr className="d-lg-none border-3 border-grey-light my-3"/>
+            ? <hr className="border-2 border-grey-light mb-3"/>
+            : <hr className="d-lg-none border-3 border-grey-light mb-3"/>
         }
       </div>
     );

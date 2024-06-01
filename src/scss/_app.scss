@@ -139,10 +139,6 @@
   }
 }
 
-.swiper-calendar{
-  max-height: 100vh;
-}
-
 .fs-day-event{
   font-size: .7rem;
 }
@@ -297,6 +293,13 @@
   @media screen and (max-width: 991px){
     max-height: 100dvh;
     overflow: hidden;
+  }
+}
+
+.swiper-calendar{
+  min-height: 100vh;
+  @media screen and (max-width: 991px){
+    max-height: 100dvh;
   }
 }
 
