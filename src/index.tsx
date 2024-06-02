@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 
 // перед сборкой проекта нужно закомментировать
-import "./css/_priem-theme.css";
+//import "./css/_priem-theme.css";
 // перед сборкой нужно закомментировать
-import {calendarData} from "./calendar-data";
+//import {calendarData} from "./calendar-data";
 
 //Стили календаря
 import "./scss/theme.scss";
