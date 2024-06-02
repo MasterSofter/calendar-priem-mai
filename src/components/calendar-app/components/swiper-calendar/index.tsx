@@ -13,7 +13,7 @@ interface SwiperCalendarProps {
   selectedDate : Date;
   setShowEvents:  React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
-  calendarData: Array<ICalendarDay> | undefined;
+  calendarData: Array<ICalendarDay>;
   filter: IFilter;
   locale : string;
 }
@@ -44,7 +44,7 @@ export function SwiperCalendar({swiperCalendarRef, swiperMobileMonthsRef, calend
           )
         }
         <SwiperSlide key="end-month">
-          <Calendar setShowEvents={setShowEvents} calendarData={undefined} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} className={`w-100 calendar-end`} month={createMonth({date: new Date(new Date().getFullYear() + 1, 0), locale: locale})} locale={"ru"}/>
+          <Calendar setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} className={`w-100 calendar-end`} month={createMonth({date: new Date(new Date().getFullYear() + 1, 0), locale: locale})} locale={"ru"}/>
         </SwiperSlide>
       </Swiper>
     </>

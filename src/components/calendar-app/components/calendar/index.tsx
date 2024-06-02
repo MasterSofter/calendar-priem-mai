@@ -11,7 +11,7 @@ interface CalendarProps {
   setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
   className: string;
   locale: string;
-  calendarData: Array<ICalendarDay> | undefined;
+  calendarData: Array<ICalendarDay>;
   filter: IFilter;
   month : IMonth;
 }

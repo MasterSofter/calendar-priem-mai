@@ -4,12 +4,12 @@ interface EventProps{
   id : string;
   className : string;
   category: string | null;
-  header : string | null;
+  header : string;
   text: string | null;
   link : string | null;
   location : string | null;
-  primary : boolean;
-  warning : boolean;
+  primary : boolean | null;
+  warning : boolean | null;
 }
 
 export function Event({id, warning, primary,  className, category, header, text, link, location} : EventProps) : JSX.Element {
@@ -22,16 +22,25 @@ export function Event({id, warning, primary,  className, category, header, text,
         <div className="row text-start pb-4 pt-4">
           <span className="fs-calendar-offcanvas-header lh-sm">{header}</span>
         </div>
-        <div className="row text-start pb-4 pt-lg-2">
-          <span className="col-11 col-lg-9 fs-calendar-offcanvas-text lh-sm">{text}</span>
-        </div>
-        <div className="row text-start pb-4 pt-lg-2">
-          <a className="fs-calendar-offcanvas-text text-mobile-uppercase" href={link ? link : ""} target="_blank">Узнать больше</a>
-        </div>
-        <div className="d-flex flex-row justify-content-start align-items-center fs-calendar-offcanvas-text pt-lg-2">
-          <i className="fa-light fa-location-dot me-3"/>
-          <span>{location}</span>
-        </div>
+        {
+          text &&
+          <div className="row text-start pb-4 pt-lg-2">
+            <span className="col-11 col-lg-9 fs-calendar-offcanvas-text lh-sm">{text}</span>
+          </div>
+        }
+        {
+          link &&
+          <div className="row text-start pb-4 pt-lg-2">
+            <a className="fs-calendar-offcanvas-text text-mobile-uppercase" href={link ? link : ""} target="_blank">Узнать больше</a>
+          </div>
+        }
+        {
+          location &&
+          <div className="d-flex flex-row justify-content-start align-items-center fs-calendar-offcanvas-text pt-lg-2">
+            <i className={`fa-light ${location.replace(" ", "") === "Онлайн" ? "fa-globe" : "fa-location-dot"} me-3`}/>
+            <span>{location}</span>
+          </div>
+        }
       </div>
     </div>
   );

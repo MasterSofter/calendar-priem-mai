@@ -10,30 +10,27 @@ interface DayProps {
   setShowEvents:  React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
   date : Date;
-  calendarData: Array<ICalendarDay> | undefined;
+  calendarData: Array<ICalendarDay>;
   filter: IFilter;
   isActualDate : boolean;
 }
 
 export default function Day({setShowEvents, calendarData, filter, isToday, selectedDate, setSelectedDate, date, isActualDate}: DayProps) : JSX.Element {
-  let categories : Array<ICalendarDay> | undefined;
+  let categories : Array<ICalendarDay>;
 
-  //1. Получить массив категорий, удовлетворяющий условиям фильтра
-  if(filter.categories.length > 0 && filter.degree != "Все")
-    categories = calendarData?.filter(
-      (item) => (!!filter.categories.find(el => el == item.category) && item.degree == filter.degree && item.month === date.getMonth() && item.number == date.getDate())
+  //1. Выбрать все
+  categories = calendarData.filter(
+    (item) => (item.month === date.getMonth() && item.number == date.getDate())
+  );
+  //2, Оставить только по выбранным категориям
+  if (filter.categories.length > 0)
+    categories = categories?.filter(
+      (item) => (!!filter.categories.find(el => el == item.category))
     );
-  else if (filter.categories.length > 0)
-    categories = calendarData?.filter(
-      (item) => (!!filter.categories.find(el => el == item.category) && item.month === date.getMonth() && item.number == date.getDate())
-    );
-  else if(filter.degree != "Все")
-    categories = calendarData?.filter(
-      (item) => (item.degree == filter.degree && item.month === date.getMonth() && item.number == date.getDate())
-    );
-  else
-    categories = calendarData?.filter(
-      (item) => (item.month === date.getMonth() && item.number == date.getDate())
+  //3. Исключить по невыбранным уровням, если degree != "Все"
+  if(filter.degree != "Все")
+    categories = categories?.filter(
+      (item) => (item.degree == filter.degree || item.degree === "Все" )
     );
 
   //2. Смотрим есть ли категории по приоритету 1.Warning 2.Primary

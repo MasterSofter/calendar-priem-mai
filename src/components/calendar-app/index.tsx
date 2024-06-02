@@ -12,7 +12,7 @@ export interface ICalendarDay {
   "timeStart": string | null;
   "timeEnd": string | null;
   "category": string | null;
-  "header": string | null;
+  "header": string;
   "text": string | null;
   "location": string | null;
   "warning": boolean;

@@ -1,6 +1,6 @@
 export function apadtStringLength(inputStr : string | null) : string{
   let result = ""
-  const maxLength = 22;
+  const maxLength = 20;
 
   if(!inputStr)
     return "";

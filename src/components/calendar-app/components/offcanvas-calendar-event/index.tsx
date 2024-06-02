@@ -10,7 +10,7 @@ interface OffcanvasCalendarEventProps{
   locale: string;
   selectedDate : Date;
   filter : IFilter;
-  calendarData: Array<ICalendarDay>,
+  calendarData: Array<ICalendarDay> | undefined,
   show : boolean;
   setShow:  React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -18,55 +18,37 @@ interface OffcanvasCalendarEventProps{
 export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDate, show, setShow } : OffcanvasCalendarEventProps) : JSX.Element {
   const handleClose = () => setShow(false);
 
-  let categories : Array<ICalendarDay>;
+  let categories : Array<ICalendarDay> | undefined;
 
   //1. Получить массив категорий, удовлетворяющий условиям фильтра
-  if(filter.categories.length > 0 && filter.degree != "Все")
-    categories = calendarData?.filter(
-      (item) => (!!filter.categories.find(el => el == item.category) && item.degree == filter.degree && item.month === selectedDate.getMonth() && item.number == selectedDate.getDate())
+  //1.1 Выбрать все
+  categories = calendarData?.filter(
+    (item) => (item.month === selectedDate.getMonth() && item.number == selectedDate.getDate())
+  );
+  //1.2 Оставить только по выбранным категориям
+  if (filter.categories.length > 0)
+    categories = categories?.filter(
+      (item) => (!!filter.categories.find(el => el == item.category))
     );
-  else if (filter.categories.length > 0)
-    categories = calendarData?.filter(
-      (item) => (!!filter.categories.find(el => el == item.category) && item.month === selectedDate.getMonth() && item.number == selectedDate.getDate())
-    );
-  else if(filter.degree != "Все")
-    categories = calendarData?.filter(
-      (item) => (item.degree == filter.degree && item.month === selectedDate.getMonth() && item.number == selectedDate.getDate())
-    );
-  else
-    categories = calendarData?.filter(
-      (item) => (item.month === selectedDate.getMonth() && item.number == selectedDate.getDate())
+  //1.3 Исключить по невыбранным уровням, если degree != "Все"
+  if(filter.degree != "Все")
+    categories = categories?.filter(
+      (item) => (item.degree == filter.degree || item.degree == "Все" )
     );
 
   //2. Группируем по категориям
   let uniqueArray = removeDuplicates(categories, "category");
-  let groupsCategories : Array<Array<ICalendarDay>> = new Array<Array<ICalendarDay>>();
+  let groupsCategories : Array<Array<ICalendarDay> | undefined> = new Array<Array<ICalendarDay>>();
   uniqueArray.map((el, index) => {
     groupsCategories[index] = categories?.filter(filterItem => filterItem.category == el.category);
   })
 
   categories = new Array<ICalendarDay>();
-  groupsCategories.map( i => i.map( k => categories.push(k)) )
-
-  //3. Смотрим есть ли категории по приоритету 1.Warning 2.Primary
-  /*
-
-  let warningCategories = categories?.filter((item) => item.warning);
-  let primaryCategories = categories?.filter((item) => item.primary);
-  categories = categories?.filter((item) => !item.warning && !item.primary);
-
-  primaryCategories?.map((item) => {
-    categories?.unshift(item); //вставляем в начало
-  });
-
-  warningCategories?.map( (item) => {
-    categories?.unshift(item); //вставляем в начало
-  });
-  */
+  groupsCategories.map( i => i?.map( k => categories?.push(k)) )
 
   function getIndexOfCategory(category : string) : number{
-    let item = categories.find( el => el.category == category );
-    if(item != undefined)
+    let item = categories?.find( el => el.category == category );
+    if(item != undefined && categories != undefined)
       return categories.indexOf(item);
     return 0;
   }
