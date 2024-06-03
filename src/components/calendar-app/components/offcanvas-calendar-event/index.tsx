@@ -1,4 +1,4 @@
-import {Offcanvas, OffcanvasBody, OffcanvasHeader} from "react-bootstrap";
+import {Offcanvas, OffcanvasBody} from "react-bootstrap";
 import {ICalendarDay} from "../../index";
 import React from "react";
 import {createDate} from "../../../../utils/helpers/date";
@@ -23,32 +23,30 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
   //1. Получить массив категорий, удовлетворяющий условиям фильтра
   //1.1 Выбрать все
   categories = calendarData?.filter(
-    (item) => (item.month === selectedDate.getMonth() && item.number == selectedDate.getDate())
+    (item) => (item.month === selectedDate.getMonth() && item.number === selectedDate.getDate())
   );
   //1.2 Оставить только по выбранным категориям
   if (filter.categories.length > 0)
     categories = categories?.filter(
-      (item) => (!!filter.categories.find(el => el == item.category))
+      (item) => (!!filter.categories.find(el => el === item.category))
     );
   //1.3 Исключить по невыбранным уровням, если degree != "Все"
-  if(filter.degree != "Все")
+  if(filter.degree !== "Все")
     categories = categories?.filter(
-      (item) => (item.degree == filter.degree || item.degree == "Все" )
+      (item) => (item.degree === filter.degree || item.degree === "Все" )
     );
 
   //2. Группируем по категориям
   let uniqueArray = removeDuplicates(categories, "category");
   let groupsCategories : Array<Array<ICalendarDay> | undefined> = new Array<Array<ICalendarDay>>();
-  uniqueArray.map((el, index) => {
-    groupsCategories[index] = categories?.filter(filterItem => filterItem.category == el.category);
-  })
+  uniqueArray.map((el, index) => groupsCategories[index] = categories?.filter(filterItem => filterItem.category === el.category))
 
   categories = new Array<ICalendarDay>();
   groupsCategories.map( i => i?.map( k => categories?.push(k)) )
 
   function getIndexOfCategory(category : string) : number{
-    let item = categories?.find( el => el.category == category );
-    if(item != undefined && categories != undefined)
+    let item = categories?.find( el => el.category === category );
+    if(item !== undefined && categories !== undefined)
       return categories.indexOf(item);
     return 0;
   }
@@ -87,7 +85,14 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
                 </div>
                 <div className="col d-flex flex-column justify-content-start py-6 px-6 mx-5 mt-6">
                   {
-                    categories?.map((item, index) => <Event id={`event-category-${index}`} className="row" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}/>)
+                    categories?.map((item, index) =>
+                    <div className="row">
+                      {
+                        index !== 0 &&
+                        <hr className="border-2 border-grey-light mb-5"/>
+                      }
+                      <Event id={`event-category-${index}`} className="col p-0" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}  timeStart={item.timeStart} timeEnd={item.timeEnd} />
+                    </div>)
                   }
                 </div>
               </div>
@@ -100,7 +105,7 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
             </div>
             <div className="d-flex flex-column justify-content-start">
               {
-                categories?.map((item, index) => <Event id={`event-category-${index}`} className="bg-grey-light mb-4 px-4 py-2" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}/>)
+                categories?.map((item, index) => <Event id={`event-category-${index}`} className="bg-grey-light mb-4 px-4 py-2" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location} timeStart={item.timeStart} timeEnd={item.timeEnd}/>)
               }
             </div>
           </div>
