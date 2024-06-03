@@ -56,11 +56,11 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
         <div className="d-none d-lg-flex flex-column">
           {
             categories?.map((item, index) => index < 3
-              && <span key={`day-event-${index}`} className={`lh-1 mb-2 fs-day-event ${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} `}>{apadtStringLength(item.category)}</span>
+              && <span key={`day-event-${index}`} className={`lh-1 mb-2 day-event-overflow fs-day-event ${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} `}>{item.category}</span>
             )
           }
           {categories && categories?.length > 3 &&
-          <span key={`day-event-end`} className="lh-1 fs-day-event">{`еще +${categories?.length - 3}`}</span>
+          <span key={`day-event-end`} className="text-primary text-dark-mode-brand lh-1 fs-day-event">{`еще +${categories?.length - 3}`}</span>
           }
         </div>
         <div className="d-lg-none text-center">
