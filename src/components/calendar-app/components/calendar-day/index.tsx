@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
 import {removeDuplicates} from "../../../../utils/helpers/array/removeDuplicates";
-import {apadtStringLength} from "../../../../utils/helpers/string/apadtStringLength";
 
 interface DayProps {
   isToday : boolean;
@@ -20,17 +19,17 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
 
   //1. Выбрать все
   categories = calendarData.filter(
-    (item) => (item.month === date.getMonth() && item.number == date.getDate())
+    (item) => (item.month === date.getMonth() && item.number === date.getDate())
   );
   //2, Оставить только по выбранным категориям
   if (filter.categories.length > 0)
     categories = categories?.filter(
-      (item) => (!!filter.categories.find(el => el == item.category))
+      (item) => (!!filter.categories.find(el => el === item.category))
     );
   //3. Исключить по невыбранным уровням, если degree != "Все"
-  if(filter.degree != "Все")
+  if(filter.degree !== "Все")
     categories = categories?.filter(
-      (item) => (item.degree == filter.degree || item.degree === "Все" )
+      (item) => (item.degree === filter.degree || item.degree === "Все" )
     );
 
   //2. Смотрим есть ли категории по приоритету 1.Warning 2.Primary
@@ -40,14 +39,10 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
   categories = removeDuplicates(categories, "category");
 
   let uniqueArray = removeDuplicates(primaryCategories, "category");
-  uniqueArray?.map((item) => {
-    categories?.unshift(item);
-  });
+  uniqueArray?.map((item) =>  categories?.unshift(item));
 
   uniqueArray = removeDuplicates(warningCategories, "category");
-  uniqueArray?.map( (item) => {
-    categories?.unshift(item);
-  });
+  uniqueArray?.map( (item) =>  categories?.unshift(item));
 
   return (
     <div onClick={() => {setSelectedDate(date); if(categories && categories.length > 0) setShowEvents(true);}} className={`${isToday ? "bg-grey-light" : ""} border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell ${isActualDate ? "" : "text-muted"}`}>
@@ -64,7 +59,7 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
           }
         </div>
         <div className="d-lg-none text-center">
-          <i className={`fa-solid fa-circle text-primary text-dark-mode-white ${(!categories || categories && categories.length == 0 )? "d-none" : ""} ${categories && categories.length < 2 ? "fs-circle-sm" : categories && categories.length < 4 ? "fs-circle-md" : "fs-circle-lg"}`}></i>
+          <i className={`fa-solid fa-circle text-primary text-dark-mode-white ${(!categories || (categories && categories.length === 0)) ? "d-none" : ""} ${categories && categories.length < 2 ? "fs-circle-sm" : categories && categories.length < 4 ? "fs-circle-md" : "fs-circle-lg"}`}/>
         </div>
       </div>
     </div>
