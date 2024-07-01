@@ -201,8 +201,8 @@
 }
 
 .swiper-mobile-months {
-  width: 100%;
-  height: 100%;
+  min-height: 4rem;
+  max-height: 4rem;
 }
 
 .slide-month {
@@ -232,12 +232,19 @@
   font-weight: 400 !important;
 }
 
+.bg-gradient-primary {
+  background: linear-gradient(144deg, #4d24ff 0%, #c669ff 100%) !important
+}
+
+.border-smart{
+  border-color: white !important;
+  @media screen and (max-width: 991px){
+    border-color: var(--mai-body-bg) !important;
+  }
+}
 [data-bs-theme="dark"]
-.border-gradient-dark-mode{
-  background-image: linear-gradient(144deg, #4d24ff 0%, #c669ff 100%);
-  background-origin: border-box;
-  border-color: rgba(0, 0, 0, 0) !important;
-  box-shadow: inset 0 1000vh var(--mai-body-bg)
+.border-smart{
+  border-color: var(--mai-body-bg) !important;
 }
 
 .bg-white-lg{
@@ -305,8 +312,10 @@
 }
 
 .swiper-calendar{
-  min-height: 100vh;
+  min-height: 85vw;
+  max-height: 85vw;
   @media screen and (max-width: 991px){
+    min-height: 100dvh;
     max-height: 100dvh;
   }
 }

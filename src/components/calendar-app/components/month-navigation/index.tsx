@@ -1,15 +1,15 @@
-import React, {useEffect, useRef, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 // Import Swiper css
 import "swiper/css";
 import "swiper/css/pagination";
 
-import {createDate, getMonthesNames} from "../../../../utils/helpers/date";
+import {createDate} from "../../../../utils/helpers/date";
 import {Pagination} from "swiper/modules";
 import {OffcanvasFilter} from "../../../filter/components/offcanvas-filter";
 import {IFilter} from "../../../filter";
 import {ICalendarDay} from "../../index";
+import {useMonthNavigation} from "./hooks/useMonthNavigation";
 
 interface MonthNavigationProps {
   swiperCalendarRef :  React.MutableRefObject<any>;
@@ -21,66 +21,18 @@ interface MonthNavigationProps {
 }
 
 export default function MonthNavigation({swiperCalendarRef, swiperMobileMonthsRef, calendarData, filter, locale, setFilter}: MonthNavigationProps): JSX.Element {
-  const swiperMonthsMobileRef = useRef<typeof Swiper>();
-  const swiperMonthsRef = useRef<typeof Swiper>();
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [selectedMonth, setSelectedMonth] = useState<number>((new Date()).getMonth());
-  const months = getMonthesNames(locale);
-
-  const handleOpen = () => setShowFilter(true);
-
-  let actualMonths = [];
-  for (let i = 0; i < 12; i++) {
-    actualMonths.push(i);
-  }
-
-  useEffect(() => {
-    if (swiperMonthsRef.current)
-      //@ts-ignore
-      swiperMonthsRef.current.slideTo(selectedMonth - 2 >= 0 ? selectedMonth - 2 : selectedMonth - 1 >= 0 ? selectedMonth - 1 : selectedMonth);
-  }, [selectedMonth]);
-
-
-  useEffect(() => {
-    // При клике на месяц делаем его выделенным (черным) и листаем свайпер календаря
-    document.querySelectorAll(".slide-month").forEach( (item) => {
-      item.addEventListener("click", function (event) {
-        document.querySelectorAll(".slide-month").forEach (el => {
-          el.classList.add("text-muted");
-          el.classList.remove("month-selected");
-        })
-        item.classList.remove("text-muted");
-        item.classList.add("month-selected");
-
-        let monthIndex: number | undefined = months.find(el => el.monthShort == item.textContent)?.monthIndex;
-        if (typeof (monthIndex) === "number")
-        {
-          swiperCalendarRef.current.slideTo(monthIndex);
-          setSelectedMonth(monthIndex);
-        }
-      })});
-
-    if (swiperMonthsMobileRef.current) {
-      //@ts-ignore
-      swiperMonthsMobileRef.current.on("slideChangeTransitionEnd", function () {
-        //@ts-ignore
-        swiperCalendarRef.current.slideTo(swiperMonthsMobileRef.current?.activeIndex);
-        //@ts-ignore
-        setSelectedMonth(swiperMonthsMobileRef.current?.activeIndex);
-      });
-    }
-  }, []);
+  const {state, functions} = useMonthNavigation({swiperCalendarRef, swiperMobileMonthsRef, locale})
 
   return (
     <>
       <div className="d-none d-lg-block calendar-month-nav w-calendar-month-nav cursor-grab">
         <Swiper
           onSwiper={(swiper: any) => {
-            swiperMonthsRef.current = swiper;
+            state.swiperMonthsRef.current = swiper;
           }}
           slidesPerView={7}
-          //slidesPerGroup={4}
           loop={false}
+          id="swiperMonths"
           className="disable-carousel pb-4"
           pagination={{
             dynamicBullets: false,
@@ -88,11 +40,11 @@ export default function MonthNavigation({swiperCalendarRef, swiperMobileMonthsRe
           modules={[Pagination]}
         >
           {
-            actualMonths.map((item, num) =>
+            state.actualMonths.map((item, num) =>
               //@ts-ignore
-              <SwiperSlide key={num} className={`${selectedMonth === item ? "month-selected" : "text-muted fw-light"} pb-4 lh-1 fs-calendar-nav hover-effect-up slide-month`}>
+              (state.months[item].monthIndex >= state.currentDate.getMonth()) && <SwiperSlide key={num} className={`${state.selectedMonth === item ? "month-selected" : "text-muted fw-light"} pb-4 lh-1 fs-calendar-nav hover-effect-up slide-month`}>
                 <span className="cursor-pointer">
-                   {months[item].monthShort}
+                   {state.months[item].monthShort}
                 </span>
               </SwiperSlide>
             )
@@ -103,31 +55,34 @@ export default function MonthNavigation({swiperCalendarRef, swiperMobileMonthsRe
         <div className="col-4 text-start" style={{maxHeight: "4rem"}}>
           <Swiper
             onSwiper={(swiper: any) => {
-              swiperMonthsMobileRef.current = swiper;
+              state.swiperMonthsMobileRef.current = swiper;
               swiperMobileMonthsRef.current = swiper;
             }}
-            slidesPerView={1}
-            spaceBetween={10}
+            slidesPerView="auto"
+            spaceBetween={0}
             loop={false}
             direction="vertical"
             speed={1}
             className="disable-carousel swiper-mobile-months"
           >
             {
-              months.map((item, num) =>
-                <SwiperSlide key={num} className="slide-month justify-content-start">
-                  <span className="fs-calendar-nav cursor-pointer text-capitalize text-start">
-                     {item.month}
-                  </span>
+              state.months.map((item, num) =>
+                <SwiperSlide key={num} className="d-inline">
+                  {
+                    (item.monthIndex >= state.currentDate.getMonth()) &&
+                    <div className="my-2 fs-calendar-nav cursor-pointer text-capitalize text-start">
+                     <span>{item.month}</span>
+                    </div>
+                  }
                 </SwiperSlide>
               )
             }
           </Swiper>
         </div>
         <div className="col-4 text-center fs-calendar-nav my-auto">{createDate({locale: locale}).dateMonth}</div>
-        <div onClick={handleOpen} className="col-4 text-end fs-calendar-nav my-auto">Фильтр</div>
+        <div onClick={functions.handleOpen} className="col-4 text-end fs-calendar-nav my-auto">Фильтр</div>
       </div>
-      <OffcanvasFilter calendarData={calendarData} filter={filter} setFilter={setFilter} show={showFilter} setShow={setShowFilter} locale={locale}/>
+      <OffcanvasFilter calendarData={calendarData} filter={filter} setFilter={setFilter} show={state.showFilter} setShow={functions.setShowFilter} locale={locale}/>
     </>
   );
 }

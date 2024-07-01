@@ -39,14 +39,14 @@ function App({calendarData} : AppProps) {
       filter={filter}
       setFilter={setFilter}
       locale={locale}
-      className="col-lg-10 bg-white-lg rounded-calendar border border-2 border-transparent border-calendar-dark-mode-light mx-dark-mode-0"
+      className="col-lg-10 bg-white-lg rounded-calendar border border-2 border-lg-0 border-calendar-dark-mode-light mx-dark-mode-0"
     />
     <Filter
       calendarData={calendarData}
       filter={filter}
       setFilter={setFilter}
       prefix="desktop"
-      className="col-lg d-none d-lg-block bg-white-lg border border-2 border-transparent border-calendar-dark-mode-light rounded-calendar ms-neg-calendar-border-dark-mode mx-dark-mode-0 ms-lg-2 pt-4 p-0"
+      className="col-lg d-none d-lg-block bg-white-lg border border-2 border-lg-0 border-calendar-dark-mode-light rounded-calendar ms-neg-calendar-border-dark-mode mx-dark-mode-0 ms-lg-2 pt-4 p-0"
     />
   </div>
   );

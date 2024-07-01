@@ -44,22 +44,24 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
   uniqueArray = removeDuplicates(warningCategories, "category");
   uniqueArray?.map( (item) =>  categories?.unshift(item));
 
+  categories = removeDuplicates(categories, "category");
+
   return (
-    <div onClick={() => {setSelectedDate(date); if(categories && categories.length > 0) setShowEvents(true);}} className={`${isToday ? "bg-grey-light" : ""} border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell ${isActualDate ? "" : "text-muted"}`}>
+    <div onClick={() => {setSelectedDate(date); if(categories && categories.length > 0) setShowEvents(true);}} className={`${isToday && isActualDate ? "bg-gradient-primary" : ""} border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : isToday && isActualDate ? "border-smart" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell ${isActualDate ? "" : "text-muted"}`}>
       <div className="d-flex flex-column justify-content-between h-100 py-2">
-        <span className="fs-day-number">{date.getDate()}</span>
+        <span className={`${isToday && isActualDate ? "text-white" : ""} fs-day-number`}>{date.getDate()}</span>
         <div className="d-none d-lg-flex flex-column">
           {
             categories?.map((item, index) => index < 3
-              && <span key={`day-event-${index}`} className={`lh-1 mb-2 day-event-overflow fs-day-event ${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} `}>{item.category}</span>
+              && <span key={`day-event-${index}`} className={`lh-1 mb-2 day-event-overflow fs-day-event  ${item.primary ? isToday && isActualDate ? "text-white" : "text-primary text-dark-mode-brand": ""} ${item.warning ? "text-danger" : ""} ${isToday && isActualDate && !item.primary && !item.warning ? "text-white" : ""} `}>{item.category}</span>
             )
           }
           {categories && categories?.length > 3 &&
-          <span key={`day-event-end`} className="text-primary text-dark-mode-brand lh-1 fs-day-event">{`еще +${categories?.length - 3}`}</span>
+          <span key={`day-event-end`} className={`${isToday && isActualDate ? "text-white" : "text-primary text-dark-mode-brand"} lh-1 fs-day-event`}>{`еще +${categories?.length - 3}`}</span>
           }
         </div>
         <div className="d-lg-none text-center">
-          <i className={`fa-solid fa-circle text-primary text-dark-mode-white ${(!categories || (categories && categories.length === 0)) ? "d-none" : ""} ${categories && categories.length < 2 ? "fs-circle-sm" : categories && categories.length < 4 ? "fs-circle-md" : "fs-circle-lg"}`}/>
+          <i className={`fa-solid fa-circle ${isToday && isActualDate ? "text-white" : "text-primary text-dark-mode-white"} ${(!categories || (categories && categories.length === 0)) ? "d-none" : ""} ${categories && categories.length < 2 ? "fs-circle-sm" : categories && categories.length < 4 ? "fs-circle-md" : "fs-circle-lg"}`}/>
         </div>
       </div>
     </div>

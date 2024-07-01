@@ -31,8 +31,19 @@ export function createYear (params?: CreateYearParams) {
     return monthes;
   };
 
+  const actualYearMonths = () : Array<IMonth> => {
+    const monthes : Array<IMonth> = new Array<IMonth>();
+
+    for (let i = today.monthNumber; i <= monthCount - 1; i++) {
+      monthes[i] = createMonth({locale: locale, date : new Date(year, i)});
+    }
+
+    return monthes;
+  }
+
   return {
     yearMonthes,
+    actualYearMonths,
     month,
     year
   };

@@ -1,7 +1,21 @@
 export const calendarData = [
     {
-        "month": 4,
-        "number": 1,
+        "month": 5,
+        "number": 28,
+        "timeStart": "10:00",
+        "timeEnd": "17:00",
+        "category": "Категория-2",
+        "header": "Предварительный приём-1",
+        "text": "Предварительная подача документов в приёмную комисcию и индивидуальные консультации по поступлению в МАИ в 2024 году.",
+        "location": "Онлайн ",
+        "warning": true,
+        "link": "https://lk.mai.ru/accounts/login",
+        "degree": "Базовое высшее",
+        "primary": false
+    },
+    {
+        "month": 5,
+        "number": 28,
         "timeStart": "10:00",
         "timeEnd": "17:00",
         "category": "Категория-2",
@@ -11,11 +25,11 @@ export const calendarData = [
         "warning": false,
         "link": "https://lk.mai.ru/accounts/login",
         "degree": "Базовое высшее",
-        "primary": false
+        "primary": true
     },
     {
-        "month": 4,
-        "number": 1,
+        "month": 5,
+        "number": 28,
         "timeStart": "",
         "timeEnd": "17:00",
         "category": "Категория-2",
@@ -28,8 +42,8 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 4,
-        "number": 1,
+        "month": 5,
+        "number": 28,
         "timeStart": "",
         "timeEnd": "",
         "category": "Категория-3",
@@ -42,8 +56,8 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 4,
-        "number": 1,
+        "month": 5,
+        "number": 28,
         "timeStart": "",
         "timeEnd": "",
         "category": "Категория-4",
@@ -56,8 +70,8 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 4,
-        "number": 1,
+        "month": 5,
+        "number": 28,
         "timeStart": "",
         "timeEnd": "",
         "category": "Категория-5",
@@ -70,8 +84,8 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 4,
-        "number": 1,
+        "month": 5,
+        "number": 28,
         "timeStart": "",
         "timeEnd": "",
         "category": "Категория-6",
@@ -84,8 +98,8 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 4,
-        "number": 1,
+        "month": 5,
+        "number": 28,
         "timeStart": "",
         "timeEnd": "",
         "category": "Категория-7",
