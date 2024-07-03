@@ -17,19 +17,19 @@ export interface IFilter {
 export default function Filter ({calendarData, prefix, filter, setFilter, className} : FilterProps) : JSX.Element {
 
   const degrees : Array<string> = ["Все"];
-  calendarData.map((item, index) => {
-    if(!degrees.find(el => el === item.degree) && (item.degree != "" && item.degree != null))
+  calendarData.map((item) : void => {
+    if(!degrees.find(el => el === item.degree) && (item.degree !== "" && item.degree !== null))
       degrees.push(item.degree);
   });
 
   const categories : Array<string> = new Array<string>();
-  calendarData.map((item, index) => {
-    if(!categories.find(el => item.category && el == item.category) && item.category)
+  calendarData.map((item) : void => {
+    if(!categories.find(el => item.category && el === item.category) && item.category)
       categories.push(item.category);
   });
 
   useEffect( () => {
-    if(filter.degree == "")
+    if(filter.degree === "")
       setFilter({...filter, degree: degrees[0]})
   }, [] );
 
@@ -44,7 +44,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
           {
             degrees.map((degree, index) =>
               <div key={index} className="d-flex flex-row align-items-center form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
-                <input checked={degrees[index] == filter.degree} onChange={(e)=> {
+                <input checked={degrees[index] === filter.degree} onChange={(e)=> {
                   if(e.currentTarget.checked){
                     filter.degree = degrees[index];
                     setFilter({...filter});
@@ -64,7 +64,7 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
           {
             categories.map((category, index) =>
               <div key={index} className="d-flex flex-row align-items-center form-check cursor-pointer hover-effect-up pt-2 pb-4 pb-lg-2 ms-3 ms-lg-0">
-                <input checked={!!filter.categories.find(item => item == categories[index]) } onChange={(e)=> {
+                <input checked={!!filter.categories.find(item => item === categories[index]) } onChange={(e)=> {
 
                   const _index = filter.categories.indexOf(`${categories[index]}`);
                   if (_index > -1)

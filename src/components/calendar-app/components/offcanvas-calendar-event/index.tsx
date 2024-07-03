@@ -63,54 +63,53 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
   }
 
   return (
-    <>
-      <Offcanvas className="w-100 h-100" scroll={false} backdrop={false} placement="end" show={show} onHide={handleClose}>
-        <OffcanvasBody className="py-0 px-0" >
-          <div className="d-none d-lg-block w-100 h-100">
-            <div className="container page-wrapper">
-              <div className="row d-flex flex-column flex-lg-row justify-content-center min-vh-100">
-                <div className="col-3 border-end border-dark border-dark-mode-light d-flex flex-column py-5">
-                  <div className="row d-flex flex-column justify-content-start mb-6 position-fixed">
-                    <div className="d-flex flex-row justify-content-start align-items-center mb-6">
-                      <i onClick={handleClose} className="fa-regular fa-arrow-left fs-calendar-offcanvas-text border border-2 border-black border-dark-mode-light rounded-circle hover-effect-up cursor-pointer p-3 me-3"/>
-                      <span className="fs-calendar-offcanvas-text text-muted">Esc</span>
-                    </div>
-                    <span className="fs-calendar-offcanvas-title lh-1">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
+    <Offcanvas className="w-100 h-100" scroll={false} backdrop={false} placement="end" show={show} onHide={handleClose}>
+      <OffcanvasBody className="py-0 px-0" >
+        <div className="d-none d-lg-block w-100 h-100">
+          <div className="container page-wrapper">
+            <div className="row d-flex flex-column flex-lg-row justify-content-center min-vh-100">
+              <div className="col-3 border-end border-dark border-dark-mode-light d-flex flex-column py-5">
+                <div className="row d-flex flex-column justify-content-start mb-6 position-fixed">
+                  <div className="d-flex flex-row justify-content-start align-items-center mb-6">
+                    <i onClick={handleClose} className="fa-regular fa-arrow-left fs-calendar-offcanvas-text border border-2 border-black border-dark-mode-light rounded-circle hover-effect-up cursor-pointer p-3 me-3"/>
+                    <span className="fs-calendar-offcanvas-text text-muted">Esc</span>
                   </div>
-                  <div className="row d-flex flex-column position-fixed" style={{width:"23rem", bottom:"4.5rem"}}>
-                    {
-                      removeDuplicates(categories, "category")?.map((item, index) => <span onClick={() => onSmoothScrollTo(`event-category-${getIndexOfCategory(item.category)}`)} className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} fs-calendar-offcanvas-category hover-effect-up cursor-pointer lh-sm mb-3`} key={index}>{item.category}</span>)
-                    }
-                  </div>
+                  <span className="fs-calendar-offcanvas-title lh-1">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
                 </div>
-                <div className="col d-flex flex-column justify-content-start py-6 px-6 mx-5 mt-6">
+                <div className="row d-flex flex-column position-fixed" style={{width:"23rem", bottom:"4.5rem"}}>
                   {
-                    categories?.map((item, index) =>
-                    <div className="row">
+                    removeDuplicates(categories, "category")?.map((item, index) => <span onClick={() => onSmoothScrollTo(`event-category-${getIndexOfCategory(item.category)}`)} className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} fs-calendar-offcanvas-category hover-effect-up cursor-pointer lh-sm mb-3`} key={`category-${index}`}>{item.category}</span>)
+                  }
+                </div>
+              </div>
+              <div className="col d-flex flex-column justify-content-start py-6 px-6 mx-5 mt-6">
+                {
+                  categories?.map((item, index) =>
+                    <div className="row" key={`${index}-${item?.category}-${item?.text}`}>
                       {
                         index !== 0 &&
                         <hr className="border-2 border-grey-light mb-5"/>
                       }
                       <Event id={`event-category-${index}`} className="col p-0" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location}  timeStart={item.timeStart} timeEnd={item.timeEnd} />
-                    </div>)
-                  }
-                </div>
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>
-          <div className="d-lg-none">
-            <div onClick={handleClose} className="ps-4 sticky-top bg-body d-flex flex-row justify-content-start align-items-center py-4">
-              <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-text text-muted ms-3 me-3"/>
-              <span className="fs-calendar-offcanvas-title lh-1 ms-2">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
-            </div>
-            <div className="d-flex flex-column justify-content-start">
-              {
-                categories?.map((item, index) => <Event id={`event-category-${index}`} className="bg-grey-light mb-4 px-4 py-2" key={index} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location} timeStart={item.timeStart} timeEnd={item.timeEnd}/>)
-              }
-            </div>
+        </div>
+        <div className="d-lg-none">
+          <div onClick={handleClose} className="ps-4 sticky-top bg-body d-flex flex-row justify-content-start align-items-center py-4">
+            <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-header text-muted ms-3 me-3"/>
+            <span className="fs-calendar-offcanvas-title lh-1 ms-2">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
           </div>
-        </OffcanvasBody>
-      </Offcanvas>
-    </>
+          <div className="d-flex flex-column justify-content-start">
+            {
+              categories?.map((item, index) => <Event id={`event-category-${index}`} className="bg-grey-light mb-4 px-4 py-2" key={`${index}-${item?.category}-${item?.text}`} warning={item.warning} primary={item.primary} category={item.category} header={item.header} text={item.text} link={item.link} location={item.location} timeStart={item.timeStart} timeEnd={item.timeEnd}/>)
+            }
+          </div>
+        </div>
+      </OffcanvasBody>
+    </Offcanvas>
   );
 }

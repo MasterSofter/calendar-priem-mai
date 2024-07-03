@@ -183,6 +183,10 @@
   border-radius: 1.2rem;
 }
 
+.rounded-inner-calendar-day-cell{
+  border-radius: 1.1rem;
+}
+
 .border-calendar-filter {
   border-width: .08rem !important;
   @media screen and (max-width: 991px){
@@ -221,7 +225,7 @@
 }
 
 .hover-effect-up{
-  transition: transform .5s;
+  transition: transform .5s, border-left-color .5s, border-right-color .5s, border-top-color .5s, border-bottom-color .5s;
   &:hover {
     transform: translateY(-.2rem);
   }
@@ -230,21 +234,6 @@
 .month-selected {
   color: var(--mai-body-color) !important;
   font-weight: 400 !important;
-}
-
-.bg-gradient-primary {
-  background: linear-gradient(144deg, #4d24ff 0%, #c669ff 100%) !important
-}
-
-.border-smart{
-  border-color: white !important;
-  @media screen and (max-width: 991px){
-    border-color: var(--mai-body-bg) !important;
-  }
-}
-[data-bs-theme="dark"]
-.border-smart{
-  border-color: var(--mai-body-bg) !important;
 }
 
 .bg-white-lg{
@@ -304,7 +293,7 @@
 }
 
 .calendar-wrapper {
-  min-height: 100vh;
+  min-height: 80vh;
   @media screen and (max-width: 991px){
     max-height: 100dvh;
     overflow: hidden;

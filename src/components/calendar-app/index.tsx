@@ -4,7 +4,6 @@ import {useRef, useState} from "react";
 import {SwiperCalendar} from "./components/swiper-calendar";
 import {OffcanvasCalendarEvent} from "./components/offcanvas-calendar-event";
 import {IFilter} from "../filter";
-import Swiper from "swiper";
 
 export interface ICalendarDay {
   "month": number,

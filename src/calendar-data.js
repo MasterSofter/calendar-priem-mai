@@ -1,6 +1,6 @@
 export const calendarData = [
     {
-        "month": 5,
+        "month": 6,
         "number": 28,
         "timeStart": "10:00",
         "timeEnd": "17:00",
@@ -14,7 +14,7 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 5,
+        "month": 6,
         "number": 28,
         "timeStart": "10:00",
         "timeEnd": "17:00",
@@ -28,7 +28,7 @@ export const calendarData = [
         "primary": true
     },
     {
-        "month": 5,
+        "month": 6,
         "number": 28,
         "timeStart": "",
         "timeEnd": "17:00",
@@ -42,7 +42,7 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 5,
+        "month": 6,
         "number": 28,
         "timeStart": "",
         "timeEnd": "",
@@ -56,7 +56,7 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 5,
+        "month": 7,
         "number": 28,
         "timeStart": "",
         "timeEnd": "",

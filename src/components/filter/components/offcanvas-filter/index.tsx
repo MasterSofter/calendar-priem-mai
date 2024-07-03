@@ -1,7 +1,5 @@
 import {Offcanvas, OffcanvasBody} from "react-bootstrap";
 import {createDate} from "../../../../utils/helpers/date";
-import {Event} from "../../../calendar-app/components/offcanvas-calendar-event/components/event";
-import React from "react";
 import {ICalendarDay} from "../../../calendar-app";
 import Filter, {IFilter} from "../../index";
 
@@ -23,7 +21,7 @@ export function OffcanvasFilter({calendarData, filter, locale, show, setShow, se
         <OffcanvasBody className="py-0 px-0" >
           <div className="d-lg-none">
             <div onClick={handleClose} className="sticky-top d-flex flex-row justify-content-start align-items-center py-4 ps-3">
-              <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-text text-muted ms-3 me-3"/>
+              <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-header text-muted ms-3 me-3"/>
               <span className="fs-calendar-offcanvas-title lh-1 text-capitalize ms-2">{createDate({locale: locale}).month}</span>
             </div>
             <Filter calendarData={calendarData} prefix="mobile" filter={filter} setFilter={setFilter} className="d-flex flex-column justify-content-start"/>
