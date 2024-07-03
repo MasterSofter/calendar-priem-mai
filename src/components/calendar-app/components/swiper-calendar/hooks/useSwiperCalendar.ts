@@ -9,8 +9,8 @@ interface SwiperCalendarParams {
 
 export function useSwiperCalendar({swiperMobileMonthsRef,  width, height} : SwiperCalendarParams){
   const defineDirection = (width : number) => "vertical"; //(width : number) : ("horizontal" | "vertical") => width < 990 ? "vertical" : "horizontal";
-  const defineAllowTouchMove = (width : number) : boolean =>  width < 990;
-  const defineSpeed = (width : number) : number => width < 990 ? 250 : 2000;
+  const defineAllowTouchMove = (width : number) : boolean =>  width < 992;
+  const defineSpeed = (width : number) : number => width < 992 ? 250 : 2000;
 
   const swiperRef = useRef<typeof Swiper>();
 

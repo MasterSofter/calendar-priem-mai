@@ -80,7 +80,7 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
         !isToday && <div onClick={() => {
           setSelectedDate(date);
           if (categories && categories.length > 0) setShowEvents(true);
-        }} className={`border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell ${isActualDate ? "" : "text-muted"}`}>
+        }} className={`border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell ${isActualDate ? "" : "text-muted-calendar"}`}>
           <div className="d-flex flex-column justify-content-between h-100 py-2">
             <span className={`${isToday && isActualDate ? "text-white" : ""} fs-day-number`}>{date.getDate()}</span>
             <div className="d-none d-lg-flex flex-column">

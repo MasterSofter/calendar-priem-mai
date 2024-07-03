@@ -1,9 +1,13 @@
 import React, {useEffect} from "react";
 import {ICalendarDay} from "../calendar-app";
+import {createDate} from "../../utils/helpers/date";
+import {useWindowDimensions} from "../hooks/useWindowDimensions";
 
 type FilterProps = {
   prefix :string;
   filter : IFilter;
+  selectedMonth : number;
+  setSelectedMonth : React.Dispatch<React.SetStateAction<number>>;
   calendarData : Array<ICalendarDay>;
   setFilter : React.Dispatch<IFilter>,
   className: string
@@ -14,16 +18,18 @@ export interface IFilter {
   categories: Array<string>,
 }
 
-export default function Filter ({calendarData, prefix, filter, setFilter, className} : FilterProps) : JSX.Element {
+export default function Filter ({selectedMonth, setSelectedMonth, calendarData, prefix, filter, setFilter, className} : FilterProps) : JSX.Element {
+  const { height, width } = useWindowDimensions();
+  const actualCalendarData = getActualCalendarData(calendarData, selectedMonth);
 
   const degrees : Array<string> = ["Все"];
-  calendarData.map((item) : void => {
+  actualCalendarData.map((item) : void => {
     if(!degrees.find(el => el === item.degree) && (item.degree !== "" && item.degree !== null))
       degrees.push(item.degree);
   });
 
   const categories : Array<string> = new Array<string>();
-  calendarData.map((item) : void => {
+  actualCalendarData.map((item) : void => {
     if(!categories.find(el => item.category && el === item.category) && item.category)
       categories.push(item.category);
   });
@@ -32,6 +38,18 @@ export default function Filter ({calendarData, prefix, filter, setFilter, classN
     if(filter.degree === "")
       setFilter({...filter, degree: degrees[0]})
   }, [] );
+
+  function getActualCalendarData( calendarData : Array<ICalendarDay>, selectedMonth : number ) : Array<ICalendarDay> {
+    if(width >= 992) {
+      let result = new Array<ICalendarDay>();
+      calendarData.forEach(data => {
+        if(data.month >= selectedMonth)
+          result.push(data);
+      })
+      return result;
+    }
+    return calendarData;
+  }
 
   return (
     <div className={className}>

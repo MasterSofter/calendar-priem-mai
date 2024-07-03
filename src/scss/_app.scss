@@ -199,9 +199,20 @@
 
 [data-bs-theme="dark"]
 .border-calendar-dark-mode-light{
+  border-color: transparent !important;
   @media screen and (min-width: 991px){
     border-color: #ccc !important;
   }
+}
+
+.border-dark-mode-2 {
+  border-width: 0 !important;
+}
+
+[data-bs-theme="dark"]
+.border-dark-mode-2
+{
+  border-width: 2px !important;
 }
 
 .swiper-mobile-months {
@@ -232,7 +243,7 @@
 }
 
 .month-selected {
-  color: var(--mai-body-color) !important;
+  color: #c669ff !important;
   font-weight: 400 !important;
 }
 
@@ -320,4 +331,30 @@
   @media screen and (max-width: 991px){
     text-transform: uppercase !important;
   }
+}
+
+.text-muted-calendar {
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  /* IE 5-7 */
+  filter: alpha(opacity=20);
+  /* Netscape */
+  -moz-opacity: .2;
+  /* Safari 1.x */
+  -khtml-opacity: .2;
+  /* Good browsers */
+  opacity: .2;
+}
+
+[data-bs-theme="dark"] .text-muted-calendar {
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+  /* IE 5-7 */
+  filter: alpha(opacity=40);
+  /* Netscape */
+  -moz-opacity: .4;
+  /* Safari 1.x */
+  -khtml-opacity: .4;
+  /* Good browsers */
+  opacity: .4;
 }

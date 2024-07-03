@@ -2,18 +2,21 @@ import {Offcanvas, OffcanvasBody} from "react-bootstrap";
 import {createDate} from "../../../../utils/helpers/date";
 import {ICalendarDay} from "../../../calendar-app";
 import Filter, {IFilter} from "../../index";
+import React from "react";
 
 
 interface OffcanvasFilterProps{
   locale: string;
   show : boolean;
+  selectedMonth : number;
+  setSelectedMonth : React.Dispatch<React.SetStateAction<number>>;
   calendarData : Array<ICalendarDay>;
   filter : IFilter;
   setFilter:  React.Dispatch<React.SetStateAction<IFilter>>;
   setShow:  React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function OffcanvasFilter({calendarData, filter, locale, show, setShow, setFilter} : OffcanvasFilterProps) :JSX.Element {
+export function OffcanvasFilter({selectedMonth, setSelectedMonth, calendarData, filter, locale, show, setShow, setFilter} : OffcanvasFilterProps) :JSX.Element {
   const handleClose = () => setShow(false);
   return (
     <>
@@ -24,7 +27,7 @@ export function OffcanvasFilter({calendarData, filter, locale, show, setShow, se
               <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-header text-muted ms-3 me-3"/>
               <span className="fs-calendar-offcanvas-title lh-1 text-capitalize ms-2">{createDate({locale: locale}).month}</span>
             </div>
-            <Filter calendarData={calendarData} prefix="mobile" filter={filter} setFilter={setFilter} className="d-flex flex-column justify-content-start"/>
+            <Filter selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} calendarData={calendarData} prefix="mobile" filter={filter} setFilter={setFilter} className="d-flex flex-column justify-content-start"/>
           </div>
         </OffcanvasBody>
       </Offcanvas>

@@ -1,19 +1,20 @@
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {getMonthesNames} from "../../../../../utils/helpers/date";
 import {Swiper} from "swiper/react";
 
 interface UseMonthNavigationParams {
   locale?: string;
+  selectedMonth : number;
+  setSelectedMonth : React.Dispatch<React.SetStateAction<number>>;
   swiperCalendarRef :  React.MutableRefObject<any>;
   swiperMobileMonthsRef: React.MutableRefObject<any>;
 }
 
-export function useMonthNavigation ({swiperCalendarRef, swiperMobileMonthsRef, locale = "default"} : UseMonthNavigationParams) {
+export function useMonthNavigation ({selectedMonth, setSelectedMonth, swiperCalendarRef, swiperMobileMonthsRef, locale = "default"} : UseMonthNavigationParams) {
   const currentDate = new Date();
   const swiperMonthsMobileRef = useRef<typeof Swiper>();
   const swiperMonthsRef = useRef<typeof Swiper>();
   const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [selectedMonth, setSelectedMonth] = useState<number>(currentDate.getMonth());
   const months = getMonthesNames(locale);
 
   const handleOpen = () => setShowFilter(true);
@@ -30,16 +31,9 @@ export function useMonthNavigation ({swiperCalendarRef, swiperMobileMonthsRef, l
   }, [selectedMonth]);
 
   useEffect(() => {
-    // При клике на месяц делаем его выделенным (черным) и листаем свайпер календаря
+    // При клике на месяц листаем свайпер календаря
     document.querySelectorAll(".slide-month").forEach( (item) => {
       item.addEventListener("click", function (event) {
-        document.querySelectorAll(".slide-month").forEach (el => {
-          el.classList.add("text-muted");
-          el.classList.remove("month-selected");
-        })
-        item.classList.remove("text-muted");
-        item.classList.add("month-selected");
-
         let monthIndex: number | undefined = months.find(el => el.monthShort === item.textContent)?.monthIndex;
         if (typeof (monthIndex) === "number")
         {
@@ -58,14 +52,6 @@ export function useMonthNavigation ({swiperCalendarRef, swiperMobileMonthsRef, l
       });
     }
   });
-
-  useEffect(() => {
-    if(swiperMonthsRef.current){
-      (document.querySelector("#swiperMonths"))?.querySelector(".swiper-wrapper")
-        ?.classList.add("justify-content-end");
-    }
-  }, []);
-
 
   return {
     state: {

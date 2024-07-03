@@ -15,7 +15,7 @@ interface UseCalendarParams {
 const DAYS_IN_WEEK = 7;
 
 export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}: UseCalendarParams) {
-  const currentDate = new Date();
+  const currentDate = new Date(2024, 6, 25);
   const currentDay = currentDate.getDate();
   const currentMonth = currentDate.getMonth();
   const days = month.monthDays();
@@ -78,6 +78,12 @@ export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}:
     return result;
   }, [calendarDays]);
 
+  const isActualDate = (day : IDate) : boolean => {
+    if(day.monthIndex === currentMonth)
+      return day.dayNumber >= currentDay;
+
+    return day.monthIndex >= currentMonth;
+  }
   return {
     state: {
       currentDate,
@@ -86,6 +92,8 @@ export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}:
       calendarWeeks,
       weekDaysNames
     },
-    functions: {}
+    functions: {
+      isActualDate
+    }
   };
 }
