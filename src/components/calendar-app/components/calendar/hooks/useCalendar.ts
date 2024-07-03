@@ -15,7 +15,7 @@ interface UseCalendarParams {
 const DAYS_IN_WEEK = 7;
 
 export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}: UseCalendarParams) {
-  const currentDate = new Date(2024, 6, 25);
+  const currentDate = new Date();
   const currentDay = currentDate.getDate();
   const currentMonth = currentDate.getMonth();
   const days = month.monthDays();

@@ -5,6 +5,7 @@ import {createDate} from "../../../../utils/helpers/date";
 import {Event} from "./components/event";
 import {IFilter} from "../../../filter";
 import {removeDuplicates} from "../../../../utils/helpers/array/removeDuplicates";
+import {compareByTime} from "../../../../utils/helpers/array/compareByTime";
 
 interface OffcanvasCalendarEventProps{
   locale: string;
@@ -37,12 +38,20 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
     );
 
   //2. Группируем по категориям
-  let uniqueArray = removeDuplicates(categories, "category");
-  let groupsCategories : Array<Array<ICalendarDay> | undefined> = new Array<Array<ICalendarDay>>();
-  uniqueArray.map((el, index) => groupsCategories[index] = categories?.filter(filterItem => filterItem.category === el.category))
+  let warningCategories = categories?.filter((item) => item.warning);
+  let primaryCategories = categories?.filter((item) => item.primary);
+  categories = categories?.filter((item) => !item.warning && !item.primary);
+  categories = removeDuplicates(categories, "category");
+  categories.sort(compareByTime);
 
-  categories = new Array<ICalendarDay>();
-  groupsCategories.map( i => i?.map( k => categories?.push(k)) )
+  let uniqueArray = removeDuplicates(primaryCategories, "category");
+  uniqueArray.sort(compareByTime).reverse();
+  uniqueArray?.map((item) =>  categories?.unshift(item));
+
+  uniqueArray = removeDuplicates(warningCategories, "category");
+  uniqueArray.sort(compareByTime).reverse();
+  uniqueArray?.map( (item) =>  categories?.unshift(item));
+  categories = removeDuplicates(categories, "category");
 
   function getIndexOfCategory(category : string) : number{
     let item = categories?.find( el => el.category === category );
@@ -50,7 +59,6 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
       return categories.indexOf(item);
     return 0;
   }
-
   function onSmoothScrollTo(id : string){
     const rootElement = document.getElementById(id);
     if (!rootElement) return;
@@ -68,8 +76,8 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
         <div className="d-none d-lg-block w-100 h-100">
           <div className="container page-wrapper">
             <div className="row d-flex flex-column flex-lg-row justify-content-center min-vh-100">
-              <div className="col-3 border-end border-dark border-dark-mode-light d-flex flex-column py-5">
-                <div className="row d-flex flex-column justify-content-start mb-6 position-fixed">
+              <div className="col w-offcanvas-events-left border-end border-dark border-dark-mode-light d-flex flex-column py-5">
+                <div className="row justify-content-start mb-6 position-fixed">
                   <div className="d-flex flex-row justify-content-start align-items-center mb-6">
                     <i onClick={handleClose} className="fa-regular fa-arrow-left fs-calendar-offcanvas-text border border-2 border-black border-dark-mode-light rounded-circle hover-effect-up cursor-pointer p-3 me-3"/>
                     <span className="fs-calendar-offcanvas-text text-muted">Esc</span>
@@ -77,9 +85,9 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
                   <span className="fs-calendar-offcanvas-title lh-1">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>
                 </div>
                 <div className="row d-flex flex-column position-fixed" style={{width:"23rem", bottom:"4.5rem"}}>
-                  {
-                    removeDuplicates(categories, "category")?.map((item, index) => <span onClick={() => onSmoothScrollTo(`event-category-${getIndexOfCategory(item.category)}`)} className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} fs-calendar-offcanvas-category hover-effect-up cursor-pointer lh-sm mb-3`} key={`category-${index}`}>{item.category}</span>)
-                  }
+                {
+                  removeDuplicates(categories, "category")?.map((item, index) => <span onClick={() => onSmoothScrollTo(`event-category-${getIndexOfCategory(item.category)}`)} className={`${item.primary ? "text-primary text-dark-mode-brand" : ""} ${item.warning ? "text-danger" : ""} fs-calendar-offcanvas-category hover-effect-up cursor-pointer lh-sm mb-3`} key={`category-${index}`}>{item.category}</span>)
+                }
                 </div>
               </div>
               <div className="col d-flex flex-column justify-content-start py-6 px-6 mx-5 mt-6">

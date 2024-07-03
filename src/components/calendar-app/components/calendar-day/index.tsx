@@ -2,6 +2,7 @@ import React from "react";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
 import {removeDuplicates} from "../../../../utils/helpers/array/removeDuplicates";
+import {compareByTime} from "../../../../utils/helpers/array/compareByTime";
 
 interface DayProps {
   isToday : boolean;
@@ -37,12 +38,15 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
   let primaryCategories = categories?.filter((item) => item.primary);
   categories = categories?.filter((item) => !item.warning && !item.primary);
   categories = removeDuplicates(categories, "category");
+  categories.sort(compareByTime);
 
   let uniqueArray = removeDuplicates(primaryCategories, "category");
-  uniqueArray?.map((item) =>  categories?.unshift(item));
+  uniqueArray.sort(compareByTime).reverse();
+  uniqueArray.map((item) =>  categories?.unshift(item));
 
   uniqueArray = removeDuplicates(warningCategories, "category");
-  uniqueArray?.map( (item) =>  categories?.unshift(item));
+  uniqueArray.sort(compareByTime).reverse();
+  uniqueArray.map( (item) =>  categories?.unshift(item));
 
   categories = removeDuplicates(categories, "category");
 
