@@ -41,17 +41,13 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
   let warningCategories = categories?.filter((item) => item.warning);
   let primaryCategories = categories?.filter((item) => item.primary);
   categories = categories?.filter((item) => !item.warning && !item.primary);
-  categories = removeDuplicates(categories, "category");
-  categories.sort(compareByTime);
+  categories?.sort(compareByTime);
 
-  let uniqueArray = removeDuplicates(primaryCategories, "category");
-  uniqueArray.sort(compareByTime).reverse();
-  uniqueArray?.map((item) =>  categories?.unshift(item));
+  primaryCategories?.sort(compareByTime).reverse();
+  primaryCategories?.map((item) =>  categories?.unshift(item));
 
-  uniqueArray = removeDuplicates(warningCategories, "category");
-  uniqueArray.sort(compareByTime).reverse();
-  uniqueArray?.map( (item) =>  categories?.unshift(item));
-  categories = removeDuplicates(categories, "category");
+  warningCategories?.sort(compareByTime).reverse();
+  warningCategories?.map( (item) =>  categories?.unshift(item));
 
   function getIndexOfCategory(category : string) : number{
     let item = categories?.find( el => el.category === category );
