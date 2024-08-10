@@ -8,8 +8,7 @@ interface SwiperCalendarParams {
 }
 
 export function useSwiperCalendar({swiperMobileMonthsRef,  width, height} : SwiperCalendarParams){
-  const defineDirection = (width : number) => "vertical"; //(width : number) : ("horizontal" | "vertical") => width < 990 ? "vertical" : "horizontal";
-  const defineAllowTouchMove = (width : number) : boolean =>  width < 992;
+  const defineDirection = (width : number) : ("horizontal" | "vertical") => width < 990 ? "vertical" : "horizontal";
   const defineSpeed = (width : number) : number => width < 992 ? 250 : 2000;
 
   const swiperRef = useRef<typeof Swiper>();
@@ -17,6 +16,7 @@ export function useSwiperCalendar({swiperMobileMonthsRef,  width, height} : Swip
   useEffect(() => {
     if(swiperRef.current)
     {
+      swiperRef.current.allowTouchMove = false;
       swiperRef.current.on('slideChangeTransitionEnd', function () {
         swiperMobileMonthsRef.current.slideTo(swiperRef.current.activeIndex);
       });
@@ -25,19 +25,12 @@ export function useSwiperCalendar({swiperMobileMonthsRef,  width, height} : Swip
     }
   }, [swiperRef]);
 
-  useEffect(() => {
-    if(swiperRef.current){
-      swiperRef.current.allowTouchMove = defineAllowTouchMove(width);
-    }
-  }, [height, width]);
-
   return {
     state: {
       swiperRef
     },
     functions: {
       defineDirection,
-      defineAllowTouchMove,
       defineSpeed
     }
   };

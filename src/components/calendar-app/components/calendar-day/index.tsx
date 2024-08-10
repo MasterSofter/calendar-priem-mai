@@ -13,9 +13,19 @@ interface DayProps {
   calendarData: Array<ICalendarDay>;
   filter: IFilter;
   isActualDate : boolean;
+  visible : boolean;
 }
 
-export default function Day({setShowEvents, calendarData, filter, isToday, selectedDate, setSelectedDate, date, isActualDate}: DayProps) : JSX.Element {
+export default function Day(
+  { setShowEvents,
+    calendarData,
+    filter,
+    isToday,
+    selectedDate,
+    setSelectedDate,
+    date,
+    isActualDate,
+    visible }: DayProps) : JSX.Element {
   let categories : Array<ICalendarDay>;
 
   //1. Выбрать все
@@ -54,7 +64,7 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
     <>
       {
         isToday && isActualDate &&
-        <div className={`border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell`}>
+        <div className={`border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell ${visible ? "visible" : "invisible"}`}>
           <div className="row h-100">
             <div onClick={() => {setSelectedDate(date);if (categories && categories.length > 0) setShowEvents(true);}} className={`${isToday && isActualDate ? "bg-gradient-primary" : ""} rounded-inner-calendar-day-cell col`}>
               <div className="d-flex flex-column justify-content-between h-100 py-2">
@@ -84,7 +94,7 @@ export default function Day({setShowEvents, calendarData, filter, isToday, selec
         !isToday && <div onClick={() => {
           setSelectedDate(date);
           if (categories && categories.length > 0) setShowEvents(true);
-        }} className={`border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell ${isActualDate ? "" : "text-muted-calendar"}`}>
+        }} className={`border ${(selectedDate === date) ? "border-dark border-dark-mode-light" : "border-transparent"} cursor-pointer hover-effect-up border-2 hover-border rounded-calendar-day-cell col text-center text-lg-start h-day-cell ${isActualDate ? "" : "text-muted-calendar"} ${visible ? "visible" : "invisible"}`}>
           <div className="d-flex flex-column justify-content-between h-100 py-2">
             <span className={`${isToday && isActualDate ? "text-white" : ""} fs-day-number`}>{date.getDate()}</span>
             <div className="d-none d-lg-flex flex-column">

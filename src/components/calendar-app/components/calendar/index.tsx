@@ -1,11 +1,12 @@
 import {useCalendar} from "./hooks/useCalendar";
 import Day from "../calendar-day";
 import React, {JSX} from "react";
-import {getWeekNumber, IMonth} from "../../../../utils/helpers/date";
+import {IMonth} from "../../../../utils/helpers/date";
 import {ICalendarDay} from "../../index";
 import {IFilter} from "../../../filter";
 
 interface CalendarProps {
+  id : string,
   selectedDate : Date;
   setShowEvents:  React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
@@ -16,7 +17,7 @@ interface CalendarProps {
   month : IMonth;
 }
 
-export default function Calendar({setShowEvents, calendarData, filter, selectedDate, setSelectedDate, className, month, locale}: CalendarProps): JSX.Element {
+export function Calendar({id, setShowEvents, calendarData, filter, selectedDate, setSelectedDate, className, month, locale}: CalendarProps): JSX.Element {
   const firstWeekDayNumber = 2;
   const {functions, state} = useCalendar({month, locale, firstWeekDayNumber});
 
@@ -24,7 +25,18 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
   state.calendarWeeks.map((week, weekNumber) => {
     let calendarDays: Array<JSX.Element> = [];
 
-    week.map((day, index) => calendarDays.push(<Day key={`day-${index}-month-${day.monthIndex}`} setShowEvents={setShowEvents} calendarData={calendarData} filter={filter} selectedDate={selectedDate} setSelectedDate={setSelectedDate} date={day.date} isToday={(state.currentDay === day.date.getDate()) && (state.currentMonth === day.date.getMonth())} isActualDate={functions.isActualDate(day)}/>));
+    week.map((day, index) => calendarDays.push(
+      <Day key={`day-${index}-month-${day.monthIndex}`}
+           setShowEvents={setShowEvents}
+           calendarData={calendarData}
+           filter={filter}
+           selectedDate={selectedDate}
+           setSelectedDate={setSelectedDate}
+           date={day.date}
+           isToday={day.isToday}
+           isActualDate={day.isActualDate}
+           visible={day.visible}/>
+    ));
     calendarWeeks.push(
       <div className="col" key={weekNumber}>
         <div className="px-3 px-lg-5 row justify-content-between text-center mb-3">
@@ -40,7 +52,7 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
   });
 
   return (
-    <div className={className}>
+    <div id={id} className={className}>
       <div className="row d-flex text-start">
         <span className="text-muted fs-calendar-nav fw-normal text-capitalize ms-4 ms-lg-5">{month.monthName}</span>
       </div>
@@ -61,3 +73,11 @@ export default function Calendar({setShowEvents, calendarData, filter, selectedD
     </div>
   );
 }
+
+//@ts-ignore
+export const MemoizedCalendar = React.memo(Calendar, (props, nextProps)=> {
+  if(props.calendarData === nextProps.calendarData && props.filter === nextProps.filter) {
+    // don't re-render/update
+    return true
+  }
+})

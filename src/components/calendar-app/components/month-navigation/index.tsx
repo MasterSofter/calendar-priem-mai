@@ -24,7 +24,7 @@ interface MonthNavigationProps {
 }
 
 export default function MonthNavigation({selectedMonth, setSelectedMonth, swiperCalendarRef, swiperMobileMonthsRef, calendarData, filter, locale, setFilter}: MonthNavigationProps): JSX.Element {
-  const {state, functions} = useMonthNavigation({selectedMonth, setSelectedMonth, swiperCalendarRef, swiperMobileMonthsRef, locale})
+  const {state, functions} = useMonthNavigation({selectedMonth, setSelectedMonth, swiperCalendarRef, locale})
 
   return (
     <>

@@ -23,7 +23,7 @@ export function OffcanvasFilter({selectedMonth, setSelectedMonth, calendarData, 
       <Offcanvas className="w-100 h-100" scroll={false} backdrop={false} placement="end" show={show} onHide={handleClose}>
         <OffcanvasBody className="py-0 px-0" >
           <div className="d-lg-none">
-            <div onClick={handleClose} className="sticky-top d-flex flex-row justify-content-start align-items-center py-4 ps-3">
+            <div onClick={handleClose} className="bg-body sticky-top d-flex flex-row justify-content-start align-items-center py-4 ps-3">
               <i className="fa-regular fa-arrow-left fs-calendar-offcanvas-header text-muted ms-3 me-3"/>
               <span className="fs-calendar-offcanvas-title lh-1 text-capitalize ms-2">{createDate({locale: locale}).month}</span>
             </div>

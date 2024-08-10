@@ -15,11 +15,9 @@ interface UseCalendarParams {
 const DAYS_IN_WEEK = 7;
 
 export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}: UseCalendarParams) {
-  const currentDate = new Date();
-  const currentDay = currentDate.getDate();
-  const currentMonth = currentDate.getMonth();
   const days = month.monthDays();
   const weekDaysNames = useMemo(() => getWeekDaysNames(locale, firstWeekDayNumber), []);
+
   const calendarDays: Array<IDate> = useMemo(() => {
     const monthNumberOfDays = getMonthNumberOfDays(month.monthIndex, month.year);
     const firstDay = days[0];
@@ -41,7 +39,9 @@ export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}:
 
       for (let i = 0; i < numberOfPrevDays; i++) {
         const inverted = numberOfPrevDays - i;
-        result.push(prevMonthDays[prevMonthDays.length - inverted]);
+        const date = prevMonthDays[prevMonthDays.length - inverted];
+        date.visible = false;
+        result.push(date);
       }
     }
 
@@ -61,7 +61,9 @@ export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}:
           : DAYS_IN_WEEK - lastDay.dayNumberInWeek + shiftIndex;
 
       for (let i = 0; i < numberOfNextDays; i++) {
-        result.push(nextMonthDays[i]);
+        const date = nextMonthDays[i];
+        date.visible = false;
+        result.push(date);
       }
     }
 
@@ -78,22 +80,13 @@ export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}:
     return result;
   }, [calendarDays]);
 
-  const isActualDate = (day : IDate) : boolean => {
-    if(day.monthIndex === currentMonth)
-      return day.dayNumber >= currentDay;
-
-    return day.monthIndex >= currentMonth;
-  }
   return {
     state: {
-      currentDate,
-      currentDay,
-      currentMonth,
       calendarWeeks,
       weekDaysNames
     },
     functions: {
-      isActualDate
+
     }
   };
 }

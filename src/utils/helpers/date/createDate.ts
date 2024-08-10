@@ -19,7 +19,10 @@ export interface IDate {
   monthNumber : number,
   monthIndex : number,
   timestamp : number,
-  week : number
+  week : number,
+  isToday : boolean,
+  isActualDate : boolean, // Сегодняшняя и будущие даты
+  visible : boolean       // Виден ли месяц для отображения в календаре
 }
 
 export function createDate (params?: CreateDateParams) : IDate {
@@ -29,6 +32,23 @@ export function createDate (params?: CreateDateParams) : IDate {
       'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',
     ][date.getMonth()];
 
+  const checkIsActualDate = () : boolean => {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth();
+
+    if(monthIndex === currentMonth)
+          return dayNumber >= currentDay;
+    return monthIndex >= currentMonth;
+  }
+
+  const checkIsToday = () : boolean => {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth();
+
+    return (currentDay === d.getDate()) && (currentMonth === d.getMonth())
+  }
 
   const locale = params?.locale ?? "default";
 
@@ -46,6 +66,9 @@ export function createDate (params?: CreateDateParams) : IDate {
   const monthIndex : number = d.getMonth();
   const timestamp : number = d.getTime();
   const week : number = getWeekNumber(d);
+  const isToday : boolean = checkIsToday();
+  const isActualDate : boolean = checkIsActualDate();
+  const visible : boolean = true;
 
   return {
     date: d,
@@ -61,6 +84,9 @@ export function createDate (params?: CreateDateParams) : IDate {
     monthNumber,
     monthIndex,
     timestamp,
-    week
+    week,
+    isToday,
+    isActualDate,
+    visible
   };
 };

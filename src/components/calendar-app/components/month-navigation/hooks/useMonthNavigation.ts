@@ -7,10 +7,9 @@ interface UseMonthNavigationParams {
   selectedMonth : number;
   setSelectedMonth : React.Dispatch<React.SetStateAction<number>>;
   swiperCalendarRef :  React.MutableRefObject<any>;
-  swiperMobileMonthsRef: React.MutableRefObject<any>;
 }
 
-export function useMonthNavigation ({selectedMonth, setSelectedMonth, swiperCalendarRef, swiperMobileMonthsRef, locale = "default"} : UseMonthNavigationParams) {
+export function useMonthNavigation ({selectedMonth, setSelectedMonth, swiperCalendarRef, locale = "default"} : UseMonthNavigationParams) {
   const currentDate = new Date();
   const swiperMonthsMobileRef = useRef<typeof Swiper>();
   const swiperMonthsRef = useRef<typeof Swiper>();
@@ -24,14 +23,15 @@ export function useMonthNavigation ({selectedMonth, setSelectedMonth, swiperCale
     actualMonths.push(i);
   }
 
+  // При изменении выбранного месяца листаем список месяцев на десктопе
   useEffect(() => {
     if (swiperMonthsRef.current)
       //@ts-ignore
       swiperMonthsRef.current.slideTo(selectedMonth - 2 >= 0 ? selectedMonth - 2 : selectedMonth - 1 >= 0 ? selectedMonth - 1 : selectedMonth);
   }, [selectedMonth]);
 
+  // При клике на месяц листаем свайпер календаря на десктопе
   useEffect(() => {
-    // При клике на месяц листаем свайпер календаря
     document.querySelectorAll(".slide-month").forEach( (item) => {
       item.addEventListener("click", function (event) {
         let monthIndex: number | undefined = months.find(el => el.monthShort === item.textContent)?.monthIndex;
@@ -41,17 +41,31 @@ export function useMonthNavigation ({selectedMonth, setSelectedMonth, swiperCale
           setSelectedMonth(monthIndex);
         }
       })});
+  },[swiperCalendarRef])
 
-    if (swiperMonthsMobileRef.current) {
-      //@ts-ignore
-      swiperMonthsMobileRef.current.on("slideChangeTransitionEnd", function () {
-        //@ts-ignore
-        swiperCalendarRef.current.slideTo(swiperMonthsMobileRef.current?.activeIndex);
-        //@ts-ignore
-        setSelectedMonth(swiperMonthsMobileRef.current?.activeIndex);
+  useEffect(() => {
+    //@ts-ignore
+    swiperMonthsMobileRef.current.allowTouchMove = false;
+    //@ts-ignore
+    swiperMonthsMobileRef.current.slideTo(selectedMonth);
+    document.querySelector(`#mobile-month-${selectedMonth}`)?.scrollIntoView();
+
+    const calendarMobile = document.querySelector("#calendar-mobile");
+    if(calendarMobile) {
+      calendarMobile.addEventListener("scroll", () => {
+        for(let i = 0; i < 12; i++) {
+          const month = document.querySelector(`#mobile-month-${i}`);
+          if(month) {
+            if(((month.getBoundingClientRect().top - calendarMobile.getBoundingClientRect().top) <= 10)){
+              //@ts-ignore
+              swiperMonthsMobileRef.current.slideTo(i);
+              setSelectedMonth(i);
+            }
+          }
+        }
       });
     }
-  });
+  },[swiperMonthsMobileRef]);
 
   return {
     state: {
