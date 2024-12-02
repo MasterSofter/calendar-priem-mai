@@ -23,4 +23,9 @@ root.render(
   typeof calendarData !== "undefined" &&
   //@ts-ignore
   <App calendarData={calendarData}/>
+  // <div className="page-wrapper h-100">
+  //   <div className="content-wrapper h-100">
+  //
+  //   </div>
+  // </div>
 );

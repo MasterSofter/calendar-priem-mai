@@ -7,6 +7,7 @@ interface AppProps {
 }
 
 function App({calendarData} : AppProps) {
+  const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth());
   const [filter, setFilter] = useState<IFilter>({categories : new Array<string>(), degree: ""});
   const locale = "ru";
@@ -33,17 +34,20 @@ function App({calendarData} : AppProps) {
  }, []);
 
   return (
-  <div className="calendar-wrapper d-flex flex-column flex-lg-row">
+  <div className="calendar-wrapper d-flex flex-column flex-lg-row h-100">
     <CalendarApp
+      selectedYear = {selectedYear}
+      setSelectedYear = {setSelectedYear}
       selectedMonth = {selectedMonth}
       setSelectedMonth = {setSelectedMonth}
       calendarData={calendarData}
       filter={filter}
       setFilter={setFilter}
       locale={locale}
-      className="col-lg-10 bg-white-lg rounded-calendar border border-dark-mode-2 border-calendar-dark-mode-light"
+      className="col-lg-10 h-100 bg-white rounded-calendar overflow-hidden border border-dark-mode-2 border-calendar-dark-mode-light"
     />
     <Filter
+      selectedYear = {selectedYear}
       selectedMonth = {selectedMonth}
       setSelectedMonth = {setSelectedMonth}
       calendarData={calendarData}

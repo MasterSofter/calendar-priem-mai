@@ -75,7 +75,7 @@ export function OffcanvasCalendarEvent({filter, locale, calendarData, selectedDa
               <div className="col w-offcanvas-events-left border-end border-dark border-dark-mode-light d-flex flex-column py-5">
                 <div className="row justify-content-start mb-6 position-fixed">
                   <div className="d-flex flex-row justify-content-start align-items-center mb-6">
-                    <i onClick={handleClose} className="fa-regular fa-arrow-left fs-calendar-offcanvas-text border border-2 border-black border-dark-mode-light rounded-circle hover-effect-up cursor-pointer p-3 me-3"/>
+                    <i onClick={handleClose} className="fa-regular fa-arrow-left fs-calendar-offcanvas-text border border-2 border-black border-dark-mode-light rounded-circle hover-effect-up cursor-pointer p-3 me-3" style={{width:"3.8rem"}}/>
                     <span className="fs-calendar-offcanvas-text text-muted">Esc</span>
                   </div>
                   <span className="fs-calendar-offcanvas-title lh-1">{createDate({date: selectedDate, locale: locale}).dateMonth}</span>

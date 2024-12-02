@@ -1,13 +1,14 @@
 import React, {useEffect, useRef} from "react";
 import Swiper from "swiper";
+import {getMonthesNames} from "../../../../../utils/helpers/date";
 
 interface SwiperCalendarParams {
-  swiperMobileMonthsRef : React.MutableRefObject<typeof Swiper>;
+  selectedYear : number;
   width : number;
   height : number;
 }
 
-export function useSwiperCalendar({swiperMobileMonthsRef,  width, height} : SwiperCalendarParams){
+export function useSwiperCalendar({selectedYear,  width, height} : SwiperCalendarParams){
   const defineDirection = (width : number) : ("horizontal" | "vertical") => width < 990 ? "vertical" : "horizontal";
   const defineSpeed = (width : number) : number => width < 992 ? 250 : 2000;
 
@@ -17,11 +18,11 @@ export function useSwiperCalendar({swiperMobileMonthsRef,  width, height} : Swip
     if(swiperRef.current)
     {
       swiperRef.current.allowTouchMove = false;
-      swiperRef.current.on('slideChangeTransitionEnd', function () {
-        swiperMobileMonthsRef.current.slideTo(swiperRef.current.activeIndex);
-      });
       swiperRef.current.slideTo(new Date().getMonth());
-      swiperMobileMonthsRef.current.slideTo(swiperRef.current.activeIndex);
+      console.log("hello");
+      swiperRef.current.on('slideChangeTransitionEnd', function () {
+        console.log("hello");
+      });
     }
   }, [swiperRef]);
 

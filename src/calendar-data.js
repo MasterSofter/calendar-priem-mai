@@ -1,10 +1,10 @@
 export const calendarData = [
     {
-        "month": 6,
+        "month": 10,
         "number": 4,
         "timeStart": "18:00",
         "timeEnd": "19:00",
-        "category": "Консультация",
+        "category": "Консультация__3",
         "header": "Предварительный приём-1",
         "text": "Предварительная подача документов в приёмную комисcию и индивидуальные консультации по поступлению в МАИ в 2024 году.",
         "location": "Онлайн ",
@@ -14,7 +14,7 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 6,
+        "month": 11,
         "number": 4,
         "timeStart": "09:00",
         "timeEnd": "19:00",
@@ -28,8 +28,8 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 6,
-        "number": 4,
+        "month": 11,
+        "number": 5,
         "timeStart": "10:00",
         "timeEnd": "17:00",
         "category": "Консультация",
@@ -42,8 +42,8 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 6,
-        "number": 4,
+        "month": 11,
+        "number": 5,
         "timeStart": "17:00",
         "timeEnd": "18:00",
         "category": "Категория-3",
@@ -56,8 +56,8 @@ export const calendarData = [
         "primary": false
     },
     {
-        "month": 6,
-        "number": 4,
+        "month": 11,
+        "number": 6,
         "timeStart": "08:00",
         "timeEnd": "18:00",
         "category": "Категория-10",
@@ -70,7 +70,7 @@ export const calendarData = [
         "primary": true
     },
     {
-        "month": 6,
+        "month": 11,
         "number": 4,
         "timeStart": "07:00",
         "timeEnd": "18:00",
@@ -83,5 +83,4 @@ export const calendarData = [
         "degree": "Базовое высшее",
         "primary": true
     },
-
 ]

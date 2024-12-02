@@ -68,21 +68,33 @@
 }
 
 .w-calendar-month-nav{
-  width: 43rem;
-  min-width: 43rem;
+  width: 56rem;
+  min-width: 56rem;
+  @media screen and (max-width: 1900px){
+    width: 49.5rem;
+    min-width: 49.5rem;
+  }
 }
 
 .fs-calendar-title {
-  font-size: 2.8rem !important;
-  @media screen and (max-width: 767px){
-    font-size: 2.2rem !important;
+  font-size: 1.8rem !important;
+  @media screen and (max-width: 991px){
+    font-size: 1.4rem !important;
+  }
+}
+
+
+.fs-calendar-nav-year {
+  font-size: .9rem !important;
+  @media screen and (max-width: 991px){
+    font-size: 1.2rem !important;
   }
 }
 
 .fs-calendar-nav {
-  font-size: 1.9rem !important;
-  @media screen and (max-width: 767px){
-    font-size: 1.6rem !important;
+  font-size: .9rem !important;
+  @media screen and (max-width: 991px){
+    font-size: 1.4rem !important;
   }
 }
 
@@ -228,7 +240,10 @@
 }
 
 .cursor-grab:hover {
-  cursor: grab;
+  cursor: default;
+  @media screen and (max-width: 1900px){
+    cursor: grab;
+  }
 }
 
 .cursor-pointer:hover{
@@ -243,8 +258,12 @@
 }
 
 .month-selected {
-  color: #c669ff !important;
+  color: #4d24ff !important;
   font-weight: 400 !important;
+}
+
+.month-selected span {
+  border-color: #4d24ff;
 }
 
 .bg-white-lg{

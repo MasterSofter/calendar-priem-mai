@@ -6,6 +6,7 @@ import {useWindowDimensions} from "../hooks/useWindowDimensions";
 type FilterProps = {
   prefix :string;
   filter : IFilter;
+  selectedYear : number;
   selectedMonth : number;
   setSelectedMonth : React.Dispatch<React.SetStateAction<number>>;
   calendarData : Array<ICalendarDay>;
@@ -18,7 +19,7 @@ export interface IFilter {
   categories: Array<string>,
 }
 
-export default function Filter ({selectedMonth, setSelectedMonth, calendarData, prefix, filter, setFilter, className} : FilterProps) : JSX.Element {
+export default function Filter ({selectedYear, selectedMonth, setSelectedMonth, calendarData, prefix, filter, setFilter, className} : FilterProps) : JSX.Element {
   const { height, width } = useWindowDimensions();
   const actualCalendarData = getActualCalendarData(calendarData, selectedMonth);
 

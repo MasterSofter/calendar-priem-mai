@@ -7,6 +7,7 @@ import {IFilter} from "../../../filter";
 
 interface CalendarProps {
   id : string,
+  selectedYear : number;
   selectedDate : Date;
   setShowEvents:  React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate :  React.Dispatch<React.SetStateAction<Date>>;
@@ -17,9 +18,9 @@ interface CalendarProps {
   month : IMonth;
 }
 
-export function Calendar({id, setShowEvents, calendarData, filter, selectedDate, setSelectedDate, className, month, locale}: CalendarProps): JSX.Element {
+export function Calendar({selectedYear, id, setShowEvents, calendarData, filter, selectedDate, setSelectedDate, className, month, locale}: CalendarProps): JSX.Element {
   const firstWeekDayNumber = 2;
-  const {functions, state} = useCalendar({month, locale, firstWeekDayNumber});
+  const {functions, state} = useCalendar({selectedYear, month, locale, firstWeekDayNumber});
 
   let calendarWeeks: Array<JSX.Element> = [];
   state.calendarWeeks.map((week, weekNumber) => {
@@ -76,7 +77,7 @@ export function Calendar({id, setShowEvents, calendarData, filter, selectedDate,
 
 //@ts-ignore
 export const MemoizedCalendar = React.memo(Calendar, (props, nextProps)=> {
-  if(props.calendarData === nextProps.calendarData && props.filter === nextProps.filter) {
+  if(props.selectedYear === nextProps.selectedYear && props.calendarData === nextProps.calendarData && props.filter === nextProps.filter) {
     // don't re-render/update
     return true
   }

@@ -8,13 +8,14 @@ import {useMemo, useState} from "react";
 
 interface UseCalendarParams {
   locale?: string;
+  selectedYear : number;
   month : IMonth,
   firstWeekDayNumber?: number;
 }
 
 const DAYS_IN_WEEK = 7;
 
-export function useCalendar({month, locale = "default", firstWeekDayNumber = 2}: UseCalendarParams) {
+export function useCalendar({selectedYear, month, locale = "default", firstWeekDayNumber = 2}: UseCalendarParams) {
   const days = month.monthDays();
   const weekDaysNames = useMemo(() => getWeekDaysNames(locale, firstWeekDayNumber), []);
 

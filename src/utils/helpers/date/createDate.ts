@@ -1,4 +1,5 @@
 import { getWeekNumber } from "./getWeekNumber";
+import {checkIsToday} from "./checkIsToday";
 
 interface CreateDateParams {
   locale?: string;
@@ -36,18 +37,14 @@ export function createDate (params?: CreateDateParams) : IDate {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    if(year > currentYear)
+      return true;
 
     if(monthIndex === currentMonth)
           return dayNumber >= currentDay;
     return monthIndex >= currentMonth;
-  }
-
-  const checkIsToday = () : boolean => {
-    const currentDate = new Date();
-    const currentDay = currentDate.getDate();
-    const currentMonth = currentDate.getMonth();
-
-    return (currentDay === d.getDate()) && (currentMonth === d.getMonth())
   }
 
   const locale = params?.locale ?? "default";
@@ -66,7 +63,7 @@ export function createDate (params?: CreateDateParams) : IDate {
   const monthIndex : number = d.getMonth();
   const timestamp : number = d.getTime();
   const week : number = getWeekNumber(d);
-  const isToday : boolean = checkIsToday();
+  const isToday : boolean = checkIsToday(d);
   const isActualDate : boolean = checkIsActualDate();
   const visible : boolean = true;
 
